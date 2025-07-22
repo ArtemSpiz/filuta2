@@ -41,7 +41,6 @@ function updateScrollLimits() {
   canScrollLeft.value = el.scrollLeft > 0;
   canScrollRight.value = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
 
-  // Динамічно визначаємо центр кожної картки
   let scrollCenter = el.scrollLeft + containerWidth / 2;
   let closestIdx = 0;
   let minDist = Infinity;
@@ -55,7 +54,7 @@ function updateScrollLimits() {
       minDist = dist;
       closestIdx = i;
     }
-    accOffset += card.offsetWidth + 24; // 24px gap
+    accOffset += card.offsetWidth + 24; 
   }
   currentIndex.value = closestIdx;
 }
@@ -73,14 +72,12 @@ onUnmounted(() => {
 
 const currentIndex = ref(0);
 const carousel = ref(null);
-// const cardWidth = 900 + 24; // Більше не використовується
 
 function scrollToIndex(index) {
   if (!carousel.value || !cardRefs.value[index]) return;
 
   const card = cardRefs.value[index];
 
-  // Вираховуємо scrollOffset динамічно
   const scrollOffset =
     card.offsetLeft - (carousel.value.offsetWidth / 2 - card.offsetWidth / 2);
 
