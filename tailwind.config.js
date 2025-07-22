@@ -22,6 +22,7 @@ module.exports = {
       },
       gridTemplateRows: {
         "[repeat(3,427px)]": "repeat(3, 427px)",
+        ddd: "repeat(2, auto)",
       },
       backgroundImage: {
         heroBg: "url('/src/assets/img/bgHero.png')",
@@ -34,8 +35,18 @@ module.exports = {
       gridTemplateColumns: {
         ddd: "repeat(2, auto)",
       },
+
       textColor: {
         graySubtitle: "rgba(255, 255, 255, 0.70)",
+      },
+      animation: {
+        float: "float 4s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(-5px)" },
+          "50%": { transform: "translateY(5px)" },
+        },
       },
     },
   },

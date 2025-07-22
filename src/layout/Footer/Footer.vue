@@ -22,24 +22,24 @@ const FooterLinks = [
   {
     title: "Solutions",
     subtitles: [
-      { subtitle: "Government & Education" },
-      { subtitle: "Manufacturing" },
-      { subtitle: "Logistics" },
+      { subtitle: "Government & Education", href: "/government-&-education" },
+      { subtitle: "Manufacturing", href: "#" },
+      { subtitle: "Logistics", href: "#" },
     ],
   },
   {
     title: "Links",
     subtitles: [
-      { subtitle: "Platform" },
-      { subtitle: "Research" },
-      { subtitle: "Team" },
-      { subtitle: "Career" },
-      { subtitle: "Blog" },
+      { subtitle: "Platform", href: "#" },
+      { subtitle: "Research", href: "#" },
+      { subtitle: "Team", href: "#" },
+      { subtitle: "Career", href: "#" },
+      { subtitle: "Blog", href: "#" },
     ],
   },
   {
     title: "Socials",
-    subtitles: [{ subtitle: "LinkedIn" }],
+    subtitles: [{ subtitle: "LinkedIn", href: "#" }],
   },
 ];
 </script>
@@ -105,26 +105,29 @@ const FooterLinks = [
               {{ link.title }}
             </div>
             <div class="flex flex-col items-start gap-3">
-              <a
+              <router-link
                 v-for="(item, subIndex) in link.subtitles"
                 :key="subIndex"
-                class="text-[#141414] font-['IBM Plex Sans'] text-[16px] leading-[130%] cursor-pointer"
+                :to="item.href"
+                class="relative text-[#141414] font-['IBM Plex Sans'] text-[16px] leading-[130%] cursor-pointer transition-colors duration-300 before:content-[''] before:absolute before:left-0 before:-bottom-[2px] before:w-0 before:h-[1px] before:bg-[#5C9BFA] before:transition-all before:duration-300 hover:before:w-full"
               >
                 {{ item.subtitle }}
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Logo -->
-      <div class="w-full">
-        <img
-          :src="footerLogo"
-          alt="logo"
-          class="w-full h-auto object-contain"
-        />
-      </div>
+      <router-link to="/">
+        <div class="w-full">
+          <img
+            :src="footerLogo"
+            alt="logo"
+            class="w-full h-auto object-contain"
+          />
+        </div>
+      </router-link>
     </div>
 
     <!-- Bottom Section -->

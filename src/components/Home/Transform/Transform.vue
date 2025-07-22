@@ -81,18 +81,16 @@ onMounted(async () => {
     scrollTrigger: {
       trigger: ".transformCardsWrapper",
       start: "center center",
-      end: `+=${totalCards * 1200}`,
+      end: `+=${totalCards * 1600 * 2}`,
       pin: ".transform",
       scrub: 1,
       snap: 1 / (totalCards - 1),
-      markers: false,
       id: "transform-scroll-trigger",
       onUpdate: (self) => {
         const progress = self.progress;
         const index = Math.round(progress * (totalCards - 1));
         activeIndex.value = index;
 
-        // Animate indicators
         indicatorRefs.value.forEach((el, i) => {
           if (i === index) {
             gsap.to(el, {
@@ -124,7 +122,7 @@ onMounted(async () => {
       current,
       {
         width: 80,
-        duration: 1,
+        duration: 0.4,
         onUpdate: () => {
           cardWidths.value[i] = parseFloat(gsap.getProperty(current, "width"));
         },
@@ -135,7 +133,7 @@ onMounted(async () => {
       next,
       {
         width: 808,
-        duration: 1,
+        duration: 0.4,
         onUpdate: () => {
           cardWidths.value[i + 1] = parseFloat(gsap.getProperty(next, "width"));
         },
@@ -187,7 +185,7 @@ onUnmounted(() => {
           @click="setActive(index)"
         >
           <div
-            class="w-[808px] h-[559px] min-w-[808px] max-w-[808px] p-11 box-border flex justify-between max-xl:min-w-[auto] max-md:w-full max-md:flex-col max-md:justify-center max-md:items-center max-md:p-[24px] max-md:gap-[24px] max-md:h-max"
+            class="w-[808px] h-[559px] min-w-[808px] max-w-[808px] p-11 box-border flex justify-between max-xl:min-w-[auto] max-md:w-full max-lg:flex-col max-md:justify-center max-md:items-center max-md:p-[24px] max-md:gap-[24px] max-md:h-max"
           >
             <div
               v-if="isMobile || index === activeIndex"
@@ -201,7 +199,7 @@ onUnmounted(() => {
             </div>
 
             <div
-              class="flex flex-col justify-between h-full z-10"
+              class="flex flex-col justify-between h-full z-10 max-lg:gap-[16px] max-lg:justify-start"
               :style="{
                 opacity: getContentOpacity(index),
                 transition: 'opacity 0.7s',
@@ -209,7 +207,7 @@ onUnmounted(() => {
             >
               <div
                 v-if="isMobile || index === activeIndex"
-                class="flex flex-col items-start gap-4 max-w-[335px] w-full"
+                class="flex flex-col items-start gap-4 max-w-[335px] w-full max-lg:min-w-[320px]"
               >
                 <div
                   class="text-white text-[24px] leading-[130%] font-ibm max-md:text-[22px] max-sm:text-[20px]"
@@ -249,7 +247,7 @@ onUnmounted(() => {
 
             <div
               v-if="isMobile || index === activeIndex"
-              class="w-[380px] z-10 my-auto max-md:max-w-[286px] max-md:w-full"
+              class="w-[380px] z-10 my-auto max-lg:w-[250px] max-md:max-w-[286px] max-md:w-full"
             >
               <img :src="card.image" alt="cardImage" class="w-full h-auto" />
             </div>
@@ -260,7 +258,7 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .transformCard {
   overflow: hidden;
   transition: width 0.5s;

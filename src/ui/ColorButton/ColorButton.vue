@@ -5,6 +5,11 @@ defineProps({
     type: String,
     default: "",
   },
+
+  text: {
+    type: String,
+    default: "Schedule a demo",
+  },
 });
 </script>
 <template>
@@ -14,7 +19,7 @@ defineProps({
       $props.class,
     ]"
   >
-    Schedule a demo <buttonArrow />
+    {{ text }} <buttonArrow />
   </button>
 </template>
 <style></style>

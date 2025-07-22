@@ -10,7 +10,7 @@ import IntelligentIcon3 from "@/assets/svg/IntelligentIcon3.vue";
 import IntelligentImage1 from "@/assets/img/intelligentCardImg1.png";
 import IntelligentImage2 from "@/assets/img/intelligentCardImg2.png";
 import IntelligentImage3 from "@/assets/img/intelligentCardImg3.png";
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const IntelligentCards = [
   {
@@ -43,6 +43,20 @@ const IntelligentCards = [
 ];
 
 const activeIndex = ref(2);
+
+const isSmallScreen = ref(window.innerWidth < 1040);
+
+function onResize() {
+  isSmallScreen.value = window.innerWidth < 1040;
+}
+
+onMounted(() => {
+  window.addEventListener("resize", onResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", onResize);
+});
 </script>
 
 <template>
@@ -111,7 +125,7 @@ const activeIndex = ref(2);
       <div class="relative max-w-[540px] h-auto w-full">
         <div
           v-for="(card, index) in IntelligentCards"
-          v-show="activeIndex === index"
+          v-show="isSmallScreen ? activeIndex === index : true"
           :key="'image-' + index"
           class="absolute top-1/2 right-0 translate-y-[-50%] opacity-0 transition-all duration-500 max-lg:relative max-lg:top-0 max-lg:translate-y-0"
           :class="{ 'opacity-100': activeIndex === index }"

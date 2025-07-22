@@ -7,6 +7,8 @@ import buildBgMob from "@/assets/img/buildBgMob.png";
 defineProps({
   title: String,
   subtitle: String,
+  titleClass: String,
+  subtitleClass: String,
 });
 
 const backgroundImage = ref(buildBg);
@@ -37,11 +39,13 @@ onBeforeUnmount(() => {
       <div class="flex flex-col items-start gap-6 w-full">
         <div
           class="text-white font-ibm text-[56px] font-normal leading-[125%] w-full max-w-[600px] max-xl:text-[50px] max-xl:max-w-[550px] max-lg:text-[45px] max-lg:max-w-[500px] max-md:text-[40px] max-md:max-w-[450px] max-sm:text-[30px] max-sm:max-w-[300px]"
+          :class="titleClass"
         >
           {{ title }}
         </div>
         <div
           class="text-white font-ibm text-base font-normal leading-[150%] w-[350px] max-sm:max-w-[350px] max-sm:w-full"
+          :class="subtitleClass"
         >
           {{ subtitle }}
         </div>

@@ -5,6 +5,10 @@ defineProps({
     type: String,
     default: "",
   },
+  text: {
+    type: String,
+    default: " Learn more ",
+  },
 });
 </script>
 <template>
@@ -14,7 +18,7 @@ defineProps({
       $props.class,
     ]"
   >
-    Learn more <buttonArrow />
+    {{ text }}<buttonArrow />
   </button>
 </template>
 <style></style>

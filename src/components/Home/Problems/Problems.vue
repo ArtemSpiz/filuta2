@@ -49,13 +49,13 @@ onUnmounted(() => {
   <div class="flex flex-col items-center gap-[56px] container">
     <div class="Title text-center">The Problems Slowing You Down</div>
     <div
-      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:justify-center max-md:items-center max-md:w-auto max-sm:w-full"
+      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
     >
       <div
         v-for="(card, index) in ProblemCards"
         :key="index"
         :class="[
-          'relative flex flex-col items-center gap-4 flex-1 p-12 pt-12 pb-8 self-stretch w-[315px] rounded-[20px] border border-[#2b2a30] max-xl:max-w-[420px] max-xl:w-full max-md:p-[32px] max-md:pt-[48px] max-md:h-[302px] max-md:flex-auto',
+          'relative flex flex-col items-center gap-4 flex-1 p-12 pt-12 pb-8 self-stretch w-[315px] rounded-[20px] border border-[#2b2a30] max-xl:max-w-[420px] max-xl:w-full max-md:p-[32px] max-md:pt-[48px] max-md:h-[302px] max-md:flex-auto max-md:ml-auto mr-auto',
           index === 1
             ? 'bg-[#121619]'
             : index === 2
@@ -65,7 +65,7 @@ onUnmounted(() => {
           index === 2
             ? windowWidth < 768
               ? 'right-[0%]'
-              : windowWidth < 1286
+              : windowWidth < 1285
               ? 'right-[-50%]'
               : ''
             : '',

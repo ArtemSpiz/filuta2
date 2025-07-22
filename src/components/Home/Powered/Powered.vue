@@ -50,13 +50,12 @@ onMounted(async () => {
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".poweredCards",
+      trigger: ".poweredText",
       start: "top top",
-      end: `+=${(totalCards - 1) * 600}`,
+      end: `+=${totalCards * 600 * 2}`,
       pin: ".powered",
       snap: 1 / (totalCards - 1),
-      scrub: true,
-      markers: false,
+      scrub: 1,
       id: "poweredScrollAnim",
     },
   });
@@ -73,18 +72,23 @@ onMounted(async () => {
         cards.value[j],
         {
           y: -(i * offsetY),
-          duration: 0.6,
+          duration: 0.2,
           ease: "power2.inOut",
         },
         `step${i}`
       );
     }
 
-    // Додаємо паузу, але лише якщо не останній крок
     if (i !== totalCards - 1) {
-      tl.to({}, { duration: 0.4 });
+      tl.to({}, { duration: 0.2, ease: "power2.inOut" });
     }
   }
+
+  tl.to(poweredCardsWrapper.value, {
+    height: 655,
+    duration: 0.2,
+    ease: "power2.inOut",
+  });
 
   if (window.innerWidth < 640) {
     tl.to(poweredCardsWrapper.value, {
@@ -107,7 +111,9 @@ onMounted(async () => {
   <div
     class="powered flex justify-center items-start overflow-hidden relative gap-[56px] container max-md:gap-[32px] max-lg:flex-col max-lg:justify-center max-lg:items-center max-sm:pb-0"
   >
-    <div class="flex flex-col items-start gap-4 max-w-[585px] w-full">
+    <div
+      class="flex flex-col items-start gap-4 max-w-[585px] w-full poweredText"
+    >
       <div class="Title">Powered by Innovation and Expertise</div>
       <div class="Subtitle">
         Filuta AI is created by a world-class team of engineers and AI experts,

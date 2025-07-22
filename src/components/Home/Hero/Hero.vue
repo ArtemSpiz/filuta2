@@ -3,21 +3,26 @@ import Header from "@/layout/Header/HeaderLayout";
 import ColorButton from "@/ui/ColorButton/ColorButton";
 import TransparentBtn from "@/ui/TransparentBtn/TransparentBtn.vue";
 import heroMobBg from "@/assets/img/bgMobHero.png";
+import bgHero from "@/assets/img/bgHero.png";
 import heroMobLight from "@/assets/img/lightMobHero.png";
+import herolightBlue from "@/assets/img/heroLightBlue.png";
 </script>
 
 <template>
   <div
-    class="h-screen bg-fullBg bg-no-repeat bg-heroBg relative max-lg:bg-none max-lg:h-full"
+    class="h-screen bg-fullBg bg-no-repeat relative max-lg:bg-none max-lg:h-full"
   >
-    <div
-      class="hidden absolute top-0 left-[-100px] max-lg:flex pointer-events-none"
-    >
+    <div class="absolute top-0 left-[-100px] pointer-events-none">
       <img :src="heroMobLight" alt="heroLight" />
+    </div>
+    <div
+      class="absolute bottom-[20px] right-0 pointer-events-none max-sm:hidden"
+    >
+      <img :src="herolightBlue" alt="heroLight" />
     </div>
     <Header />
     <div
-      class="flex flex-col items-start justify-center gap-16 h-[calc(100vh-96px)] px-[108px] max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:items-center max-xl:px-[80px] max-lg:px-[60px] max-md:px-[40px] max-sm:px-[16px]"
+      class="heroContainer flex flex-col items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:items-center"
     >
       <div
         class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center"
@@ -30,14 +35,8 @@ import heroMobLight from "@/assets/img/lightMobHero.png";
         <div
           class="flex flex-col items-start gap-6 w-full max-lg:justify-center max-lg:items-center"
         >
-          <div
-            class="text-white text-[66px] w-full max-w-[650px] leading-[120%] font-ibm font-normal max-xl:text-[60px] max-lg:text-[55px] max-lg:text-center max-md:text-[45px] max-sm:text-[36px]"
-          >
-            Automate game testing with AI agents
-          </div>
-          <div
-            class="text-white text-[16px] leading-[150%] font-ibm font-normal w-full max-w-[400px] max-lg:text-center"
-          >
+          <div class="HeroTitle">Automate game testing with AI agents</div>
+          <div class="HeroSubtitle">
             Our agents play through your game like real users — finding bugs
             before your players do.
           </div>
@@ -48,8 +47,14 @@ import heroMobLight from "@/assets/img/lightMobHero.png";
         <TransparentBtn class="max-md:w-full" />
       </div>
 
-      <div class="w-full max-w-[400px] hidden max-lg:flex mt-[-40px]">
-        <img :src="heroMobBg" alt="robot" />
+      <div
+        class="w-full z-0 absolute right-0 top-[50%] translate-y-[-50%] max-w-[800px] max-xl:max-w-[600px] max-lg:hidden"
+      >
+        <img :src="bgHero" alt="robot" class="animate-float" />
+      </div>
+
+      <div class="w-full z-10 max-w-[400px] hidden max-lg:flex mt-[-40px]">
+        <img :src="heroMobBg" alt="robot" class="animate-float" />
       </div>
     </div>
   </div>
