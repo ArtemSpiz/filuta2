@@ -56,7 +56,7 @@ const ValuesCards = [
       class="grid grid-cols-6 grid-rows-2 gap-[16px] max-lg:flex max-lg:flex-col"
     >
       <div
-        class="p-[48px] flex flex-col items-start gap-[32px] flex-1 rounded-[20px] border border-[#2B2A30] bg-[#141219] self-stretch max-xl:p-[24px]"
+        class="p-[48px] flex flex-col items-start gap-[32px] flex-1 rounded-[20px] border border-[#2B2A30] bg-[#141219] self-stretch cardsHover max-xl:p-[24px]"
         v-for="(card, index) in ValuesCards"
         :key="index"
         :class="{

@@ -31,7 +31,7 @@ const FooterLinks = [
     title: "Links",
     subtitles: [
       { subtitle: "Platform", href: "#" },
-      { subtitle: "Research", href: "#" },
+      { subtitle: "Research", href: "/research" },
       { subtitle: "Team", href: "#" },
       { subtitle: "Career", href: "#" },
       { subtitle: "Blog", href: "#" },

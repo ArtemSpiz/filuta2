@@ -61,7 +61,7 @@ const SecurityCards = [
       <div
         v-for="(card, index) in SecurityCards"
         :key="index"
-        class="flex flex-col items-start justify-center p-12 gap-4 rounded-[20px] border border-[#2b2a30] bg-[#141219] shadow-[0_-17px_44px_0_rgba(0,0,0,0.45)] transition-all duration-500 hover:border-[#A394F7] max-lg:p-[24px]"
+        class="flex flex-col items-start justify-center p-12 gap-4 rounded-[20px] border border-[#2b2a30] bg-[#141219] shadow-[0_-17px_44px_0_rgba(0,0,0,0.45)] cardsHover max-lg:p-[24px]"
       >
         <div class="flex flex-col items-center gap-8 w-full">
           <component :is="card.icon" />
