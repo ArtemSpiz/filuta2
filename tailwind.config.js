@@ -23,6 +23,7 @@ module.exports = {
       gridTemplateRows: {
         "[repeat(3,427px)]": "repeat(3, 427px)",
         ddd: "repeat(2, auto)",
+        ddd4: "repeat(4, auto)",
       },
       backgroundImage: {
         heroBg: "url('/src/assets/img/bgHero.png')",

@@ -27,11 +27,7 @@ import herolightBlue from "@/assets/img/heroLightBlue.png";
       <div
         class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center"
       >
-        <div
-          class="text-[#57c0c9] uppercase font-light text-[16px] font-mono max-sm:text-[14px]"
-        >
-          Leading AI Tools to Grow Your Business
-        </div>
+        <div class="heroUnderTitle max-sm:text-[14px]">Leading AI Tools to Grow Your Business</div>
         <div
           class="flex flex-col items-start gap-6 w-full max-lg:justify-center max-lg:items-center"
         >

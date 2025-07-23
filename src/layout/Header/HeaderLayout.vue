@@ -15,6 +15,7 @@ const headerNavs = [
   {
     title: "Solutions",
     arrow: true,
+    href: "#",
     links: [
       {
         icon: headerIcon1,
@@ -32,15 +33,17 @@ const headerNavs = [
   {
     title: "Research",
     arrow: false,
+    href: "/research",
   },
   {
     title: "Company",
     arrow: true,
+    href: "#",
     links: [
       {
         icon: headerIcon6,
         link: "About us",
-        href: "#",
+        href: "/about-us",
         subtitle: "Everything you need to know about Filuta",
       },
       {
@@ -90,7 +93,7 @@ const isOpen = (index) => openIndex.value === index;
           :key="index"
           class="flex items-center relative"
         >
-          <div
+          <router-link
             :class="[
               'flex items-center gap-2 font-light text-base font-ibm cursor-pointer transition-all duration-500',
               {
@@ -99,6 +102,7 @@ const isOpen = (index) => openIndex.value === index;
               },
             ]"
             @click="toggleDropdown(index)"
+            :to="navItem.href"
           >
             {{ navItem.title }}
             <ArrowIcon
@@ -108,12 +112,12 @@ const isOpen = (index) => openIndex.value === index;
                 isOpen(index) && 'rotate-180 [&>path]:fill-[#9e92f5]',
               ]"
             />
-          </div>
+          </router-link>
           <div
             :class="[
-              'absolute top-[calc(100%+22px)] right-0 w-max flex flex-col items-start gap-2 p-3 rounded-[10px] border border-white/20 bg-[#0F202115] backdrop-blur-[10px] opacity-0  transition-all duration-300',
+              'absolute top-[calc(100%+22px)] pointer-events-none right-0 w-max flex flex-col items-start gap-2 p-3 rounded-[10px] border border-white/20 bg-[#0F202115] backdrop-blur-[10px] opacity-0  transition-all duration-300',
               {
-                'opacity-100 visible z-20': isOpen(index),
+                'opacity-100 visible z-20 pointer-events-auto ': isOpen(index),
               },
             ]"
           >
@@ -175,7 +179,8 @@ const isOpen = (index) => openIndex.value === index;
             :key="index"
             class="flex items-center relative w-full gap-[16px] flex-col"
           >
-            <div
+            <router-link
+              :to="navItem.href"
               :class="[
                 'flex items-center justify-between font-light text-base font-ibm cursor-pointer w-full transition-all duration-500',
                 {
@@ -193,7 +198,7 @@ const isOpen = (index) => openIndex.value === index;
                   isOpen(index) && 'rotate-180 [&>path]:fill-[#9e92f5]',
                 ]"
               />
-            </div>
+            </router-link>
             <div
               v-if="isOpen(index)"
               :class="[

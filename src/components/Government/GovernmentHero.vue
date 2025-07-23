@@ -9,7 +9,7 @@ import PlayIcon from "@/assets/svg/PlayIcon.vue";
 
 <template>
   <div
-    class="h-scree flex flex-col relative max-lg:gap-[21px] max-lg:pb-[60px]"
+    class="h-scree flex flex-col relative max-lg:gap-[21px] max-lg:pb-[60px] overflow-hidden"
   >
     <HeaderLayout />
     <div
@@ -29,9 +29,7 @@ import PlayIcon from "@/assets/svg/PlayIcon.vue";
         class="flex flex-col gap-[64px] items-start justify-start max-lg:center max-lg:gap-[32px]"
       >
         <div class="flex flex-col gap-[32px] max-lg:center">
-          <div
-            class="text-[#57c0c9] uppercase font-light text-[16px] font-mono max-sm:text-[14px]"
-          >
+          <div class="heroUnderTitle">
             Vendor Compliance Monitor
           </div>
           <div class="flex flex-col gap-[24px] max-lg:center">

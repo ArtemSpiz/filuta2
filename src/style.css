@@ -46,8 +46,12 @@
     @apply text-white text-[16px] w-full max-w-[420px] leading-[150%] font-ibm font-normal;
   }
 
+  .heroUnderTitle {
+    @apply text-[#57c0c9] uppercase font-light text-[16px] font-mono;
+  }
+
   .heroContainer {
-    @apply px-[108px] flex items-center h-[calc(100vh-96px)];
+    @apply px-[108px] flex items-center h-[calc(100vh-96px)] gap-[64px];
   }
 
   .center {
@@ -56,6 +60,10 @@
 
   .pbNone {
     @apply pb-0 !important;
+  }
+
+  .containerBottom {
+    @apply pb-[100px];
   }
 }
 
@@ -79,8 +87,12 @@
       @apply px-[60px] py-[80px] max-w-none;
     }
 
+    .containerBottom {
+      @apply pb-[80px];
+    }
+
     .heroContainer {
-      @apply px-[60px] flex-col h-full items-center justify-center;
+      @apply px-[60px] flex-col h-full items-center justify-center overflow-hidden;
     }
 
     .Title {
@@ -94,6 +106,10 @@
     .HeroSubtitle {
       @apply text-center;
     }
+
+    .heroUnderTitle {
+      @apply text-center;
+    }
   }
 
   @media (max-width: 768px) {
@@ -101,8 +117,12 @@
       @apply px-[40px] py-[60px] max-w-none;
     }
 
+    .containerBottom {
+      @apply pb-[60px];
+    }
+
     .heroContainer {
-      @apply px-[40px];
+      @apply px-[40px] gap-[32px];
     }
 
     .Title {
@@ -117,6 +137,10 @@
   @media (max-width: 640px) {
     .container {
       @apply px-[24px] py-[48px] max-w-none;
+    }
+
+    .containerBottom {
+      @apply pb-[48px];
     }
 
     .heroContainer {

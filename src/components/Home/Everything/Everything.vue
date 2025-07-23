@@ -12,8 +12,6 @@ import { onMounted, ref } from "vue";
 
 const isMobile = window.innerWidth < 1040;
 
-console.log(anim1);
-
 const EverythingCards = [
   {
     animation: anim1,

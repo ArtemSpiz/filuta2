@@ -54,7 +54,7 @@ function updateScrollLimits() {
       minDist = dist;
       closestIdx = i;
     }
-    accOffset += card.offsetWidth + 24; 
+    accOffset += card.offsetWidth + 24;
   }
   currentIndex.value = closestIdx;
 }
@@ -99,7 +99,7 @@ function scrollPrev() {
 </script>
 
 <template>
-  <div class="flex-col gap-[48px] flex">
+  <div class="flex-col gap-[48px] flex containerBottom ">
     <div
       class="flex justify-between items-start container pbNone max-sm:flex-col max-sm:gap-[32px] max-sm:items-end"
     >
