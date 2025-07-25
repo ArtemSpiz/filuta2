@@ -62,6 +62,10 @@
     @apply pb-0 !important;
   }
 
+  .ptNone {
+    @apply pt-0 !important;
+  }
+
   .containerBottom {
     @apply pb-[100px];
   }

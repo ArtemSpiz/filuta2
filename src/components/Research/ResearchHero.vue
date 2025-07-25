@@ -12,9 +12,7 @@ import ColorButton from "@/ui/ColorButton/ColorButton.vue";
       class="heroContainer center flex-col max-lg:h-[calc(100vh-96px)] max-md:h-full max-sm:px-[24px]"
     >
       <div class="flex flex-col gap-[32px] center">
-        <div
-          class="heroUnderTitle text-center"
-        >
+        <div class="heroUnderTitle text-center">
           Research-Driven AI for a Smarter Tomorrow
         </div>
         <div class="flex flex-col gap-[24px] center text-center">

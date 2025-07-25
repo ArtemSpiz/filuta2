@@ -29,9 +29,7 @@ import PlayIcon from "@/assets/svg/PlayIcon.vue";
         class="flex flex-col gap-[64px] items-start justify-start max-lg:center max-lg:gap-[32px]"
       >
         <div class="flex flex-col gap-[32px] max-lg:center">
-          <div class="heroUnderTitle">
-            Vendor Compliance Monitor
-          </div>
+          <div class="heroUnderTitle">Vendor Compliance Monitor</div>
           <div class="flex flex-col gap-[24px] max-lg:center">
             <div class="HeroTitle">Government & Education</div>
             <div class="HeroSubtitle max-w-none">
@@ -52,7 +50,7 @@ import PlayIcon from "@/assets/svg/PlayIcon.vue";
         </div>
 
         <button
-          class="px-[24px] absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%] py-[14px] flex gap-[8px] border border-[#000] rounded-[900px] bg-[rgba(255,255,255,0.02)] backdrop-blur-[6px] items-center text-[#000] font-ibm text-[16px] font-normal max-md:w-[-webkit-fit-content]"
+          class="px-[24px] absolute top-[50%] right-[50%] translate-x-[50%] translate-y-[-50%] py-[14px] flex gap-[8px] border border-[#000] rounded-[900px] bg-[rgba(255,255,255,0.02)] backdrop-blur-[6px] items-center text-[#000] font-ibm text-[16px] font-normal max-md:w-[-webkit-max-content]"
         >
           How Filuta Works <PlayIcon />
         </button>

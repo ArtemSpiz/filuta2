@@ -49,7 +49,7 @@ const headerNavs = [
       {
         icon: headerIcon8,
         link: "Blog ",
-        href: "#",
+        href: "/blog",
         subtitle: "Read our latest news and updates",
       },
       {
