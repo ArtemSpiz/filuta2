@@ -16,7 +16,7 @@ const BlogCards = [
   },
   {
     slug: "TheFutureofVendorComplianceinK–12Education",
-    category: "Government & Education",
+    category: "Government & Education", 
     title: "The Future of Vendor Compliance in K–12 Education",
     subtitle:
       "Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.",
