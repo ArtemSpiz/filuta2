@@ -14,11 +14,11 @@ defineProps({
 <template>
   <button
     :class="[
-      'flex px-6 py-3.5 justify-center items-center gap-2 rounded-full border border-white bg-white/5 backdrop-blur-sm text-white font-ibm text-base font-normal cursor-pointer',
+      'flex px-6 h-12 justify-center items-center gap-2 rounded-full border border-white backdrop-blur-sm text-white font-ibm text-base font-normal cursor-pointer',
       $props.class,
     ]"
   >
     {{ text }}<buttonArrow />
   </button>
 </template>
-<style></style>
+<style scoped></style>

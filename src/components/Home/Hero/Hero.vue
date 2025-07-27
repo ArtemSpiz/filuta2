@@ -8,7 +8,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
 </script>
 
 <template>
-  <div class="h-screen bg-fullBg bg-no-repeat relative max-lg:bg-none max-lg:h-full">
+  <div class="h-screen bg-no-repeat relative max-lg:bg-none max-lg:h-full">
     <div class="absolute top-0 left-[-100px] pointer-events-none">
       <img :src="heroMobLight" alt="heroLight" />
     </div>
@@ -23,8 +23,8 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
         <div
           class="flex flex-col items-start gap-6 w-full max-lg:justify-center max-lg:items-center"
         >
-          <div class="HeroTitle">Automate game testing with AI agents</div>
-          <div class="HeroSubtitle">
+          <div class="HeroTitle max-lg:text-center">Automate game testing with AI agents</div>
+          <div class="HeroSubtitle max-lg:text-center">
             Our agents play through your game like real users — finding bugs before your players do.
           </div>
         </div>

@@ -11,6 +11,16 @@ export default {
   ],
   darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1.5rem',
+        sm: '2.5rem',
+        md: ' 3.75rem',
+        lg: '5rem',
+        xl: '6.75rem',
+      },
+    },
     extend: {
       fontFamily: {
         ibm: ['IBM Plex Sans', 'sans-serif'],
@@ -35,6 +45,10 @@ export default {
         },
       },
       screens: {
+        xl: '1285px',
+        lg: '1040px',
+        md: '768px',
+        sm: '640px',
         xs: '475px',
       },
       spacing: {
@@ -53,5 +67,15 @@ export default {
       },
     },
   },
+  safelist: [
+    'container',
+    'gap-14',
+    'items-center',
+    'flex',
+    'py-[100px]',
+    'max-xl:py-20',
+    'max-lg:py-16',
+    'max-md:py-12',
+  ],
   plugins: [],
 } satisfies Config;

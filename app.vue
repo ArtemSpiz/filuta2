@@ -114,22 +114,10 @@ body {
 
 /* Utility classes */
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
-@media (min-width: 640px) {
-  .container {
-    padding: 0 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 4rem;
-  }
-}
 
 /* Animation classes */
 .fade-enter-active,

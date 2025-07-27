@@ -29,6 +29,7 @@ const ProblemCards = [
 ];
 
 import { ref, onMounted, onUnmounted } from 'vue';
+import Section from '../../../ui/section.vue';
 
 const windowWidth = ref(0);
 
@@ -53,10 +54,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-[56px] container">
-    <div class="Title text-center">The Problems Slowing You Down</div>
+  <Section
+    customClass="flex-col items-center "
+    title="The Problems Slowing You Down"
+    classTitle="text-center"
+  >
     <div
-      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
+      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-2 max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
     >
       <div
         v-for="(card, index) in ProblemCards"
@@ -94,7 +98,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-  </div>
+  </Section>
 </template>
 
 <style></style>

@@ -45,7 +45,7 @@
   }
 
   .HeroTitle {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-ibm font-normal text-white leading-tight w-full max-w-[700px];
   }
 
   .HeroSubtitle {
@@ -53,7 +53,6 @@
   }
 
   .bg-fullBg {
-    background-image: url('@/assets/img/bgHero.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -61,7 +60,7 @@
 
   /* Common component styles */
   .Title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight;
+    @apply text-3xl md:text-4xl lg:text-5xl font-normal text-white !leading-[130%];
   }
 
   .Subtitle {
@@ -84,6 +83,10 @@
 
   .heroUnderTitle {
     @apply text-[#57c0c9] uppercase font-light text-[16px] font-mono;
+  }
+
+  .heroContainer {
+    @apply px-[108px] flex items-center h-[calc(100vh)] gap-[64px] max-xl:px-20 max-lg:pt-[116px] max-lg:px-15 max-md:px-10 max-sm:px-4;
   }
 
   .cardsHover {

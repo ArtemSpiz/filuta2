@@ -78,7 +78,7 @@ const isOpen = index => openIndex.value === index;
 </script>
 
 <template>
-  <div class="m-auto flex items-center justify-between w-full box-border container">
+  <div class="m-auto flex items-center justify-between w-full box-border z-10 container !pb-0 !pt-0 bg-transparent absolute top-6 px-27">
     <div class="flex items-center justify-between w-full">
       <NuxtLink to="/">
         <div class="w-[44px] h-[46px] shrink-0">
