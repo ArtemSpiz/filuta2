@@ -7,6 +7,7 @@
         :src="post.featured_image"
         :alt="post.title"
         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+        loading="lazy"
       />
     </div>
     <div class="p-6">

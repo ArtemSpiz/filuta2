@@ -4,7 +4,7 @@ import ColorButton from '@/ui/ColorButton/ColorButton.vue';
 
 <template>
   <div
-    class="h-screen bg-[url('/src/assets/img/bgResearchHero.png')] bg-no-repeat bg-cover bg-center flex flex-col max-md:gap-18 max-md:h-full max-sm:bg-[url('/src/assets/img/researchHeroBgMob.png')] max-md:pb-16"
+    class="h-screen bg-[url('/img/bgResearchHero.png')] bg-no-repeat bg-cover bg-center flex flex-col max-md:gap-18 max-md:h-full max-sm:bg-[url('/img/researchHeroBgMob.png')] max-md:pb-16"
   >
     <div
       class="heroContainer flex items-center justify-center flex-col max-lg:h-[calc(100vh-96px)] max-md:h-full max-sm:px-6"

@@ -1,25 +1,54 @@
-export const footerLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'About Us', to: '/about-us' },
-  { label: 'Research', to: '/research' },
-  { label: 'Government', to: '/government-education' },
-  { label: 'Blog', to: '/blog' },
+export interface FooterPartner {
+  logo: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface FooterLink {
+  title: string;
+  subtitles: FooterSubtitle[];
+}
+
+export interface FooterSubtitle {
+  subtitle: string;
+  href: string;
+}
+
+export const FooterPartnersLinks: FooterPartner[] = [
+  {
+    logo: 'footerAirLogo',
+    title: 'AIPlan4EU',
+    subtitle:
+      'The AIPlan4EU project is funded by the European Commission – H2020 research and innovation programme under grant agreement No 101016442',
+  },
+  {
+    logo: 'footerTechLogo',
+    title: 'CzechInvest',
+    subtitle: 'We were supported by the system project Technological Incubation',
+  },
 ];
 
-export const footerContact = {
-  email: 'contact@filuta.com',
-  phone: '+1 (234) 567-890',
-  address: '123 Innovation Drive\nTech City, TC 12345',
-};
-
-export const footerSocials = [
-  { label: 'Twitter', href: '#', icon: 'twitter' },
-  { label: 'LinkedIn', href: '#', icon: 'linkedin' },
-  { label: 'GitHub', href: '#', icon: 'github' },
-];
-
-export const footerPolicies = [
-  { label: 'Privacy Policy', to: '#' },
-  { label: 'Terms of Service', to: '#' },
-  { label: 'Cookie Policy', to: '#' },
+export const FooterLinks: FooterLink[] = [
+  {
+    title: 'Solutions',
+    subtitles: [
+      { subtitle: 'Government & Education', href: '/government-education' },
+      { subtitle: 'Manufacturing', href: '#' },
+      { subtitle: 'Logistics', href: '#' },
+    ],
+  },
+  {
+    title: 'Links',
+    subtitles: [
+      { subtitle: 'Platform', href: '#' },
+      { subtitle: 'Research', href: '/research' },
+      { subtitle: 'Team', href: '#' },
+      { subtitle: 'Career', href: '#' },
+      { subtitle: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    title: 'Socials',
+    subtitles: [{ subtitle: 'LinkedIn', href: '#' }],
+  },
 ];

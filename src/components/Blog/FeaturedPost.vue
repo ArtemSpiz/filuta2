@@ -37,6 +37,7 @@
             :src="post.featured_image"
             :alt="post.title"
             class="w-full h-64 object-cover rounded-lg"
+            loading="lazy"
           />
         </div>
       </div>

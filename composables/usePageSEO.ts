@@ -21,26 +21,6 @@ export interface PageSEOConfig {
 export function setupPageSEO(config: PageSEOConfig) {
   const baseUrl = 'https://filuta.com';
 
-  // Set up meta tags
-  useHead({
-    title: config.title,
-    meta: [
-      { name: 'description', content: config.description },
-      { property: 'og:title', content: config.title },
-      { property: 'og:description', content: config.description },
-      { property: 'og:type', content: config.type || 'website' },
-      { property: 'og:url', content: `${baseUrl}${config.url}` },
-      ...(config.image ? [{ property: 'og:image', content: config.image }] : []),
-      ...(config.publishedAt
-        ? [{ property: 'article:published_time', content: config.publishedAt }]
-        : []),
-      ...(config.author ? [{ property: 'article:author', content: config.author }] : []),
-      ...(config.section ? [{ property: 'article:section', content: config.section }] : []),
-      ...(config.keywords ? [{ name: 'keywords', content: config.keywords.join(', ') }] : []),
-    ],
-    link: [{ rel: 'canonical', href: `${baseUrl}${config.url}` }],
-  });
-
   // Set up Schema.org structured data
   const schemaData = {
     '@context': 'https://schema.org',
@@ -63,7 +43,24 @@ export function setupPageSEO(config: PageSEOConfig) {
     }),
   };
 
+  // Single useHead call with all meta tags and schema data
   useHead({
+    title: config.title,
+    meta: [
+      { name: 'description', content: config.description },
+      { property: 'og:title', content: config.title },
+      { property: 'og:description', content: config.description },
+      { property: 'og:type', content: config.type || 'website' },
+      { property: 'og:url', content: `${baseUrl}${config.url}` },
+      ...(config.image ? [{ property: 'og:image', content: config.image }] : []),
+      ...(config.publishedAt
+        ? [{ property: 'article:published_time', content: config.publishedAt }]
+        : []),
+      ...(config.author ? [{ property: 'article:author', content: config.author }] : []),
+      ...(config.section ? [{ property: 'article:section', content: config.section }] : []),
+      ...(config.keywords ? [{ name: 'keywords', content: config.keywords.join(', ') }] : []),
+    ],
+    link: [{ rel: 'canonical', href: `${baseUrl}${config.url}` }],
     script: [
       {
         type: 'application/ld+json',

@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-// Global SEO and meta tags
+// Global SEO and meta tags - single useHead call
 useHead({
   title: 'Filuta - AI-Powered Compliance Solutions',
   meta: [
@@ -45,10 +45,6 @@ useHead({
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'canonical', href: 'https://filuta.com' },
   ],
-});
-
-// Schema.org structured data
-useHead({
   script: [
     {
       type: 'application/ld+json',
