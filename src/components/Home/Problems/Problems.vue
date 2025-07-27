@@ -29,7 +29,7 @@ const ProblemCards = [
 ];
 
 import { ref, onMounted, onUnmounted } from 'vue';
-import Section from '../../../ui/section.vue';
+import Section from '../../../ui/Section.vue';
 
 const windowWidth = ref(0);
 
@@ -55,9 +55,9 @@ onUnmounted(() => {
 
 <template>
   <Section
-    customClass="flex-col items-center "
+    custom-class="flex-col items-center "
     title="The Problems Slowing You Down"
-    classTitle="text-center"
+    class-title="text-center"
   >
     <div
       class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-2 max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
