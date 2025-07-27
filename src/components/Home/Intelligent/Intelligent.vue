@@ -1,73 +1,78 @@
 <script setup>
-import Light1 from "@/assets/svg/Light1.vue";
-import Light2 from "@/assets/svg/Light2.vue";
-import Light3 from "@/assets/svg/Light3.vue";
+import Light1 from '@/assets/svg/Light1.vue';
+import Light2 from '@/assets/svg/Light2.vue';
+import Light3 from '@/assets/svg/Light3.vue';
 
-import IntelligentIcon1 from "@/assets/svg/IntelligentIcon1.vue";
-import IntelligentIcon2 from "@/assets/svg/IntelligentIcon2.vue";
-import IntelligentIcon3 from "@/assets/svg/IntelligentIcon3.vue";
+import IntelligentIcon1 from '@/assets/svg/IntelligentIcon1.vue';
+import IntelligentIcon2 from '@/assets/svg/IntelligentIcon2.vue';
+import IntelligentIcon3 from '@/assets/svg/IntelligentIcon3.vue';
 
-import IntelligentImage1 from "@/assets/img/intelligentCardImg1.png";
-import IntelligentImage2 from "@/assets/img/intelligentCardImg2.png";
-import IntelligentImage3 from "@/assets/img/intelligentCardImg3.png";
-import { ref, onMounted, onUnmounted } from "vue";
+import IntelligentImage1 from '@/assets/img/intelligentCardImg1.png';
+import IntelligentImage2 from '@/assets/img/intelligentCardImg2.png';
+import IntelligentImage3 from '@/assets/img/intelligentCardImg3.png';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const IntelligentCards = [
   {
     light: Light3,
     icon: IntelligentIcon3,
-    title: "Automotive Infotainment",
+    title: 'Automotive Infotainment',
     subtitle:
-      "We develop smart in-car infotainment systems that enhance navigation, connectivity, and user experience on the road.",
+      'We develop smart in-car infotainment systems that enhance navigation, connectivity, and user experience on the road.',
     image: IntelligentImage3,
-    hoverBg: "hoverBgThird",
+    hoverBg: 'hoverBgThird',
   },
   {
     light: Light2,
     icon: IntelligentIcon2,
-    title: "Defence Simulators",
+    title: 'Defence Simulators',
     subtitle:
-      "We create high-precision defence simulators for realistic, risk-free military training.",
+      'We create high-precision defence simulators for realistic, risk-free military training.',
     image: IntelligentImage2,
-    hoverBg: "hoverBgSecond",
+    hoverBg: 'hoverBgSecond',
   },
   {
     light: Light1,
     icon: IntelligentIcon1,
-    title: "Government & Education",
+    title: 'Government & Education',
     subtitle:
-      "Automated vendor compliance checks that reduce human error, minimize risk, and protect public institutions from fines or funding loss.",
+      'Automated vendor compliance checks that reduce human error, minimize risk, and protect public institutions from fines or funding loss.',
     image: IntelligentImage1,
-    hoverBg: "hoverBgFirst",
+    hoverBg: 'hoverBgFirst',
   },
 ];
 
 const activeIndex = ref(2);
 
-const isSmallScreen = ref(window.innerWidth < 1040);
+const isSmallScreen = ref(false);
 
 function onResize() {
-  isSmallScreen.value = window.innerWidth < 1040;
+  if (process.client) {
+    isSmallScreen.value = window.innerWidth < 1040;
+  }
 }
 
 onMounted(() => {
-  window.addEventListener("resize", onResize);
+  if (process.client) {
+    isSmallScreen.value = window.innerWidth < 1040;
+    window.addEventListener('resize', onResize);
+  }
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", onResize);
+  if (process.client) {
+    window.removeEventListener('resize', onResize);
+  }
 });
 </script>
 
 <template>
   <div class="flex flex-col items-center container gap-[56px]">
     <div class="flex flex-col items-center gap-4">
-      <div class="Title text-center">
-        Intelligent AI Solutions for Critical Industries
-      </div>
+      <div class="Title text-center">Intelligent AI Solutions for Critical Industries</div>
       <div class="Subtitle text-center">
-        From government to logistics and manufacturing — Filuta delivers smart
-        automation that ensures accuracy and reliability.
+        From government to logistics and manufacturing — Filuta delivers smart automation that
+        ensures accuracy and reliability.
       </div>
     </div>
 
@@ -79,13 +84,13 @@ onUnmounted(() => {
         <div
           v-for="(card, index) in IntelligentCards"
           :key="'card-' + index"
-          @mouseenter="activeIndex = index"
           class="flex flex-col items-center gap-4 w-[617px] px-8 pt-12 pb-8 rounded-[20px] border border-[#2b2a30] cursor-pointer relative transition-all duration-500 max-xl:w-[500px] max-sm:w-full max-sm:p-[16px] max-sm:pt-[32px]"
           :class="{
             'bg-[#141219]': activeIndex === 2 && index === 2,
             'bg-[#121619]': activeIndex === 1 && index === 1,
             'bg-[#121819]': activeIndex === 0 && index === 0,
           }"
+          @mouseenter="activeIndex = index"
         >
           <!-- light -->
           <div class="absolute top-0 right-1/2 translate-x-1/2">
@@ -111,9 +116,7 @@ onUnmounted(() => {
           <div
             :class="[
               'text-center border-b text-[16px] leading-[150%] font-ibm font-normal transition-all duration-500',
-              activeIndex === index
-                ? 'text-white border-white'
-                : 'text-[#9D9D9D] border-[#9D9D9D]',
+              activeIndex === index ? 'text-white border-white' : 'text-[#9D9D9D] border-[#9D9D9D]',
             ]"
           >
             Read more

@@ -1,51 +1,58 @@
 <script setup>
-import FeaturedCard1 from "@/assets/img/FeaturedCard1.png";
-import FeaturedCard2 from "@/assets/img/FeaturedCard2.png";
-import FeaturedCard3 from "@/assets/img/FeaturedCard3.png";
-import lightLeft from "@/assets/img/everythingLightLeft.png";
-import lightRight from "@/assets/img/everythingLightRight.png";
+import FeaturedCard1 from '@/assets/img/FeaturedCard1.png';
+import FeaturedCard2 from '@/assets/img/FeaturedCard2.png';
+import FeaturedCard3 from '@/assets/img/FeaturedCard3.png';
+import lightLeft from '@/assets/img/everythingLightLeft.png';
+import lightRight from '@/assets/img/everythingLightRight.png';
 
 const FeaturedCards = [
   {
     image: FeaturedCard1,
-    type: "Government & Education",
-    date: "May 05, 2025",
-    title: "Why Manual Compliance No Longer Works",
+    type: 'Government & Education',
+    date: 'May 05, 2025',
+    title: 'Why Manual Compliance No Longer Works',
     subtitle:
-      "Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.",
+      'Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.',
   },
   {
     image: FeaturedCard2,
-    type: "Government & Education",
-    date: "May 05, 2025",
-    title: "The Future of Vendor Compliance in K–12 Education",
+    type: 'Government & Education',
+    date: 'May 05, 2025',
+    title: 'The Future of Vendor Compliance in K–12 Education',
     subtitle:
-      "Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.",
+      'Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.',
   },
   {
     image: FeaturedCard3,
-    type: "Government & Education",
-    date: "May 05, 2025",
-    title: "5 Signs Your District Needs a Compliance Upgrade",
+    type: 'Government & Education',
+    date: 'May 05, 2025',
+    title: '5 Signs Your District Needs a Compliance Upgrade',
     subtitle:
-      "Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.",
+      'Manual processes are slow, error-prone, and risky. Discover the hidden costs of outdated workflows — and how automation changes the game.',
   },
 ];
 
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const windowWidth = ref(window.innerWidth);
+const windowWidth = ref(0);
 
 function updateWidth() {
-  windowWidth.value = window.innerWidth;
+  if (process.client) {
+    windowWidth.value = window.innerWidth;
+  }
 }
 
 onMounted(() => {
-  window.addEventListener("resize", updateWidth);
+  if (process.client) {
+    windowWidth.value = window.innerWidth;
+    window.addEventListener('resize', updateWidth);
+  }
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", updateWidth);
+  if (process.client) {
+    window.removeEventListener('resize', updateWidth);
+  }
 });
 </script>
 
@@ -64,8 +71,7 @@ onUnmounted(() => {
     <div class="flex flex-col gap-[16px] items-center">
       <div class="Title text-center">Featured Articles</div>
       <div class="Subtitle text-center">
-        Insights on modern compliance, automation, and operational excellence in
-        school districts.
+        Insights on modern compliance, automation, and operational excellence in school districts.
       </div>
     </div>
     <div
@@ -80,8 +86,8 @@ onUnmounted(() => {
             ? windowWidth < 768
               ? 'right-[0%]'
               : windowWidth < 1285
-              ? 'right-[-50%] relative'
-              : ''
+                ? 'right-[-50%] relative'
+                : ''
             : ''
         "
       >
@@ -90,27 +96,19 @@ onUnmounted(() => {
         </div>
         <div class="flex flex-col gap-2 items-start">
           <div class="flex justify-between items-center w-full">
-            <div
-              class="text-[#57C1CA] text-[14px] font-ibm leading-[130%] tracking-[-0.28px]"
-            >
+            <div class="text-[#57C1CA] text-[14px] font-ibm leading-[130%] tracking-[-0.28px]">
               {{ card.type }}
             </div>
-            <div
-              class="text-[#7C7C7C] text-[14px] font-ibm leading-[130%] tracking-[-0.28px]"
-            >
+            <div class="text-[#7C7C7C] text-[14px] font-ibm leading-[130%] tracking-[-0.28px]">
               {{ card.date }}
             </div>
           </div>
-          <div
-            class="text-white text-[24px] leading-[130%] font-ibm font-normal"
-          >
+          <div class="text-white text-[24px] leading-[130%] font-ibm font-normal">
             {{ card.title }}
           </div>
         </div>
 
-        <div
-          class="text-[rgba(255,255,255,0.60)] text-[16px] font-ibm leading-[150%]"
-        >
+        <div class="text-[rgba(255,255,255,0.60)] text-[16px] font-ibm leading-[150%]">
           {{ card.subtitle }}
         </div>
       </div>

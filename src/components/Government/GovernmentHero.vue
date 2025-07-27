@@ -1,30 +1,20 @@
 <script setup>
-import HeaderLayout from "@/layout/Header/HeaderLayout.vue";
-import lightGreen from "@/assets/img/govHeroLightGreen.png";
-import lightBlue from "@/assets/img/govHeroLightBlue.png";
-import ColorButton from "@/ui/ColorButton/ColorButton.vue";
-import video from "@/assets/img/govHeroVideo.png";
-import PlayIcon from "@/assets/svg/PlayIcon.vue";
+import lightGreen from '@/assets/img/govHeroLightGreen.png';
+import lightBlue from '@/assets/img/govHeroLightBlue.png';
+import ColorButton from '@/ui/ColorButton/ColorButton.vue';
+import video from '@/assets/img/govHeroVideo.png';
+import PlayIcon from '@/assets/svg/PlayIcon.vue';
 </script>
 
 <template>
-  <div
-    class="h-scree flex flex-col relative max-lg:gap-[21px] max-lg:pb-[60px] overflow-hidden"
-  >
-    <HeaderLayout />
-    <div
-      class="absolute top-0 left-0 w-[1118px] pointer-events-none max-md:w-[1000px]"
-    >
+  <div class="h-screen flex flex-col relative max-lg:gap-[21px] max-lg:pb-[60px] overflow-hidden">
+    <div class="absolute top-0 left-0 w-[1118px] pointer-events-none max-md:w-[1000px]">
       <img :src="lightGreen" alt="lightGreen" />
     </div>
-    <div
-      class="absolute bottom-[30px] right-0 w-[1184px] pointer-events-none max-md:hidden"
-    >
+    <div class="absolute bottom-[30px] right-0 w-[1184px] pointer-events-none max-md:hidden">
       <img :src="lightBlue" alt="lightBlue" />
     </div>
-    <div
-      class="gap-[24px] heroContainer justify-center max-lg:center max-lg:gap-[45px]"
-    >
+    <div class="gap-[24px] heroContainer justify-center max-lg:center max-lg:gap-[45px]">
       <div
         class="flex flex-col gap-[64px] items-start justify-start max-lg:center max-lg:gap-[32px]"
       >
@@ -33,8 +23,8 @@ import PlayIcon from "@/assets/svg/PlayIcon.vue";
           <div class="flex flex-col gap-[24px] max-lg:center">
             <div class="HeroTitle">Government & Education</div>
             <div class="HeroSubtitle max-w-none">
-              AI-powered functional testing that adapts in real time, uncovers
-              edge cases, and helps your team scale QA efficiently.
+              AI-powered functional testing that adapts in real time, uncovers edge cases, and helps
+              your team scale QA efficiently.
             </div>
           </div>
         </div>

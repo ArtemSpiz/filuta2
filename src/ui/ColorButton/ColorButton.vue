@@ -1,14 +1,14 @@
 <script setup>
-import buttonArrow from "../../assets/svg/ButtonArrow.vue";
+import buttonArrow from '../../assets/svg/ButtonArrow.vue';
 defineProps({
   class: {
     type: String,
-    default: "",
+    default: '',
   },
 
   text: {
     type: String,
-    default: "Schedule a demo",
+    default: 'Schedule a demo',
   },
 });
 </script>

@@ -1,29 +1,47 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import ColorButton from "@/ui/ColorButton/ColorButton.vue";
-import buildBg from "@/assets/img/buildBg.png";
-import buildBgMob from "@/assets/img/buildBgMob.png";
+import buildBg from '@/assets/img/buildBg.png';
+import buildBgMob from '@/assets/img/buildBgMob.png';
+import ColorButton from '@/ui/ColorButton/ColorButton.vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 defineProps({
-  title: String,
-  subtitle: String,
-  titleClass: String,
-  subtitleClass: String,
+  title: {
+    type: String,
+    default: 'Build Better Games, With Less QA Stress',
+  },
+  subtitle: {
+    type: String,
+    default: 'Let Filuta handle the grunt work so your team can focus on great gameplay.',
+  },
+  titleClass: {
+    type: String,
+    default: '',
+  },
+  subtitleClass: {
+    type: String,
+    default: '',
+  },
 });
 
 const backgroundImage = ref(buildBg);
 
 function updateBg() {
-  backgroundImage.value = window.innerWidth < 450 ? buildBgMob : buildBg;
+  if (process.client) {
+    backgroundImage.value = window.innerWidth < 450 ? buildBgMob : buildBg;
+  }
 }
 
 onMounted(() => {
-  updateBg();
-  window.addEventListener("resize", updateBg);
+  if (process.client) {
+    updateBg();
+    window.addEventListener('resize', updateBg);
+  }
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", updateBg);
+  if (process.client) {
+    window.removeEventListener('resize', updateBg);
+  }
 });
 </script>
 
@@ -51,9 +69,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <ColorButton
-        class="!bg-white !text-[#0e0e0e] [&_svg_path]:fill-[#0e0e0e]"
-      />
+      <ColorButton class="!bg-white !text-[#0e0e0e] [&_svg_path]:fill-[#0e0e0e]" />
     </div>
   </div>
 </template>

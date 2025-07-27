@@ -1,40 +1,31 @@
 <script setup>
-import Header from "@/layout/Header/HeaderLayout";
-import ColorButton from "@/ui/ColorButton/ColorButton";
-import TransparentBtn from "@/ui/TransparentBtn/TransparentBtn.vue";
-import heroMobBg from "@/assets/img/bgMobHero.png";
-import bgHero from "@/assets/img/bgHero.png";
-import heroMobLight from "@/assets/img/lightMobHero.png";
-import herolightBlue from "@/assets/img/heroLightBlue.png";
+import ColorButton from '@/ui/ColorButton/ColorButton.vue';
+import TransparentBtn from '@/ui/TransparentBtn/TransparentBtn.vue';
+import heroMobBg from '@/assets/img/bgMobHero.png';
+import bgHero from '@/assets/img/bgHero.png';
+import heroMobLight from '@/assets/img/lightMobHero.png';
+import herolightBlue from '@/assets/img/heroLightBlue.png';
 </script>
 
 <template>
-  <div
-    class="h-screen bg-fullBg bg-no-repeat relative max-lg:bg-none max-lg:h-full"
-  >
+  <div class="h-screen bg-fullBg bg-no-repeat relative max-lg:bg-none max-lg:h-full">
     <div class="absolute top-0 left-[-100px] pointer-events-none">
       <img :src="heroMobLight" alt="heroLight" />
     </div>
-    <div
-      class="absolute bottom-[20px] right-0 pointer-events-none max-sm:hidden"
-    >
+    <div class="absolute bottom-[20px] right-0 pointer-events-none max-sm:hidden">
       <img :src="herolightBlue" alt="heroLight" />
     </div>
-    <Header />
     <div
       class="heroContainer flex flex-col items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:items-center"
     >
-      <div
-        class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center"
-      >
+      <div class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center">
         <div class="heroUnderTitle max-sm:text-[14px]">Leading AI Tools to Grow Your Business</div>
         <div
           class="flex flex-col items-start gap-6 w-full max-lg:justify-center max-lg:items-center"
         >
           <div class="HeroTitle">Automate game testing with AI agents</div>
           <div class="HeroSubtitle">
-            Our agents play through your game like real users — finding bugs
-            before your players do.
+            Our agents play through your game like real users — finding bugs before your players do.
           </div>
         </div>
       </div>

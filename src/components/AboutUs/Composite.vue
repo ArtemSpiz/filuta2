@@ -1,20 +1,20 @@
 <script setup>
-import Light1 from "@/assets/svg/Light1.vue";
-import Light3 from "@/assets/svg/Light3.vue";
-import light from "@/assets/img/lightRightSecur.png";
+import Light1 from '@/assets/svg/Light1.vue';
+import Light3 from '@/assets/svg/Light3.vue';
+import light from '@/assets/img/lightRightSecur.png';
 
 const CompositeCards = [
   {
     light: Light1,
-    title: "Our Mission",
+    title: 'Our Mission',
     subtitle:
-      "Transforming game testing with intelligent, high-performance AI agents — powered by deep-tech innovation and real-time adaptability.",
+      'Transforming game testing with intelligent, high-performance AI agents — powered by deep-tech innovation and real-time adaptability.',
   },
   {
     light: Light3,
-    title: "Our Commitment",
+    title: 'Our Commitment',
     subtitle:
-      "Advancing Composite AI by uniting symbolic reasoning and machine learning for next-gen automation.",
+      'Advancing Composite AI by uniting symbolic reasoning and machine learning for next-gen automation.',
   },
 ];
 </script>
@@ -28,23 +28,21 @@ const CompositeCards = [
     </div>
     <div class="flex flex-col gap-[16px] w-full max-w-[575px] z-10">
       <div class="Title">
-        Filuta is a research-driven AI company pioneering the next generation of
-        Composite AI.
+        Filuta is a research-driven AI company pioneering the next generation of Composite AI.
       </div>
       <div class="Subtitle">
-        We build intelligent systems that combine symbolic reasoning with
-        machine learning to solve real-world problems — from game testing and
-        logistics to planning and decision automation. Our team unites
-        scientists and engineers with deep academic roots and a passion for
-        product impact.
+        We build intelligent systems that combine symbolic reasoning with machine learning to solve
+        real-world problems — from game testing and logistics to planning and decision automation.
+        Our team unites scientists and engineers with deep academic roots and a passion for product
+        impact.
       </div>
     </div>
 
     <div class="flex flex-col gap-[24px] max-lg:flex-row max-md:flex-col max-sm:center">
       <div
-        class="h-[240px] p-[48px] relative items-center justify-end flex flex-col gap-[16px] rounded-[20px] border border-[#2B2A30] max-lg:w-[50%] max-lg:p-[32px] max-lg:h-[260px] max-lg:pt-[48px] max-md:w-full max-md:h-max max-w-[500px]"
         v-for="(card, index) in CompositeCards"
         :key="index"
+        class="h-[240px] p-[48px] relative items-center justify-end flex flex-col gap-[16px] rounded-[20px] border border-[#2B2A30] max-lg:w-[50%] max-lg:p-[32px] max-lg:h-[260px] max-lg:pt-[48px] max-md:w-full max-md:h-max max-w-[500px]"
         :class="{ 'bg-[#141219]': index === 0, 'bg-[#121819]': index === 1 }"
       >
         <div class="absolute top-0 right-[50%] translate-x-[50%]">

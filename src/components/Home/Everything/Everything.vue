@@ -1,81 +1,126 @@
 <script setup>
-import anim1 from "@/jsonAnimations/animation1.json";
-import anim2 from "@/jsonAnimations/animation2.json";
-import anim3 from "@/jsonAnimations/animation3.json";
-import anim4 from "@/jsonAnimations/animation4.json";
-import anim5 from "@/jsonAnimations/animation5.json";
-import animMob3 from "@/jsonAnimations/animation3Mob.json";
-import everythingLightLeft from "@/assets/img/everythingLightLeft.png";
-import everythingLightRight from "@/assets/img/everythingLightRight.png";
+const anim1 = '/animations/animation1.json';
+const anim2 = '/animations/animation2.json';
+const anim3 = '/animations/animation3.json';
+const anim4 = '/animations/animation4.json';
+const anim5 = '/animations/animation5.json';
+const animMob3 = '/animations/animation3Mob.json';
+import everythingLightLeft from '@/assets/img/everythingLightLeft.png';
+import everythingLightRight from '@/assets/img/everythingLightRight.png';
 
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, nextTick } from 'vue';
 
-const isMobile = window.innerWidth < 1040;
+const { $lottie } = useNuxtApp();
+
+const isMobile = ref(false);
+
+onMounted(() => {
+  if (process.client) {
+    isMobile.value = window.innerWidth < 1040;
+  }
+});
 
 const EverythingCards = [
   {
     animation: anim1,
-    title: "AI Agents that Play Like Real Players",
+    title: 'AI Agents that Play Like Real Players',
     subtitle:
-      "Test actual gameplay — not just clicks. Our agents understand goals, navigate levels, and adapt to changing mechanics.",
+      'Test actual gameplay — not just clicks. Our agents understand goals, navigate levels, and adapt to changing mechanics.',
   },
   {
     animation: anim2,
-    title: "Continuous Testing, 24/7",
+    title: 'Continuous Testing, 24/7',
     subtitle:
-      "No need to wait for QA cycles. Agents run tests automatically with every build, day and night.",
+      'No need to wait for QA cycles. Agents run tests automatically with every build, day and night.',
   },
   {
-    animation: isMobile ? animMob3 : anim3,
-    title: "Smart Bug Detection",
+    animation: isMobile.value ? animMob3 : anim3,
+    title: 'Smart Bug Detection',
     subtitle:
-      "Catch hidden issues that traditional scripts miss — edge cases, timing problems, and unusual player behavior.",
+      'Catch hidden issues that traditional scripts miss — edge cases, timing problems, and unusual player behavior.',
   },
   {
     animation: anim4,
-    title: "Easy Integration",
+    title: 'Easy Integration',
     subtitle:
-      "Works with Unity, Unreal, and your CI/CD pipeline. Get started fast without changing your workflow.",
+      'Works with Unity, Unreal, and your CI/CD pipeline. Get started fast without changing your workflow.',
   },
   {
     animation: anim5,
-    title: "Scalable by Design",
+    title: 'Scalable by Design',
     subtitle:
-      "From indie games to AAA titles — test one level or an entire game world. Our system scales with your needs.",
+      'From indie games to AAA titles — test one level or an entire game world. Our system scales with your needs.',
   },
 ];
 
 const animationRefs = EverythingCards.map(() => ref(null));
 const lottieInstances = [];
 
-onMounted(() => {
-  EverythingCards.forEach((card, index) => {
+onMounted(async () => {
+  await nextTick();
+
+  for (let index = 0; index < EverythingCards.length; index++) {
+    const card = EverythingCards[index];
     const container = animationRefs[index].value;
 
-    const anim = window.lottie.loadAnimation({
-      container,
-      renderer: "svg",
-      loop: false,
-      autoplay: false,
-      animationData: card.animation,
-    });
-    lottieInstances[index] = anim;
+    if (!container || !$lottie) {
+      console.warn(`Container or lottie not available for index ${index}`);
+      continue;
+    }
+
+    try {
+      // Fetch the animation data
+      const response = await fetch(card.animation);
+      const animationData = await response.json();
+
+      const anim = $lottie.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        animationData: animationData,
+      });
+      lottieInstances[index] = anim;
+      console.log(`Lottie animation ${index} loaded successfully`);
+    } catch (error) {
+      console.error('Failed to load Lottie animation:', error);
+    }
+  }
+});
+
+onUnmounted(() => {
+  lottieInstances.forEach(anim => {
+    if (anim) {
+      try {
+        anim.destroy();
+      } catch (error) {
+        console.error('Failed to destroy animation:', error);
+      }
+    }
   });
 });
 
 function playAnimation(index) {
   const anim = lottieInstances[index];
   if (anim) {
-    anim.setDirection(1);
-    anim.play();
+    try {
+      anim.setDirection(1);
+      anim.play();
+    } catch (error) {
+      console.error('Failed to play animation:', error);
+    }
   }
 }
 
 function reverseAnimation(index) {
   const anim = lottieInstances[index];
   if (anim) {
-    anim.setDirection(-1);
-    anim.play();
+    try {
+      anim.setDirection(-1);
+      anim.play();
+    } catch (error) {
+      console.error('Failed to reverse animation:', error);
+    }
   }
 }
 </script>
@@ -112,8 +157,6 @@ function reverseAnimation(index) {
         v-for="(card, index) in EverythingCards"
         :key="index"
         class="flex flex-col justify-end items-start gap-4 p-12 rounded-[20px] border border-[#2b2a30] bg-[#141219] relative overflow-hidden transition-all duration-500 hover:border-[#a394f7] hover:bg-[#262034] max-lg:p-[30px] max-md:p-[25px] max-md:gap-[10px] max-sm:p-[16px]"
-        @mouseenter="playAnimation(index)"
-        @mouseleave="reverseAnimation(index)"
         :class="[
           index === 0 && 'col-start-1 row-start-1',
           index === 1 && 'col-start-2 row-start-1',
@@ -121,10 +164,12 @@ function reverseAnimation(index) {
           index === 3 && 'col-start-1 row-start-3',
           index === 4 && 'col-start-2 row-start-3',
         ]"
+        @mouseenter="playAnimation(index)"
+        @mouseleave="reverseAnimation(index)"
       >
         <div
-          class="w-full h-full max-md:h-[200px] max-sm:h-[130px]"
-          :ref="(el) => (animationRefs[index].value = el)"
+          :ref="el => (animationRefs[index].value = el)"
+          class="animation-container w-full h-full max-md:h-[200px] max-sm:h-[130px]"
         />
         <div class="flex flex-col gap-3 items-start w-full">
           <div
@@ -143,4 +188,18 @@ function reverseAnimation(index) {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.animation-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animation-container svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+</style>

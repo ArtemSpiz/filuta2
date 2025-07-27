@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, nextTick, onUnmounted, ref } from "vue";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { onMounted, nextTick, onUnmounted, ref } from 'vue';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,20 +10,20 @@ const poweredCardsWrapper = ref(null);
 
 const PoweredCards = [
   {
-    title: "13+ ",
-    subtitle: "Years of experience in AI research",
+    title: '13+ ',
+    subtitle: 'Years of experience in AI research',
   },
   {
-    title: "8+",
-    subtitle: "Years of advanced software development",
+    title: '8+',
+    subtitle: 'Years of advanced software development',
   },
   {
-    title: "16",
-    subtitle: "Doctorates in Artificial Intelligence and Mathematics",
+    title: '16',
+    subtitle: 'Doctorates in Artificial Intelligence and Mathematics',
   },
   {
-    title: "Countless",
-    subtitle: "Published Papers on AI, testing, and automation",
+    title: 'Countless',
+    subtitle: 'Published Papers on AI, testing, and automation',
   },
 ];
 
@@ -42,68 +42,72 @@ function updateContainerHeight() {
 }
 
 onMounted(async () => {
-  await nextTick();
-  updateContainerHeight();
+  try {
+    await nextTick();
+    updateContainerHeight();
 
-  const offsetY = 120;
-  const totalCards = cards.value.length;
+    const offsetY = 120;
+    const totalCards = cards.value.length;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".poweredText",
-      start: "top top",
-      end: `+=${totalCards * 600 * 2}`,
-      pin: ".powered",
-      snap: 1 / (totalCards - 1),
-      scrub: 1,
-      id: "poweredScrollAnim",
-    },
-  });
-
-  cards.value.forEach((card) => {
-    gsap.set(card, { y: 0 });
-  });
-
-  for (let i = 1; i < totalCards; i++) {
-    tl.addLabel(`step${i}`);
-
-    for (let j = i; j < totalCards; j++) {
-      tl.to(
-        cards.value[j],
-        {
-          y: -(i * offsetY),
-          duration: 0.2,
-          ease: "power2.inOut",
-        },
-        `step${i}`
-      );
-    }
-
-    if (i !== totalCards - 1) {
-      tl.to({}, { duration: 0.2, ease: "power2.inOut" });
-    }
-  }
-
-  tl.to(poweredCardsWrapper.value, {
-    height: 655,
-    duration: 0.2,
-    ease: "power2.inOut",
-  });
-
-  if (window.innerWidth < 640) {
-    tl.to(poweredCardsWrapper.value, {
-      height: 400,
-      duration: 0.3,
-      ease: "power1.out",
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.poweredText',
+        start: 'top top',
+        end: `+=${totalCards * 600 * 2}`,
+        pin: '.powered',
+        snap: 1 / (totalCards - 1),
+        scrub: 1,
+        id: 'poweredScrollAnim',
+      },
     });
+
+    cards.value.forEach(card => {
+      gsap.set(card, { y: 0 });
+    });
+
+    for (let i = 1; i < totalCards; i++) {
+      tl.addLabel(`step${i}`);
+
+      for (let j = i; j < totalCards; j++) {
+        tl.to(
+          cards.value[j],
+          {
+            y: -(i * offsetY),
+            duration: 0.2,
+            ease: 'power2.inOut',
+          },
+          `step${i}`
+        );
+      }
+
+      if (i !== totalCards - 1) {
+        tl.to({}, { duration: 0.2, ease: 'power2.inOut' });
+      }
+    }
+
+    tl.to(poweredCardsWrapper.value, {
+      height: 655,
+      duration: 0.2,
+      ease: 'power2.inOut',
+    });
+
+    if (process.client && window.innerWidth < 640) {
+      tl.to(poweredCardsWrapper.value, {
+        height: 400,
+        duration: 0.3,
+        ease: 'power1.out',
+      });
+    }
+
+    poweredTrigger = tl.scrollTrigger;
+  } catch (error) {
+    console.error('Error in powered component:', error);
   }
+});
 
-  poweredTrigger = tl.scrollTrigger;
-
-  onUnmounted(() => {
-    poweredTrigger?.kill();
-    poweredTrigger = null;
-  });
+onUnmounted(() => {
+  poweredTrigger?.kill();
+  poweredTrigger = null;
 });
 </script>
 
@@ -111,20 +115,17 @@ onMounted(async () => {
   <div
     class="powered flex justify-center items-start overflow-hidden relative gap-[56px] container max-md:gap-[32px] max-lg:flex-col max-lg:justify-center max-lg:items-center max-sm:pb-0"
   >
-    <div
-      class="flex flex-col items-start gap-4 max-w-[585px] w-full poweredText"
-    >
+    <div class="flex flex-col items-start gap-4 max-w-[585px] w-full poweredText">
       <div class="Title">Powered by Innovation and Expertise</div>
       <div class="Subtitle">
-        Filuta AI is created by a world-class team of engineers and AI experts,
-        backed by patented technology and unique insights from fields like deep
-        space exploration.
+        Filuta AI is created by a world-class team of engineers and AI experts, backed by patented
+        technology and unique insights from fields like deep space exploration.
       </div>
     </div>
 
     <div
-      class="flex flex-col items-center gap-4 max-w-[584px] w-full relative poweredCards"
       ref="poweredCardsWrapper"
+      class="flex flex-col items-center gap-4 max-w-[584px] w-full relative poweredCards"
     >
       <div
         v-for="(card, index) in PoweredCards"
@@ -140,9 +141,7 @@ onMounted(async () => {
         >
           {{ card.title }}
         </div>
-        <div
-          class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm w-[220px]"
-        >
+        <div class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm w-[220px]">
           {{ card.subtitle }}
         </div>
       </div>

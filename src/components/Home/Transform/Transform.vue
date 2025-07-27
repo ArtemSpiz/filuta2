@@ -1,41 +1,41 @@
 <script setup>
-import { ref, onMounted, nextTick, onUnmounted } from "vue";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ref, onMounted, nextTick, onUnmounted } from 'vue';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-import transformCards1 from "@/assets/img/transformCards1.png";
-import transformCards2 from "@/assets/img/transformCards2.png";
-import transformCards3 from "@/assets/img/transformCards3.png";
-import transformCards4 from "@/assets/img/transformCards4.png";
-import bgTransformCard from "@/assets/img/bgTransformCard.png";
-import transformLight from "@/assets/img/transformLight.png";
+import transformCards1 from '@/assets/img/transformCards1.png';
+import transformCards2 from '@/assets/img/transformCards2.png';
+import transformCards3 from '@/assets/img/transformCards3.png';
+import transformCards4 from '@/assets/img/transformCards4.png';
+import bgTransformCard from '@/assets/img/bgTransformCard.png';
+import transformLight from '@/assets/img/transformLight.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const transformCards = [
   {
-    title: "Faster Development Cycles",
-    text: "AI agents run continuously with every build, catching bugs early and reducing the time between iterations. This means shorter release cycles and faster time-to-market — without waiting on manual QA.",
+    title: 'Faster Development Cycles',
+    text: 'AI agents run continuously with every build, catching bugs early and reducing the time between iterations. This means shorter release cycles and faster time-to-market — without waiting on manual QA.',
     image: transformCards1,
-    step: "01",
+    step: '01',
   },
   {
-    title: "Cut QA Costs by Up to 70%",
-    text: "Replace repetitive manual work with scalable AI testing. Achieve full coverage and reduce your QA budget without sacrificing quality.",
+    title: 'Cut QA Costs by Up to 70%',
+    text: 'Replace repetitive manual work with scalable AI testing. Achieve full coverage and reduce your QA budget without sacrificing quality.',
     image: transformCards2,
-    step: "02",
+    step: '02',
   },
   {
-    title: "Actionable, Consistent Reports",
-    text: "Every test run produces structured, reproducible reports tied to real gameplay paths — so your team can fix faster and smarter.",
+    title: 'Actionable, Consistent Reports',
+    text: 'Every test run produces structured, reproducible reports tied to real gameplay paths — so your team can fix faster and smarter.',
     image: transformCards3,
-    step: "03",
+    step: '03',
   },
   {
-    title: "Easy Setup and Smooth Integration",
-    text: "Start testing in hours, not weeks. Filuta works out of the box with Unity, Unreal, and custom engines — no code rewrites needed.",
+    title: 'Easy Setup and Smooth Integration',
+    text: 'Start testing in hours, not weeks. Filuta works out of the box with Unity, Unreal, and custom engines — no code rewrites needed.',
     image: transformCards4,
-    step: "04",
+    step: '04',
   },
 ];
 
@@ -45,17 +45,19 @@ const indicatorRefs = ref([]);
 const scrollTriggers = ref([]);
 const isMobile = ref(false);
 
-const setActive = (index) => {
+const setActive = index => {
   if (!isMobile.value) {
     activeIndex.value = index;
   }
 };
 
 onMounted(() => {
-  isMobile.value = window.innerWidth < 768;
+  if (process.client) {
+    isMobile.value = window.innerWidth < 768;
+  }
 });
 
-const getContentOpacity = (index) => {
+const getContentOpacity = index => {
   if (!isMobile.value) {
     const w = cardWidths.value[index];
     if (w >= 300) return 1;
@@ -65,118 +67,125 @@ const getContentOpacity = (index) => {
 };
 
 onMounted(async () => {
-  isMobile.value = window.innerWidth < 768;
+  if (process.client) {
+    isMobile.value = window.innerWidth < 768;
+  }
   if (isMobile.value) return;
 
-  await nextTick();
-  const cards = gsap.utils.toArray(".transformCard");
-  const totalCards = cards.length;
+  try {
+    await nextTick();
+    const cards = gsap.utils.toArray('.transformCard');
+    const totalCards = cards.length;
 
-  cards.forEach((card, i) => {
-    gsap.set(card, { width: i === 0 ? 808 : 80 });
-    cardWidths.value[i] = i === 0 ? 808 : 80;
-  });
+    if (totalCards === 0) {
+      console.warn('No transform cards found');
+      return;
+    }
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".transformCardsWrapper",
-      start: "center center",
-      end: `+=${totalCards * 1600 * 2}`,
-      pin: ".transform",
-      scrub: 1,
-      snap: 1 / (totalCards - 1),
-      id: "transform-scroll-trigger",
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const index = Math.round(progress * (totalCards - 1));
-        activeIndex.value = index;
+    console.log(`Initializing Transform animations with ${totalCards} cards`);
 
-        indicatorRefs.value.forEach((el, i) => {
-          if (i === index) {
-            gsap.to(el, {
-              width: 60,
-              backgroundColor: "#fff",
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          } else {
-            gsap.to(el, {
-              width: 10,
-              backgroundColor: "#d0d0d0",
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }
-        });
-      },
-    },
-  });
+    cards.forEach((card, i) => {
+      gsap.set(card, { width: i === 0 ? 808 : 80 });
+      cardWidths.value[i] = i === 0 ? 808 : 80;
+    });
 
-  scrollTriggers.value.push(tl.scrollTrigger);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.transformCardsWrapper',
+        start: 'center center',
+        end: `+=${totalCards * 1600 * 2}`,
+        pin: '.transform',
+        scrub: 1,
+        snap: 1 / (totalCards - 1),
+        id: 'transform-scroll-trigger',
+        onUpdate: self => {
+          const progress = self.progress;
+          const index = Math.round(progress * (totalCards - 1));
+          activeIndex.value = index;
 
-  for (let i = 0; i < totalCards - 1; i++) {
-    const current = cards[i];
-    const next = cards[i + 1];
-
-    tl.to(
-      current,
-      {
-        width: 80,
-        duration: 0.4,
-        onUpdate: () => {
-          cardWidths.value[i] = parseFloat(gsap.getProperty(current, "width"));
+          indicatorRefs.value.forEach((el, i) => {
+            if (el) {
+              if (i === index) {
+                gsap.to(el, {
+                  width: 60,
+                  backgroundColor: '#fff',
+                  duration: 0.3,
+                  ease: 'power2.out',
+                });
+              } else {
+                gsap.to(el, {
+                  width: 10,
+                  backgroundColor: '#d0d0d0',
+                  duration: 0.3,
+                  ease: 'power2.out',
+                });
+              }
+            }
+          });
         },
       },
-      i
-    );
-    tl.to(
-      next,
-      {
-        width: 808,
-        duration: 0.4,
-        onUpdate: () => {
-          cardWidths.value[i + 1] = parseFloat(gsap.getProperty(next, "width"));
+    });
+
+    scrollTriggers.value.push(tl.scrollTrigger);
+
+    for (let i = 0; i < totalCards - 1; i++) {
+      const current = cards[i];
+      const next = cards[i + 1];
+
+      tl.to(
+        current,
+        {
+          width: 80,
+          duration: 0.4,
+          onUpdate: () => {
+            cardWidths.value[i] = parseFloat(gsap.getProperty(current, 'width'));
+          },
         },
-      },
-      i
-    );
+        i
+      );
+      tl.to(
+        next,
+        {
+          width: 808,
+          duration: 0.4,
+          onUpdate: () => {
+            cardWidths.value[i + 1] = parseFloat(gsap.getProperty(next, 'width'));
+          },
+        },
+        i
+      );
+    }
+
+    ScrollTrigger.refresh();
+    console.log('Transform animations initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize Transform animations:', error);
   }
-
-  ScrollTrigger.refresh();
 });
 
 onUnmounted(() => {
-  const transformTrigger = ScrollTrigger.getById("transform-scroll-trigger");
+  const transformTrigger = ScrollTrigger.getById('transform-scroll-trigger');
   if (transformTrigger) transformTrigger.kill();
 });
 </script>
 
 <template>
-  <div
-    class="transform container gap-[56px] items-center justify-center flex flex-col relative"
-  >
-    <div
-      class="absolute right-0 -top-[15%] pointer-events-none w-[790px] max-md:-top-[8%]"
-    >
+  <div class="transform container gap-[56px] items-center justify-center flex flex-col relative">
+    <div class="absolute right-0 -top-[15%] pointer-events-none w-[790px] max-md:-top-[8%]">
       <img :src="transformLight" alt="light" />
     </div>
 
-    <div
-      class="flex flex-col gap-4 w-full items-center justify-center max-md:items-start"
-    >
+    <div class="flex flex-col gap-4 w-full items-center justify-center max-md:items-start">
       <div class="Title max-w-[520px] text-left w-full max-sm:w-[300px]">
         Transform your QA with these powerful benefits
       </div>
       <div class="Subtitle text-left">
-        Filuta helps you move faster, save costs, and ship with confidence — all
-        in one platform.
+        Filuta helps you move faster, save costs, and ship with confidence — all in one platform.
       </div>
     </div>
 
     <div class="transformCardsWrapper relative w-full">
-      <div
-        class="transformCards flex gap-4 justify-center items-start max-md:flex-col"
-      >
+      <div class="transformCards flex gap-4 justify-center items-start max-md:flex-col">
         <div
           v-for="(card, index) in transformCards"
           :key="index"
@@ -214,9 +223,7 @@ onUnmounted(() => {
                 >
                   {{ card.title }}
                 </div>
-                <div
-                  class="text-white/90 text-[16px] leading-[150%] font-ibm max-sm:text-[14px]"
-                >
+                <div class="text-white/90 text-[16px] leading-[150%] font-ibm max-sm:text-[14px]">
                   {{ card.text }}
                 </div>
               </div>
@@ -224,9 +231,7 @@ onUnmounted(() => {
                 v-if="isMobile || index === activeIndex"
                 class="flex flex-col items-start gap-2 max-md:hidden"
               >
-                <div
-                  class="text-white/90 text-[16px] font-ibm flex items-center gap-1"
-                >
+                <div class="text-white/90 text-[16px] font-ibm flex items-center gap-1">
                   {{ card.step }}
                   <span class="text-white/40 text-[12px]">/04</span>
                 </div>
@@ -234,7 +239,7 @@ onUnmounted(() => {
                   <div
                     v-for="(_, i) in transformCards"
                     :key="i"
-                    :ref="(el) => (indicatorRefs[i] = el)"
+                    :ref="el => (indicatorRefs[i] = el)"
                     class="h-[5px] rounded-full bg-white/40 transition-all duration-700"
                     :class="{
                       'w-[60px] bg-white': i === activeIndex,
