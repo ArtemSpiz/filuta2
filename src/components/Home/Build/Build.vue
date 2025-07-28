@@ -2,7 +2,7 @@
 import buildBg from '@/assets/img/buildBg.png';
 import buildBgMob from '@/assets/img/buildBgMob.png';
 import Section from '@/components/ui/Section/Section.vue';
-import ColorButton from '@/ui/ColorButton/ColorButton.vue';
+import ColorButton from '@/components/ui/ColorButton/ColorButton.vue';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 defineProps({

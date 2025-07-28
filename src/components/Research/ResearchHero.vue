@@ -1,5 +1,5 @@
 <script setup>
-import ColorButton from '@/ui/ColorButton/ColorButton.vue';
+import ColorButton from '@/components/ui/ColorButton/ColorButton.vue';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import ColorButton from '@/ui/ColorButton/ColorButton.vue';
         <div class="heroUnderTitle">Research-Driven AI for a Smarter Tomorrow</div>
         <div class="flex flex-col gap-6 items-center justify-center text-center">
           <div class="HeroTitle">Research</div>
-          <div class="HeroSubtitle max-w-4xl mx-auto">
+          <div class="HeroSubtitle !max-w-4xl mx-auto">
             At Filuta AI, we're pushing the boundaries of Composite AI by merging symbolic reasoning
             with neural networks. Our research drives breakthroughs in automation, logistics, game
             testing, and beyond — transforming complex systems into intelligent solutions.

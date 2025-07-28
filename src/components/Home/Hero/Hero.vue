@@ -1,6 +1,6 @@
 <script setup>
-import ColorButton from '@/ui/ColorButton/ColorButton.vue';
-import TransparentBtn from '@/ui/TransparentBtn/TransparentBtn.vue';
+import ColorButton from '@/components/ui/ColorButton/ColorButton.vue';
+import TransparentBtn from '@/components/ui/TransparentBtn/TransparentBtn.vue';
 import heroMobBg from '@/assets/img/bgMobHero.png';
 import bgHero from '@/assets/img/bgHero.png';
 import heroMobLight from '@/assets/img/lightMobHero.png';
@@ -16,7 +16,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
       <img :src="herolightBlue" alt="heroLight" />
     </div>
     <div
-      class="heroContainer flex flex-col items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:items-center"
+      class="heroContainer flex flex-col !items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:!items-center"
     >
       <div class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center">
         <div class="heroUnderTitle max-sm:text-[14px]">Leading AI Tools to Grow Your Business</div>

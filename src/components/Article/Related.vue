@@ -35,7 +35,7 @@ const BlogCards = [
 </script>
 
 <template>
-  <div class="container gap-[48px] flex-col">
+  <div class="container flex gap-[48px] flex-col py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12">
     <div class="flex justify-between items-center max-md:center">
       <div class="Title">Related articles</div>
       <NuxtLink to="/blog" class="max-md:hidden">
@@ -77,9 +77,9 @@ const BlogCards = [
       </NuxtLink>
     </div>
 
-    <NuxtLink to="/blog" class="hiddenitems-center justify-centermax-md:flex">
+    <NuxtLink to="/blog" class="hidden items-center justify-center max-md:flex">
       <button
-        class="h-[48px] px-[20px] gap-[8px]items-center justify-centerflex rounded-full border border-white bg-[rgba(255,255,255,0.02)] text-white text-[16px] font-ibm"
+        class="h-[48px] px-[20px] gap-[8px]items-center justify-center flex rounded-full border border-white bg-[rgba(255,255,255,0.02)] text-white text-[16px] font-ibm"
       >
         All articles <ButtonArrow />
       </button>

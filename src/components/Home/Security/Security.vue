@@ -6,6 +6,8 @@ import SecurityIcon4 from '@/assets/svg/SecurityIcon4.vue';
 import SecurityIcon5 from '@/assets/svg/SecurityIcon5.vue';
 import SecurityIcon6 from '@/assets/svg/SecurityIcon6.vue';
 import Section from '@/components/ui/Section/Section.vue';
+import lightLeft from '@/assets/img/lightLeftSecur.png';
+import lightRight from '@/assets/img/lightRightSecur.png';
 
 const SecurityCards = [
   {
@@ -44,7 +46,17 @@ const SecurityCards = [
 </script>
 
 <template>
+  <div class="relative">
+    <div class="absolute top-0 left-0">
+      <img :src="lightLeft" alt="" />
+    </div>
+
+    <div class="absolute top-0 right-0 max-md:top-[50px]">
+      <img :src="lightRight" alt="" />
+    </div>
+  </div>
   <Section
+    text-wrap-class="max-md:mb-12"
     title="Security You Can Trust"
     align="center"
     subtitle="Your data stays safe, private, and fully under your control."

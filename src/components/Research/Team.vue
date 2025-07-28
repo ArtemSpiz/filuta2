@@ -218,8 +218,10 @@ function handleActiveCard(index) {
 </script>
 
 <template>
-  <div class="container flex flex-col gap-12">
-    <div class="w-full flex justify-between max-md:flex-col max-md:gap-12">
+  <div class="flex flex-col gap-12">
+    <div
+      class="w-full container !pb-0 flex justify-between max-md:flex-col max-md:gap-12 pt-[100px] max-xl:pt-20 max-lg:pt-16 max-md:pt-12"
+    >
       <div class="flex flex-col gap-4 w-full max-w-2xl">
         <div class="Title">Research team</div>
         <div class="Subtitle">
@@ -248,7 +250,7 @@ function handleActiveCard(index) {
 
     <div
       ref="scrollContainer"
-      class="flex items-center self-stretch gap-6 px-27 w-full overflow-y-hidden overflow-x-scroll no-scrollbar snap-x scroll-smooth max-xl:px-20 max-lg:px-15 max-md:px-10 max-sm:px-6 max-md:snap-center"
+      class="flex container items-center self-stretch gap-6 px-27 w-full overflow-y-hidden overflow-x-scroll no-scrollbar snap-x scroll-smooth max-xl:px-20 max-lg:px-15 max-md:px-10 max-sm:px-6 pb-[100px] max-xl:pb-20 max-lg:pb-16 max-md:pb-12"
     >
       <div
         v-for="(card, index) in props.teamCards"

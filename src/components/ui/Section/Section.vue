@@ -2,7 +2,7 @@
   <section :class="sectionClasses">
     <div class="container mx-auto">
       <!-- Header -->
-      <div v-if="title || subtitle" :class="textWrapClass" class="text-center mb-12 lg:mb-16">
+      <div v-if="title || subtitle" :class="textWrapClass" class="text-center">
         <h2 v-if="title" class="Title mb-4">{{ title }}</h2>
         <p v-if="subtitle" :class="textSubtitle" class="Subtitle max-w-3xl mx-auto">
           {{ subtitle }}
@@ -77,6 +77,6 @@ const contentClasses = computed(() => {
 }
 
 .Subtitle {
-  @apply text-lg md:text-xl text-gray-300 leading-relaxed;
+  @apply text-lg md:text-xl text-subtitle-color leading-relaxed;
 }
 </style>

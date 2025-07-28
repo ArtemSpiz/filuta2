@@ -1,5 +1,5 @@
 <template>
-  <div class="container grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="container flex flex-col gap-6">
     <slot />
   </div>
 </template>

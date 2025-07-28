@@ -5,6 +5,7 @@ import HighlightsCardsIcon3 from '@/assets/svg/HighlightsCardsIcon3.vue';
 import light from '@/assets/img/lightRightSecur.png';
 import ff from '../../assets/img/imgCard3.png';
 import Star from '@/assets/svg/Star.vue';
+import Section from '../ui/Section/Section.vue';
 
 const firstCardSubtitle = [
   {
@@ -23,23 +24,23 @@ const firstCardSubtitle = [
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative max-w-[100vw]">
     <div
-      class="absolute -top-32 right-0 w-[996px] h-[618px] pointer-events-none max-md:w-[527px] max-md:h-[327px] max-md:-top-12"
+      class="absolute -top-32 right-[0px] w-[996px] h-[618px] pointer-events-none max-md:w-[527px] max-md:h-[327px] max-md:-top-12"
     >
       <img :src="light" alt="light" />
     </div>
-    <div class="container flex flex-col gap-12 max-md:gap-8">
-      <div class="flex flex-col gap-4">
-        <div class="Title">Highlights & Achievements</div>
-        <div class="Subtitle">What We've Built, Proven, and Published</div>
-      </div>
-
+    <Section
+      align="left"
+      text-wrap-class="max-md:pb-12"
+      title="Highlights & Achievements"
+      subtitle="What We've Built, Proven, and Published"
+    >
       <div
-        class="grid grid-cols-3 grid-rows-2 gap-6 max-xl:grid-cols-4 max-lg:grid-rows-3 max-md:grid-cols-1 max-md:grid-rows-4"
+        class="grid grid-cols-3 grid-rows-2 gap-6 max-xl:grid-cols-4 max-lg:grid-rows-3 max-md:grid-cols-1 max-md:grid-rows-4auto"
       >
         <div
-          class="col-span-2 p-8 flex flex-col pt-12 gap-4 rounded-5xl border border-dark-700 bg-dark-900 max-lg:col-span-4 max-md:h-auto"
+          class="col-span-2 p-8 flex flex-col pt-12 gap-4 rounded-5xl border border-dark-700 bg-dark-900 max-lg:col-span-4 max-md:h-max max-md:col-span-full"
         >
           <div class="flex flex-col gap-8">
             <HighlightsCardsIcon1 />
@@ -75,7 +76,7 @@ const firstCardSubtitle = [
         </div>
 
         <div
-          class="col-start-3 p-8 flex flex-col pt-12 gap-4 rounded-5xl border border-dark-700 bg-dark-800 max-xl:col-span-2 max-lg:col-span-4 max-lg:row-start-2 max-md:col-span-1 max-md:h-auto"
+          class="col-start-3 p-8 flex flex-col pt-12 gap-4 rounded-5xl border border-dark-700 bg-dark-800 max-xl:col-span-2 max-lg:col-span-4 max-lg:row-start-2 max-md:col-span-1 max-md:h-max"
         >
           <div class="flex flex-col gap-8">
             <HighlightsCardsIcon2 />
@@ -100,7 +101,7 @@ const firstCardSubtitle = [
         ></div>
 
         <div
-          class="col-span-2 flex flex-col row-start-2 p-8 pt-12 gap-4 rounded-5xl border border-dark-700 max-lg:row-span-3 max-md:row-start-3 max-md:row-end-3 max-md:col-span-1 max-md:h-auto"
+          class="col-span-2 flex flex-col row-start-2 p-8 pt-12 gap-4 rounded-5xl border border-dark-700 max-lg:row-span-3 max-md:row-start-3 max-md:row-end-3 max-md:col-span-1 max-md:h-max"
           :style="{
             background: 'linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%), #121619',
           }"
@@ -118,8 +119,8 @@ const firstCardSubtitle = [
             practical, impactful AI research.
           </div>
         </div>
-      </div>
-    </div>
+      </div></Section
+    >
   </div>
 </template>
 

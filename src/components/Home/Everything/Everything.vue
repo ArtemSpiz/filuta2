@@ -133,7 +133,7 @@ function reverseAnimation(index) {
   <div class="max-w-[100vw] overflow-hidden">
     <Section
       align="left"
-      text-wrap-class="w-full max-w-[750px] mx-auto max-md:max-w-[400px]"
+      text-wrap-class="w-full max-w-[750px] mx-auto max-md:max-w-[400px] max-md:mb-8"
       title="Everything you need to test smarter, faster, and at scale"
       subtitle="Built for modern game testing"
     >

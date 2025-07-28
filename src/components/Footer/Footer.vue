@@ -20,10 +20,11 @@ const footerData = {
         <!-- Links -->
         <FooterLinksComponent :links="FooterLinks" />
       </div>
-
-      <div class="w-full">
-        <img :src="footerLogo" alt="" />
-      </div>
+      <NuxtLink to="/">
+        <div class="w-full">
+          <img :src="footerLogo" alt="" />
+        </div>
+      </NuxtLink>
     </div>
 
     <!-- Bottom Section -->

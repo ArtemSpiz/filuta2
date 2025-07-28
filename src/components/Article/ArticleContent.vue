@@ -10,7 +10,9 @@ import light from '@/assets/img/lightArticleContent.png';
 <template>
   <div>
     <ArticleHero />
-    <div class="container gap-[120px] relative max-md:gap-[32px] max-md:flex-col">
+    <div
+      class="container flex gap-[120px] relative max-md:gap-[32px] max-md:flex-col py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12"
+    >
       <div
         class="absolute pointer-events-none bottom-[-120px] left-0 max-md:top-[-70px] max-md:bottom-auto max-md:left-auto max-md:right-0 max-md:w-[435px] max-md:rotate-180"
       >
@@ -20,7 +22,7 @@ import light from '@/assets/img/lightArticleContent.png';
         <div class="flex flex-col gap-[13px]">
           <div class="text-white text-[24px] font-ibm leading-[130%]">Categories</div>
           <div
-            class="px-[12px] whitespace-nowrap h-[33px] w-maxitems-center justify-centerflex rounded-full border cursor-pointer select-none text-[16px] font-mono uppercase bg-[linear-gradient(0deg,#302F45_-8.44%,#424069_107.14%)] text-[#9E92F5] border-[#484873]"
+            class="px-[12px] whitespace-nowrap h-[33px] w-max items-center justify-center flex rounded-full border cursor-pointer select-none text-[16px] font-mono uppercase bg-[linear-gradient(0deg,#302F45_-8.44%,#424069_107.14%)] text-[#9E92F5] border-[#484873]"
           >
             News
           </div>

@@ -1,5 +1,5 @@
 <script setup>
-import ButtonArrow from '../../assets/svg/ButtonArrow.vue';
+import ButtonArrow from '@/assets/svg/ButtonArrow.vue';
 defineProps({
   class: {
     type: String,

@@ -32,6 +32,7 @@ const TrustedCards = [
   <Section
     title="Trusted by Industry Leaders"
     align="center"
+    text-wrap-class="mb-12"
     text-subtitle="!max-w-full "
     subtitle="How studios use Filuta AI to speed up releases, improve quality, and boost team focus."
   >

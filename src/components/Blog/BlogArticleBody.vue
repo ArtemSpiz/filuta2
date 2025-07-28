@@ -1,12 +1,12 @@
 <template>
-  <div class="max-w-4xl mx-auto">
-    <div class="grid lg:grid-cols-3 gap-12">
+  <div class="max-w-full mx-auto">
+    <div class="flex gap-12">
       <!-- Main Content -->
       <BlogMainContent :title="post.title" :featured-image="post.featured_image">
         <div v-html="post.content"></div>
 
-        <template #footer>
-          <div class="flex items-center justify-between">
+        <!-- <template #footer>
+          <div class="flex items-center justify-center pb-5">
             <SocialSharing :post="post" />
             <NuxtLink
               to="/blog"
@@ -23,13 +23,10 @@
               Back to Blog
             </NuxtLink>
           </div>
-        </template>
+        </template> -->
       </BlogMainContent>
 
       <!-- Sidebar -->
-      <BlogSidebar>
-        <RelatedPosts :posts="relatedPosts" />
-      </BlogSidebar>
     </div>
   </div>
 </template>

@@ -11,6 +11,11 @@
   body {
     @apply bg-black text-white;
   }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @layer components {
@@ -41,7 +46,7 @@
 
   /* Hero component styles */
   .heroUnderTitle {
-    @apply text-brand-primary text-sm font-medium tracking-wide uppercase;
+    @apply text-brand-primary text-sm font-normal tracking-wide uppercase;
   }
 
   .HeroTitle {
@@ -53,7 +58,7 @@
   }
 
   .heroContainer {
-    @apply px-[108px] items-center flex h-[calc(100vh)] gap-[64px] max-xl:px-20 max-lg:pt-[116px] max-lg:px-15 max-md:px-10 max-sm:px-4 max-lg:items-center;
+    @apply px-[108px] items-center flex h-[calc(100vh)] gap-[64px] max-lg:flex-col max-xl:px-20 max-lg:pt-[116px] max-lg:px-15 max-md:px-10 max-sm:px-4 max-lg:items-center;
   }
 
   .bg-fullBg {

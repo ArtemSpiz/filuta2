@@ -56,7 +56,7 @@ const isOpen = (index: number) => openIndex.value === index;
         :class="[
           'absolute top-[calc(100%+22px)] pointer-events-none right-0 w-max flex flex-col items-start gap-2 p-3 rounded-[10px] border border-white/20 bg-[#0F202115] backdrop-blur-[10px] opacity-0  transition-all duration-300',
           {
-            'opacity-100 visible z-20 pointer-events-auto ': isOpen(index),
+            'opacity-100 visible z-30 pointer-events-auto ': isOpen(index),
           },
         ]"
       >

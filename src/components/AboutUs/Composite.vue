@@ -20,7 +20,9 @@ const CompositeCards = [
 </script>
 
 <template>
-  <div class="container gap-[48px] relative max-lg:flex-col">
+  <div
+    class="container gap-[48px] flex relative py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-lg:flex-col"
+  >
     <div
       class="absolute bottom-[-150px] left-0 rotate-180 w-[996px] pointer-events-none max-md:hidden"
     >

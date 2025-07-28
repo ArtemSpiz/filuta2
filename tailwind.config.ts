@@ -30,6 +30,7 @@ export default {
         'brand-primary': '#57C1CA',
         'brand-secondary': '#9E92F5',
         'subtitle-color': '#9D9D9D',
+        'card-green': '#121819',
         'dark-900': '#141219',
         'dark-800': '#1A1A1A',
         'dark-700': '#2B2A30',
@@ -41,6 +42,9 @@ export default {
       },
       gridTemplateColumns: {
         '2auto': 'repeat(2, auto)',
+      },
+      gridTemplateRows: {
+        '4auto': 'repeat(4, auto)',
       },
       keyframes: {
         float: {

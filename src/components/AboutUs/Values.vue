@@ -5,6 +5,7 @@ import ValuesCardIcon3 from '@/assets/svg/ValuesCardIcon3.vue';
 import ValuesCardIcon4 from '@/assets/svg/ValuesCardIcon4.vue';
 import ValuesCardIcon5 from '@/assets/svg/ValuesCardIcon5.vue';
 import light from '@/assets/img/transformLight.png';
+import Section from '../ui/Section/Section.vue';
 
 const ValuesCards = [
   {
@@ -41,41 +42,42 @@ const ValuesCards = [
 </script>
 
 <template>
-  <div class="container flex-col items-start relative max-md:gap-[32px]">
+  <div class="relative">
     <div
       class="absolute top-[-110px] right-0 w-[789px] h-[500px] pointer-events-none max-sm:w-[486px] max-sm:h-[273px] max-sm:top-[-90px]"
     >
       <img :src="light" alt="light" />
     </div>
-    <div class="flex flex-col gap-[16px]">
-      <div class="Title">Our Team Values</div>
-      <div class="Subtitle">Guiding Principles Behind Every Partnership</div>
-    </div>
 
-    <div class="grid grid-cols-6 grid-rows-2 gap-[16px] max-lg:flex max-lg:flex-col">
-      <div
-        v-for="(card, index) in ValuesCards"
-        :key="index"
-        class="p-[48px] flex flex-col items-start gap-[32px] flex-1 rounded-[20px] border border-[#2B2A30] bg-[#141219] self-stretch cardsHover max-xl:p-[24px]"
-        :class="{
-          'col-span-2': index === 0,
-          'col-span-2 col-start-3': index === 1,
-          'col-span-2 col-start-5': index === 2,
-          'col-span-3 row-start-2': index === 3,
-          'col-span-3 col-start-4 row-start-2': index === 4,
-        }"
-      >
-        <component :is="card.icon" />
-        <div class="flex flex-col gap-[16px]">
-          <div class="text-white text-[24px] font-ibm leading-[130%] max-md:text-[20px]">
-            {{ card.title }}
-          </div>
-          <div class="text-[rgba(255,255,255,0.90)] text-[16px] font-ibm leading-[150%]">
-            {{ card.subtitle }}
+    <Section
+      title="Our Team Values"
+      subtitle="Guiding Principles Behind Every Partnership"
+      align="left"
+      ><div class="grid grid-cols-6 grid-rows-2 gap-[16px] max-lg:flex max-lg:flex-col">
+        <div
+          v-for="(card, index) in ValuesCards"
+          :key="index"
+          class="p-[48px] flex flex-col items-start gap-[32px] flex-1 rounded-[20px] border border-[#2B2A30] bg-[#141219] self-stretch cardsHover max-xl:p-[24px]"
+          :class="{
+            'col-span-2': index === 0,
+            'col-span-2 col-start-3': index === 1,
+            'col-span-2 col-start-5': index === 2,
+            'col-span-3 row-start-2': index === 3,
+            'col-span-3 col-start-4 row-start-2': index === 4,
+          }"
+        >
+          <component :is="card.icon" />
+          <div class="flex flex-col gap-[16px]">
+            <div class="text-white text-[24px] font-ibm leading-[130%] max-md:text-[20px]">
+              {{ card.title }}
+            </div>
+            <div class="text-[rgba(255,255,255,0.90)] text-[16px] font-ibm leading-[150%]">
+              {{ card.subtitle }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   </div>
 </template>
 

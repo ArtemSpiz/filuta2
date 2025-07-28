@@ -3,6 +3,7 @@ import SmarterCard1 from '@/assets/svg/SmarterCard1.vue';
 import SmarterCard2 from '@/assets/svg/SmarterCard2.vue';
 import SmarterCard3 from '@/assets/svg/SmarterCard3.vue';
 import SmarterCard4 from '@/assets/svg/SmarterCard4.vue';
+import Section from '../ui/Section/Section.vue';
 
 const SmarterCards = [
   {
@@ -29,15 +30,14 @@ const SmarterCards = [
 </script>
 
 <template>
-  <div class="container flex-col items-center max-md:gap-[32px]">
-    <div class="flex flex-col items-center gap-[16px]">
-      <div class="Title text-center">The Smarter Way to Test In-Car Systems</div>
-      <div class="Subtitle text-center w-full max-w-[680px] max-sm:w-[101%]">
-        Outdated compliance methods put school districts at risk. Filuta AI automates vendor
-        monitoring with daily checks, eliminating errors, saving time, and protecting your funding.
-      </div>
-    </div>
-
+  <Section
+    text-wrap-class="max-md:mb-8"
+    title="The Smarter Way to Test In-Car Systems"
+    subtitle="Outdated compliance methods put school districts at risk. Filuta AI automates vendor
+        monitoring with daily checks, eliminating errors, saving time, and protecting your funding."
+    align="left"
+    text-subtitle="!w-full !max-w-[800px] !max-sm:w-[101%]"
+  >
     <div class="flex gap-[24px] self-stretch max-lg:flex-col">
       <div
         class="flex flex-col bg-[#141219] rounded-[20px] border border-[#141219] p-[32px] pt-[48px] w-[392px] gap-[24px] items-start max-lg:w-full max-xl:p-[32px] max-sm:p-[24px]"
@@ -111,7 +111,7 @@ const SmarterCards = [
         </div>
       </div>
     </div>
-  </div>
+  </Section>
 </template>
 
 <style scoped></style>

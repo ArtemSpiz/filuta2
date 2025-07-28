@@ -4,6 +4,7 @@ import Light1 from '@/assets/svg/Light1.vue';
 import Light3 from '@/assets/svg/Light3.vue';
 import lightLeft from '@/assets/img/helpLightLeft.png';
 import lightRight from '@/assets/img/helpLightRight.png';
+import Section from '../ui/Section/Section.vue';
 
 const TalentsCards = [
   {
@@ -20,7 +21,7 @@ const TalentsCards = [
 </script>
 
 <template>
-  <div class="container flex flex-col items-center justify-center relative max-md:gap-8">
+  <div class="relative">
     <div
       class="absolute -top-38 left-0 w-[996px] h-[764px] pointer-events-none max-md:w-[271px] max-md:h-[208px] max-md:-top-10"
     >
@@ -32,43 +33,43 @@ const TalentsCards = [
     >
       <img :src="lightRight" alt="lightRight" />
     </div>
-
-    <div class="flex flex-col items-center justify-center text-center gap-6 w-full max-w-2xl">
-      <div class="Title">Our Talents</div>
-      <div class="Subtitle">
-        We've assembled a one-of-a-kind team of researchers, engineers, and product thinkers —
-        combining academic brilliance with hands-on innovation.
-      </div>
-    </div>
-
-    <div class="flex items-center self-stretch gap-6 max-md:flex-col">
-      <div class="w-auto self-stretch max-xl:self-auto">
-        <img :src="talentsImg" alt="talentsImg" />
-      </div>
-      <div class="flex flex-col gap-6 self-stretch">
-        <div
-          v-for="(card, index) in TalentsCards"
-          :key="index"
-          class="flex relative w-max flex-col p-8 pt-12 h-[302px] justify-end gap-4 self-stretch rounded-5xl border border-dark-700 max-md:w-full max-md:items-center max-md:h-auto max-sm:p-6 max-sm:pt-10"
-          :class="{
-            'bg-dark-800': index === 0,
-            'bg-dark-900': index === 1,
-          }"
-        >
-          <div class="absolute top-0 right-1/2 translate-x-1/2">
-            <component :is="card.light" active />
-          </div>
-          <div class="text-white text-2xl font-ibm leading-[130%] text-center max-md:text-xl">
-            {{ card.title }}
-          </div>
+    <Section
+      title="Our Talents"
+      subtitle=" We've assembled a one-of-a-kind team of researchers, engineers, and product thinkers —
+        combining academic brilliance with hands-on innovation."
+      align="center"
+      text-wrap-class="!max-md:pb-8"
+      text-subtitle="!max-w-[750px]"
+    >
+      <div class="flex items-center self-stretch gap-6 max-md:flex-col">
+        <div class="w-auto self-stretch max-xl:self-auto">
+          <img :src="talentsImg" alt="talentsImg" />
+        </div>
+        <div class="flex flex-col gap-6 self-stretch">
           <div
-            class="text-gray-400 text-base font-ibm leading-[150%] text-center w-[435px] max-lg:w-[335px] max-md:w-full"
+            v-for="(card, index) in TalentsCards"
+            :key="index"
+            class="flex relative w-max flex-col p-8 pt-12 h-[302px] justify-end gap-4 self-stretch rounded-5xl border border-dark-700 max-md:w-full max-md:items-center max-md:h-auto max-sm:p-6 max-sm:pt-10"
+            :class="{
+              'bg-card-green': index === 0,
+              'bg-dark-900': index === 1,
+            }"
           >
-            {{ card.text }}
+            <div class="absolute top-0 right-1/2 translate-x-1/2">
+              <component :is="card.light" active />
+            </div>
+            <div class="text-white text-2xl font-ibm leading-[130%] text-center max-md:text-xl">
+              {{ card.title }}
+            </div>
+            <div
+              class="text-gray-400 text-base font-ibm leading-[150%] text-center w-[435px] max-lg:w-[335px] max-md:w-full"
+            >
+              {{ card.text }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   </div>
 </template>
 

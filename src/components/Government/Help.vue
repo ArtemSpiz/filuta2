@@ -235,7 +235,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container relative items-center flex-col help pb-0 max-lg:pb-0 max-md:gap-[32px]">
+  <div
+    class="container relative gap-[56px] flex items-center flex-col help max-lg:!pb-0 max-md:gap-[32px] py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-sm:pb-0"
+  >
     <div
       class="absolute top-[-200px] left-0 pointer-events-none z-0 max-md:top-[-90px] max-md:max-w-[305px] max-md:w-full"
     >

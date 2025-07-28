@@ -3,7 +3,8 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import ArrowCaseIcon from '@/assets/svg/ArrowCaseIcon.vue';
 import bgImgCard1 from '@/assets/img/caseBg1.png';
 import bgImgCardMob1 from '@/assets/img/caseBgMob1.png';
-import TransparentBtn from '@/ui/TransparentBtn/TransparentBtn.vue';
+import TransparentBtn from '@/components/ui/TransparentBtn/TransparentBtn.vue';
+import Section from '../ui/Section/Section.vue';
 
 const isMobile = ref(false);
 
@@ -104,7 +105,9 @@ function scrollPrev() {
 </script>
 
 <template>
-  <div class="flex-col gap-[48px] flex containerBottom">
+  <div
+    class="flex-col gap-[48px] flex containerBottom py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12"
+  >
     <div
       class="flex justify-between items-start container pbNone max-sm:flex-col max-sm:gap-[32px] max-sm:items-end"
     >

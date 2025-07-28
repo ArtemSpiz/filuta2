@@ -16,6 +16,10 @@
       <Section padding="lg">
         <BlogArticleBody :post="post" :related-posts="relatedPosts" />
       </Section>
+
+      <Section>
+        <Related />
+      </Section>
     </article>
 
     <!-- Error State -->
@@ -24,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+import Related from '@/components/Article/Related.vue';
+
 const route = useRoute();
 const slug = route.params.slug;
 

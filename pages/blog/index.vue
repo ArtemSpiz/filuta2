@@ -11,13 +11,28 @@
 
     <!-- Blog Content Section -->
     <Section padding="lg">
-      <div class="max-w-7xl mx-auto">
+      <div
+        class="max-w-7xl mx-auto flex flex-col gap-14 py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-md:gap-8"
+      >
         <!-- Category Filter -->
-        <CategoryFilter
-          :categories="categories"
-          :selected-category="selectedCategory"
-          @select="selectCategory"
-        />
+        <div class="flex gap-[16px] container overflow-x-scroll categories snap-mandatory">
+          <div
+            v-for="(category, index) in categoriesWrap"
+            :key="index"
+            class="px-[12px] whitespace-nowrap h-[33px] justify-center items-center flex rounded-full border cursor-pointer select-none text-[16px] font-mono uppercase"
+            :style="{
+              background:
+                index === activeIndex
+                  ? 'linear-gradient(0deg, #302F45 -8.44%, #424069 107.14%)'
+                  : 'linear-gradient(180deg, rgba(103, 103, 103, 0.30) 0.24%, rgba(19, 32, 48, 0.00) 120.36%)',
+              color: index === activeIndex ? '#9E92F5' : '#8B8B8B',
+              borderColor: index === activeIndex ? '#484873' : '#393939',
+            }"
+            @click="setActive(index)"
+          >
+            {{ category.title }}
+          </div>
+        </div>
 
         <!-- Loading State -->
         <LoadingState v-if="pending" />
@@ -30,10 +45,21 @@
             :post="blogData.posts[0]"
           />
 
+          <BlogCardNewsWrap>
+            <BlogCardNews v-for="post in displayPosts" :key="post.id" :post="post" />
+          </BlogCardNewsWrap>
           <!-- Regular Grid -->
           <BlogGrid>
             <BlogPostCard v-for="post in displayPosts" :key="post.id" :post="post" />
           </BlogGrid>
+
+          <div class="justify-center items-center w-full flex">
+            <button
+              class="h-[48px] px-[24px] justify-center items-center flex rounded-full border border-white bg-[rgba(255,255,255,0.02)] text-white text-[16px] font-ibm"
+            >
+              Load more
+            </button>
+          </div>
 
           <!-- Pagination -->
           <Pagination
@@ -64,9 +90,23 @@ definePageMeta({
 import { setupPageSEO, pageSEOConfigs } from '~/composables/usePageSEO';
 setupPageSEO(pageSEOConfigs.blog);
 
+const categoriesWrap = [
+  { title: 'All', value: 'all' },
+  { title: 'News', value: 'news' },
+  { title: 'Research', value: 'research' },
+  { title: 'Government & Education', value: 'government-education' },
+];
+
+const activeIndex = ref(0);
+
+function setActive(index) {
+  activeIndex.value = index;
+  const selected = categoriesWrap[index].value;
+  selectCategory(selected);
+}
+
 // Use blog composable
 const {
-  categories,
   selectedCategory,
   currentPage,
   blogData,
@@ -91,5 +131,9 @@ const {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.categories {
+  scrollbar-width: none;
 }
 </style>
