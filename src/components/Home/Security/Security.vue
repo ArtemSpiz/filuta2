@@ -5,6 +5,7 @@ import SecurityIcon3 from '@/assets/svg/SecurityIcon3.vue';
 import SecurityIcon4 from '@/assets/svg/SecurityIcon4.vue';
 import SecurityIcon5 from '@/assets/svg/SecurityIcon5.vue';
 import SecurityIcon6 from '@/assets/svg/SecurityIcon6.vue';
+import Section from '@/components/ui/Section/Section.vue';
 
 const SecurityCards = [
   {
@@ -43,15 +44,11 @@ const SecurityCards = [
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-[48px] justify-center container">
-    <div class="flex flex-col items-center gap-4">
-      <div class="Title text-center">Security You Can Trust</div>
-      <div class="Subtitle text-center">
-        Your data stays safe, private, and fully under your control.
-      </div>
-    </div>
-
-    <div class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1 w-full">
+  <Section
+    title="Security You Can Trust"
+    align="center"
+    subtitle="Your data stays safe, private, and fully under your control."
+    ><div class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1 w-full">
       <div
         v-for="(card, index) in SecurityCards"
         :key="index"
@@ -67,8 +64,8 @@ const SecurityCards = [
           {{ card.subtitle }}
         </div>
       </div>
-    </div>
-  </div>
+    </div></Section
+  >
 </template>
 
 <style scoped></style>

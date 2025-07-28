@@ -1,5 +1,3 @@
-import { BlogCards, categories as mockCategories, filteredCards } from '@/content/blogData';
-
 export interface BlogPost {
   id: string;
   title: string;
@@ -18,11 +16,15 @@ export interface BlogPagination {
   current: number;
   total: number;
   limit: number;
+  totalPosts: number;
+  hasNext: boolean;
+  hasPrev: boolean;
 }
 
 export interface BlogData {
   posts: BlogPost[];
   pagination: BlogPagination;
+  categories: BlogCategory[];
 }
 
 export interface BlogCategory {
@@ -33,40 +35,36 @@ export interface BlogCategory {
 export function useBlog() {
   const route = useRoute();
 
-  // Categories from mock data
-  const categories: BlogCategory[] = mockCategories.map(cat => ({
-    value: cat.title.toLowerCase(),
-    label: cat.title,
-  }));
-
   // Reactive data
   const selectedCategory = ref('all');
   const currentPage = ref(parseInt(route.query.page as string) || 1);
   const postsPerPage = 12;
 
-  // Use mock data instead of API call
-  const blogData = computed<BlogData>(() => {
-    const filteredPosts = filteredCards(
-      selectedCategory.value === 'all' ? 'All' : selectedCategory.value
-    );
-    const totalPosts = filteredPosts.length;
-    const totalPages = Math.ceil(totalPosts / postsPerPage);
-    const startIndex = (currentPage.value - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
-
-    return {
-      posts: paginatedPosts,
+  // Fetch data from API
+  const {
+    data: blogData,
+    pending,
+    error,
+    refresh,
+  } = useFetch('/api/blog', {
+    query: computed(() => ({
+      category: selectedCategory.value,
+      page: currentPage.value,
+      limit: postsPerPage,
+    })),
+    default: () => ({
+      posts: [],
       pagination: {
-        current: currentPage.value,
-        total: totalPages,
+        current: 1,
+        total: 1,
         limit: postsPerPage,
+        totalPosts: 0,
+        hasNext: false,
+        hasPrev: false,
       },
-    };
+      categories: [],
+    }),
   });
-
-  const pending = ref(false);
-  const error = ref(null);
 
   // Computed properties
   const displayPosts = computed(() => {
@@ -115,8 +113,8 @@ export function useBlog() {
     }
   };
 
-  const refresh = () => {
-    // No-op for mock data
+  const refreshData = () => {
+    refresh();
   };
 
   // Watch for route changes to update pagination
@@ -144,7 +142,7 @@ export function useBlog() {
 
   return {
     // Data
-    categories,
+    categories: computed(() => blogData.value?.categories || []),
     selectedCategory,
     currentPage,
     blogData,
@@ -158,35 +156,33 @@ export function useBlog() {
     // Methods
     selectCategory,
     changePage,
-    refresh,
+    refresh: refreshData,
   };
 }
 
 export function useBlogPost(slug: string) {
-  // Use mock data instead of API call
-  const post = computed(() => {
-    return BlogCards.find(card => card.slug === slug);
+  // Fetch single post from API
+  const {
+    data: post,
+    pending,
+    error,
+  } = useFetch(`/api/blog/${slug}`, {
+    default: () => null,
   });
 
-  const pending = ref(false);
-  const error = ref(null);
-
-  // Get related posts from mock data
-  const relatedPosts = computed(() => {
-    if (!post.value) return [];
-
-    const currentCategory = post.value.category;
-    const related = BlogCards.filter(
-      card => card.category === currentCategory && card.slug !== slug
-    ).slice(0, 3);
-
-    return related;
+  // Get related posts from API
+  const { data: relatedPosts } = useFetch('/api/blog', {
+    query: computed(() => ({
+      category: post.value?.category || '',
+      limit: 3,
+    })),
+    default: () => ({ posts: [] }),
   });
 
   return {
-    post,
+    post: computed(() => post.value),
     pending,
     error,
-    relatedPosts,
+    relatedPosts: computed(() => relatedPosts.value?.posts || []),
   };
 }

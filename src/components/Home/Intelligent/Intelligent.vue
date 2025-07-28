@@ -11,6 +11,7 @@ import IntelligentImage1 from '@/assets/img/intelligentCardImg1.png';
 import IntelligentImage2 from '@/assets/img/intelligentCardImg2.png';
 import IntelligentImage3 from '@/assets/img/intelligentCardImg3.png';
 import { ref, onMounted, onUnmounted } from 'vue';
+import Section from '@/components/ui/Section/Section.vue';
 
 const IntelligentCards = [
   {
@@ -67,16 +68,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center container gap-[56px]">
-    <div class="flex flex-col items-center gap-4">
-      <div class="Title text-center">Intelligent AI Solutions for Critical Industries</div>
-      <div class="Subtitle text-center">
-        From government to logistics and manufacturing — Filuta delivers smart automation that
-        ensures accuracy and reliability.
-      </div>
-    </div>
-
-    <div
+  <Section
+    title="Intelligent AI Solutions for Critical Industries"
+    subtitle=" From government to logistics and manufacturing — Filuta delivers smart automation that
+        ensures accuracy and reliability."
+    text-subtitle="!max-w-full "
+    align="left"
+    ><div
       class="flex justify-between items-center w-full relative gap-[24px] max-lg:flex-col max-lg:justify-center max-lg:items-center"
     >
       <!-- Картки -->
@@ -137,7 +135,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-  </div>
+  </Section>
 </template>
 
 <style></style>

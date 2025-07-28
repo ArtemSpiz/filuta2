@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply bg-dark-900 text-white;
+    @apply bg-black text-white;
   }
 }
 
@@ -45,14 +45,19 @@
   }
 
   .HeroTitle {
-    @apply text-4xl md:text-5xl lg:text-6xl font-ibm font-normal text-white leading-tight w-full max-w-[700px];
+    @apply text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-tight w-full max-w-[700px];
   }
 
   .HeroSubtitle {
-    @apply text-lg md:text-xl text-gray-300 leading-relaxed;
+    @apply text-lg md:text-xl text-gray-300 leading-relaxed w-full max-w-[500px];
+  }
+
+  .heroContainer {
+    @apply px-[108px] items-center flex h-[calc(100vh)] gap-[64px] max-xl:px-20 max-lg:pt-[116px] max-lg:px-15 max-md:px-10 max-sm:px-4 max-lg:items-center;
   }
 
   .bg-fullBg {
+    background-image: url('@/assets/img/bgHero.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -64,7 +69,7 @@
   }
 
   .Subtitle {
-    @apply text-lg md:text-xl text-gray-300 leading-relaxed;
+    @apply text-lg md:text-xl text-subtitle-color leading-relaxed;
   }
 }
 
@@ -83,10 +88,6 @@
 
   .heroUnderTitle {
     @apply text-[#57c0c9] uppercase font-light text-[16px] font-mono;
-  }
-
-  .heroContainer {
-    @apply px-[108px] flex items-center h-[calc(100vh)] gap-[64px] max-xl:px-20 max-lg:pt-[116px] max-lg:px-15 max-md:px-10 max-sm:px-4;
   }
 
   .cardsHover {

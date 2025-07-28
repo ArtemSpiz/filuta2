@@ -6,6 +6,7 @@ import Light3 from '@/assets/svg/Light3.vue';
 import ProblemCard1 from '@/assets/svg/ProblemCard1.vue';
 import ProblemCard2 from '@/assets/svg/ProblemCard2.vue';
 import ProblemCard3 from '@/assets/svg/ProblemCard3.vue';
+import Section from '@/components/ui/Section/Section.vue';
 
 const ProblemCards = [
   {
@@ -29,7 +30,6 @@ const ProblemCards = [
 ];
 
 import { ref, onMounted, onUnmounted } from 'vue';
-import Section from '../../../ui/Section.vue';
 
 const windowWidth = ref(0);
 
@@ -52,15 +52,10 @@ onUnmounted(() => {
   }
 });
 </script>
-
 <template>
-  <Section
-    custom-class="flex-col items-center "
-    title="The Problems Slowing You Down"
-    class-title="text-center"
-  >
+  <Section title="The Problems Slowing You Down">
     <div
-      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-2 max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
+      class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
     >
       <div
         v-for="(card, index) in ProblemCards"
@@ -70,7 +65,7 @@ onUnmounted(() => {
           index === 1 ? 'bg-[#121619]' : index === 2 ? 'bg-[#121819]' : 'bg-[#141219]',
 
           index === 2
-            ? windowWidth < 768
+            ? windowWidth < 769
               ? 'right-[0%]'
               : windowWidth < 1285
                 ? 'right-[-50%]'

@@ -1,4 +1,4 @@
-import { getBlogPost } from '~/server/utils/directus';
+import { BlogCards } from '../../data/blog';
 
 export default defineEventHandler(async event => {
   try {
@@ -11,7 +11,7 @@ export default defineEventHandler(async event => {
       });
     }
 
-    const post = await getBlogPost(slug);
+    const post = BlogCards.find(card => card.slug === slug);
 
     if (!post) {
       throw createError({

@@ -113,7 +113,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="powered flex justify-center items-start overflow-hidden relative gap-[56px] container max-md:gap-[32px] max-lg:flex-col max-lg:justify-center max-lg:items-center max-sm:pb-0"
+    class="powered flex justify-center items-start overflow-hidden relative gap-[56px] container max-md:gap-[32px] max-lg:flex-col max-lg:justify-center max-lg:items-center py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-sm:pb-0"
   >
     <div class="flex flex-col items-start gap-4 max-w-[585px] w-full poweredText">
       <div class="Title">Powered by Innovation and Expertise</div>

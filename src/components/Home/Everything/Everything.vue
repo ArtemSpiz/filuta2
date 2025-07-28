@@ -5,10 +5,12 @@ const anim3 = '/animations/animation3.json';
 const anim4 = '/animations/animation4.json';
 const anim5 = '/animations/animation5.json';
 const animMob3 = '/animations/animation3Mob.json';
+
 import everythingLightLeft from '@/assets/img/everythingLightLeft.png';
 import everythingLightRight from '@/assets/img/everythingLightRight.png';
+import Section from '@/components/ui/Section/Section.vue';
 
-import { onMounted, onUnmounted, ref, nextTick } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch, nextTick } from 'vue';
 
 const { $lottie } = useNuxtApp();
 
@@ -57,7 +59,9 @@ const animationRefs = EverythingCards.map(() => ref(null));
 const lottieInstances = [];
 
 onMounted(async () => {
-  await nextTick();
+  await nextTick(); // перший tick (запуск після реактивних змін)
+
+  await nextTick(); // другий tick (DOM точно оновлений)
 
   for (let index = 0; index < EverythingCards.length; index++) {
     const card = EverythingCards[index];
@@ -69,7 +73,6 @@ onMounted(async () => {
     }
 
     try {
-      // Fetch the animation data
       const response = await fetch(card.animation);
       const animationData = await response.json();
 
@@ -80,6 +83,7 @@ onMounted(async () => {
         autoplay: false,
         animationData: animationData,
       });
+
       lottieInstances[index] = anim;
       console.log(`Lottie animation ${index} loaded successfully`);
     } catch (error) {
@@ -126,65 +130,60 @@ function reverseAnimation(index) {
 </script>
 
 <template>
-  <div
-    class="flex flex-col items-center justify-center gap-[56px] relative container max-md:gap-[32px]"
-  >
-    <!-- Світло зліва -->
-    <div
-      class="absolute left-0 -top-[10%] w-[752.168px] pointer-events-none z-0 max-md:w-[390px] max-md:-top-[4%]"
-    >
-      <img :src="everythingLightLeft" alt="everythingLightLeft" />
-    </div>
-
-    <!-- Світло справа -->
-    <div class="absolute right-0 -top-[10%] w-[996px] pointer-events-none z-0">
-      <img :src="everythingLightRight" alt="everythingLightRight" />
-    </div>
-
-    <!-- Тексти -->
-    <div class="flex flex-col items-center justify-center gap-4 w-full z-10">
-      <div class="Title text-center max-w-[600px] w-full">
-        Everything you need to test smarter, faster, and at scale
-      </div>
-      <div class="Subtitle text-center">Built for modern game testing</div>
-    </div>
-
-    <!-- Картки -->
-    <div
-      class="grid grid-cols-2 grid-rows-[repeat(3,427px)] gap-6 w-full z-10 max-md:flex max-md:flex-col"
+  <div class="max-w-[100vw] overflow-hidden">
+    <Section
+      align="left"
+      text-wrap-class="w-full max-w-[750px] mx-auto max-md:max-w-[400px]"
+      title="Everything you need to test smarter, faster, and at scale"
+      subtitle="Built for modern game testing"
     >
       <div
-        v-for="(card, index) in EverythingCards"
-        :key="index"
-        class="flex flex-col justify-end items-start gap-4 p-12 rounded-[20px] border border-[#2b2a30] bg-[#141219] relative overflow-hidden transition-all duration-500 hover:border-[#a394f7] hover:bg-[#262034] max-lg:p-[30px] max-md:p-[25px] max-md:gap-[10px] max-sm:p-[16px]"
-        :class="[
-          index === 0 && 'col-start-1 row-start-1',
-          index === 1 && 'col-start-2 row-start-1',
-          index === 2 && 'col-span-2 row-start-2',
-          index === 3 && 'col-start-1 row-start-3',
-          index === 4 && 'col-start-2 row-start-3',
-        ]"
-        @mouseenter="playAnimation(index)"
-        @mouseleave="reverseAnimation(index)"
+        class="absolute left-0 -top-[10%] w-[752.168px] pointer-events-none z-0 max-md:w-[390px] max-md:-top-[4%]"
+      >
+        <img :src="everythingLightLeft" alt="everythingLightLeft" />
+      </div>
+
+      <!-- Світло справа -->
+      <div class="absolute right-0 -top-[10%] w-[996px] pointer-events-none z-0">
+        <img :src="everythingLightRight" alt="everythingLightRight" />
+      </div>
+      <!-- Картки -->
+      <div
+        class="grid grid-cols-2 grid-rows-[repeat(3,427px)] gap-6 w-full z-10 max-md:flex max-md:flex-col"
       >
         <div
-          :ref="el => (animationRefs[index].value = el)"
-          class="animation-container w-full h-full max-md:h-[200px] max-sm:h-[130px]"
-        />
-        <div class="flex flex-col gap-3 items-start w-full">
+          v-for="(card, index) in EverythingCards"
+          :key="index"
+          class="flex flex-col justify-end items-start gap-4 p-12 rounded-[20px] border border-[#2b2a30] bg-[#141219] relative overflow-hidden transition-all duration-500 hover:border-[#a394f7] hover:bg-[#262034] max-lg:p-[30px] max-md:p-[25px] max-md:gap-[10px] max-sm:p-[16px]"
+          :class="[
+            index === 0 && 'col-start-1 row-start-1',
+            index === 1 && 'col-start-2 row-start-1',
+            index === 2 && 'col-span-2 row-start-2',
+            index === 3 && 'col-start-1 row-start-3',
+            index === 4 && 'col-start-2 row-start-3',
+          ]"
+          @mouseenter="playAnimation(index)"
+          @mouseleave="reverseAnimation(index)"
+        >
           <div
-            class="text-white text-[24px] leading-[130%] font-ibm font-normal max-md:text-[20px]"
-          >
-            {{ card.title }}
-          </div>
-          <div
-            class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm font-normal max-md:text-[10px]"
-          >
-            {{ card.subtitle }}
+            :ref="el => (animationRefs[index].value = el)"
+            class="animation-container w-full h-full max-md:h-[200px] max-sm:h-[130px]"
+          />
+          <div class="flex flex-col gap-3 items-start w-full">
+            <div
+              class="text-white text-[24px] leading-[130%] font-ibm font-normal max-md:text-[20px]"
+            >
+              {{ card.title }}
+            </div>
+            <div
+              class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm font-normal max-md:text-[10px]"
+            >
+              {{ card.subtitle }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   </div>
 </template>
 

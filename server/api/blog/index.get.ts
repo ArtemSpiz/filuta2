@@ -1,28 +1,36 @@
-import { getBlogPosts } from '~/server/utils/directus';
+import { BlogCards, categories as mockCategories, filteredCards } from '../../data/blog';
 
 export default defineEventHandler(async event => {
   try {
     const query = getQuery(event);
-    const category = query.category as string;
+    const category = (query.category as string) || 'all';
     const page = parseInt(query.page as string) || 1;
-    const limit = parseInt(query.limit as string) || 10;
+    const limit = parseInt(query.limit as string) || 12;
 
-    const posts = await getBlogPosts(category);
+    // Filter posts by category
+    const filteredPosts = filteredCards(category === 'all' ? 'All' : category);
 
     // Calculate pagination
+    const totalPosts = filteredPosts.length;
+    const totalPages = Math.ceil(totalPosts / limit);
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-    const paginatedPosts = posts.slice(startIndex, endIndex);
+    const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
 
     return {
       posts: paginatedPosts,
       pagination: {
         current: page,
-        total: Math.ceil(posts.length / limit),
-        totalPosts: posts.length,
-        hasNext: endIndex < posts.length,
+        total: totalPages,
+        totalPosts,
+        limit,
+        hasNext: endIndex < totalPosts,
         hasPrev: page > 1,
       },
+      categories: mockCategories.map((cat: any) => ({
+        value: cat.title.toLowerCase(),
+        label: cat.title,
+      })),
     };
   } catch (error) {
     console.error('Error fetching blog posts:', error);

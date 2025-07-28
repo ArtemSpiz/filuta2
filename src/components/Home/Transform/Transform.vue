@@ -9,6 +9,7 @@ import transformCards3 from '@/assets/img/transformCards3.png';
 import transformCards4 from '@/assets/img/transformCards4.png';
 import bgTransformCard from '@/assets/img/bgTransformCard.png';
 import transformLight from '@/assets/img/transformLight.png';
+import Section from '@/components/ui/Section/Section.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,7 +54,7 @@ const setActive = index => {
 
 onMounted(() => {
   if (process.client) {
-    isMobile.value = window.innerWidth < 768;
+    isMobile.value = window.innerWidth < 769;
   }
 });
 
@@ -68,7 +69,7 @@ const getContentOpacity = index => {
 
 onMounted(async () => {
   if (process.client) {
-    isMobile.value = window.innerWidth < 768;
+    isMobile.value = window.innerWidth < 769;
   }
   if (isMobile.value) return;
 
@@ -170,96 +171,98 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="transform container gap-[56px] items-center justify-center flex flex-col relative">
-    <div class="absolute right-0 -top-[15%] pointer-events-none w-[790px] max-md:-top-[8%]">
-      <img :src="transformLight" alt="light" />
-    </div>
-
-    <div class="flex flex-col gap-4 w-full items-center justify-center max-md:items-start">
-      <div class="Title max-w-[520px] text-left w-full max-sm:w-[300px]">
-        Transform your QA with these powerful benefits
+  <div class="transform">
+    <Section
+      align="left"
+      text-wrap-class="text-start "
+      text-subtitle="!mx-0 !max-w-full"
+      section-classes=" relative"
+      title="Transform your QA with these powerful benefits"
+      subtitle="Filuta helps you move faster, save costs, and ship with confidence — all in one platform."
+    >
+      <div
+        class="absolute right-[-130px] -top-[15%] pointer-events-none w-[790px] max-md:-top-[8%]"
+      >
+        <img :src="transformLight" alt="light" />
       </div>
-      <div class="Subtitle text-left">
-        Filuta helps you move faster, save costs, and ship with confidence — all in one platform.
-      </div>
-    </div>
 
-    <div class="transformCardsWrapper relative w-full">
-      <div class="transformCards flex gap-4 justify-center items-start max-md:flex-col">
-        <div
-          v-for="(card, index) in transformCards"
-          :key="index"
-          class="transformCard overflow-hidden flex rounded-[20px] bg-gradient-to-l from-[#112231] to-[#19192b] relative max-md:w-full"
-          :style="!isMobile ? { width: cardWidths[index] + 'px' } : {}"
-          @click="setActive(index)"
-        >
+      <div class="transformCardsWrapper relative w-full">
+        <div class="transformCards flex gap-4 justify-center items-start max-md:flex-col">
           <div
-            class="w-[808px] h-[559px] min-w-[808px] max-w-[808px] p-11 box-border flex justify-between max-xl:min-w-[auto] max-md:w-full max-lg:flex-col max-md:justify-center max-md:items-center max-md:p-[24px] max-md:gap-[24px] max-md:h-max"
+            v-for="(card, index) in transformCards"
+            :key="index"
+            class="transformCard overflow-hidden flex rounded-[20px] bg-gradient-to-l from-[#112231] to-[#19192b] relative max-md:w-full"
+            :style="!isMobile ? { width: cardWidths[index] + 'px' } : {}"
+            @click="setActive(index)"
           >
             <div
-              v-if="isMobile || index === activeIndex"
-              class="absolute w-full h-full top-0 right-0 z-0 pointer-events-none"
-            >
-              <img
-                :src="bgTransformCard"
-                alt="bgTransformCard"
-                class="w-full h-full object-cover"
-              />
-            </div>
-
-            <div
-              class="flex flex-col justify-between h-full z-10 max-lg:gap-[16px] max-lg:justify-start"
-              :style="{
-                opacity: getContentOpacity(index),
-                transition: 'opacity 0.7s',
-              }"
+              class="w-[808px] h-[559px] min-w-[808px] max-w-[808px] p-11 box-border flex justify-between max-xl:min-w-[auto] max-md:w-full max-lg:flex-col max-md:justify-center max-md:items-center max-md:p-[24px] max-md:gap-[24px] max-md:h-max"
             >
               <div
                 v-if="isMobile || index === activeIndex"
-                class="flex flex-col items-start gap-4 max-w-[335px] w-full max-lg:min-w-[320px]"
+                class="absolute w-full h-full top-0 right-0 z-0 pointer-events-none"
+              >
+                <img
+                  :src="bgTransformCard"
+                  alt="bgTransformCard"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+
+              <div
+                class="flex flex-col justify-between h-full z-10 max-lg:gap-[16px] max-lg:justify-start"
+                :style="{
+                  opacity: getContentOpacity(index),
+                  transition: 'opacity 0.7s',
+                }"
               >
                 <div
-                  class="text-white text-[24px] leading-[130%] font-ibm max-md:text-[22px] max-sm:text-[20px]"
+                  v-if="isMobile || index === activeIndex"
+                  class="flex flex-col items-start gap-4 max-w-[335px] w-full max-lg:min-w-[320px] max-md:min-w-[auto]"
                 >
-                  {{ card.title }}
+                  <div
+                    class="text-white text-[24px] leading-[130%] font-ibm max-md:text-[22px] max-sm:text-[20px]"
+                  >
+                    {{ card.title }}
+                  </div>
+                  <div class="text-white/90 text-[16px] leading-[150%] font-ibm max-sm:text-[14px]">
+                    {{ card.text }}
+                  </div>
                 </div>
-                <div class="text-white/90 text-[16px] leading-[150%] font-ibm max-sm:text-[14px]">
-                  {{ card.text }}
+                <div
+                  v-if="isMobile || index === activeIndex"
+                  class="flex flex-col items-start gap-2 max-md:hidden"
+                >
+                  <div class="text-white/90 text-[16px] font-ibm flex items-center gap-1">
+                    {{ card.step }}
+                    <span class="text-white/40 text-[12px]">/04</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <div
+                      v-for="(_, i) in transformCards"
+                      :key="i"
+                      :ref="el => (indicatorRefs[i] = el)"
+                      class="h-[5px] rounded-full bg-white/40 transition-all duration-700"
+                      :class="{
+                        'w-[60px] bg-white': i === activeIndex,
+                        'w-[10px]': i !== activeIndex,
+                      }"
+                    ></div>
+                  </div>
                 </div>
               </div>
+
               <div
                 v-if="isMobile || index === activeIndex"
-                class="flex flex-col items-start gap-2 max-md:hidden"
+                class="w-[380px] z-10 my-auto max-lg:w-[250px] max-md:max-w-[286px] max-md:w-full"
               >
-                <div class="text-white/90 text-[16px] font-ibm flex items-center gap-1">
-                  {{ card.step }}
-                  <span class="text-white/40 text-[12px]">/04</span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <div
-                    v-for="(_, i) in transformCards"
-                    :key="i"
-                    :ref="el => (indicatorRefs[i] = el)"
-                    class="h-[5px] rounded-full bg-white/40 transition-all duration-700"
-                    :class="{
-                      'w-[60px] bg-white': i === activeIndex,
-                      'w-[10px]': i !== activeIndex,
-                    }"
-                  ></div>
-                </div>
+                <img :src="card.image" alt="cardImage" class="w-full h-auto" />
               </div>
-            </div>
-
-            <div
-              v-if="isMobile || index === activeIndex"
-              class="w-[380px] z-10 my-auto max-lg:w-[250px] max-md:max-w-[286px] max-md:w-full"
-            >
-              <img :src="card.image" alt="cardImage" class="w-full h-auto" />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   </div>
 </template>
 

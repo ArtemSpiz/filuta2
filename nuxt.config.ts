@@ -19,6 +19,7 @@ export default defineNuxtConfig({
 
   // App configuration
   app: {
+    baseURL: '/',
     head: {
       title: 'Filuta - AI-Powered Compliance Solutions',
       meta: [
@@ -51,6 +52,8 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     minify: true,
+    // Add compatibility date for latest features
+    compatibilityDate: '2025-07-27',
   },
 
   // Image configuration
@@ -116,6 +119,8 @@ export default defineNuxtConfig({
 
   // Experimental features
   experimental: {
-    // inlineSSRStyles: false, // Removed as it's deprecated
+    // Enable latest experimental features
+    componentIslands: true,
+    viewTransition: true,
   },
 });

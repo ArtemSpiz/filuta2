@@ -4,6 +4,7 @@ import video2 from '@/assets/img/video2.png';
 import video3 from '@/assets/img/video3.png';
 
 import logo from '@/assets/img/trustedCadLogo.png';
+import Section from '@/components/ui/Section/Section.vue';
 
 const TrustedCards = [
   {
@@ -28,14 +29,12 @@ const TrustedCards = [
 </script>
 
 <template>
-  <div class="flex container gap-[48px] flex-col items-center w-full">
-    <div class="flex flex-col items-start gap-4">
-      <div class="Title text-center w-full">Trusted by Industry Leaders</div>
-      <div class="Subtitle text-center w-full">
-        How studios use Filuta AI to speed up releases, improve quality, and boost team focus.
-      </div>
-    </div>
-
+  <Section
+    title="Trusted by Industry Leaders"
+    align="center"
+    text-subtitle="!max-w-full "
+    subtitle="How studios use Filuta AI to speed up releases, improve quality, and boost team focus."
+  >
     <div
       class="flex gap-6 w-full justify-between max-lg:flex-col max-lg:justify-center max-lg:items-center max-lg:gap-[32px]"
     >
@@ -68,7 +67,7 @@ const TrustedCards = [
         </div>
       </div>
     </div>
-  </div>
+  </Section>
 </template>
 
 <style scoped></style>

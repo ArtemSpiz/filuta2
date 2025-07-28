@@ -30,7 +30,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="h-screen flex flex-col bg-no-repeat bg-[100%,100%] bg-[url('/src/assets/img/aboutHeroBg.png')] max-lg:gap-[60px] max-lg:pb-[60px] max-lg:h-full overflow-hidden max-sm:bg-[url('/src/assets/img/aboutHeroBgMob.png')]"
+    class="h-screen flex flex-col bg-no-repeat bg-[100%,100%] bg-[url('/img/aboutHeroBg.png')] max-lg:gap-[60px] max-lg:pb-[60px] max-lg:h-full overflow-hidden max-sm:bg-[url('/img/aboutHeroBgMob.png')]"
   >
     <div class="heroContainer gap-[40px] justify-center max-lg:gap-[53px]">
       <div class="flex flex-col gap-[64px] max-lg:center">

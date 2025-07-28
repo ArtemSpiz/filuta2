@@ -85,7 +85,6 @@ html {
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
-  background-color: #141219;
   color: #ffffff;
   line-height: 1.6;
 }
