@@ -2,7 +2,7 @@
   <section :class="sectionClasses">
     <div class="container mx-auto">
       <!-- Header -->
-      <div v-if="title || subtitle" :class="textWrapClass" class="text-center">
+      <div v-if="title || subtitle" :class="textWrapClass" class="text-center mb-14">
         <h2 v-if="title" class="Title mb-4">{{ title }}</h2>
         <p v-if="subtitle" :class="textSubtitle" class="Subtitle max-w-3xl mx-auto">
           {{ subtitle }}

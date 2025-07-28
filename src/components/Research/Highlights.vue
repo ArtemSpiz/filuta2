@@ -32,7 +32,7 @@ const firstCardSubtitle = [
     </div>
     <Section
       align="left"
-      text-wrap-class="max-md:pb-12"
+      text-wrap-class="max-md:mb-12"
       title="Highlights & Achievements"
       subtitle="What We've Built, Proven, and Published"
     >

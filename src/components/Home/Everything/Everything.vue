@@ -10,9 +10,8 @@ import everythingLightLeft from '@/assets/img/everythingLightLeft.png';
 import everythingLightRight from '@/assets/img/everythingLightRight.png';
 import Section from '@/components/ui/Section/Section.vue';
 
-import { onMounted, onUnmounted, ref, computed, watch, nextTick } from 'vue';
-
-const { $lottie } = useNuxtApp();
+import { onMounted, ref } from 'vue';
+import lottie from 'lottie-web';
 
 const isMobile = ref(false);
 
@@ -58,73 +57,35 @@ const EverythingCards = [
 const animationRefs = EverythingCards.map(() => ref(null));
 const lottieInstances = [];
 
-onMounted(async () => {
-  await nextTick(); // перший tick (запуск після реактивних змін)
-
-  await nextTick(); // другий tick (DOM точно оновлений)
-
-  for (let index = 0; index < EverythingCards.length; index++) {
-    const card = EverythingCards[index];
+onMounted(() => {
+  EverythingCards.forEach((card, index) => {
     const container = animationRefs[index].value;
 
-    if (!container || !$lottie) {
-      console.warn(`Container or lottie not available for index ${index}`);
-      continue;
-    }
+    const anim = lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: card.animation, // Замість animationData
+    });
 
-    try {
-      const response = await fetch(card.animation);
-      const animationData = await response.json();
-
-      const anim = $lottie.loadAnimation({
-        container,
-        renderer: 'svg',
-        loop: false,
-        autoplay: false,
-        animationData: animationData,
-      });
-
-      lottieInstances[index] = anim;
-      console.log(`Lottie animation ${index} loaded successfully`);
-    } catch (error) {
-      console.error('Failed to load Lottie animation:', error);
-    }
-  }
-});
-
-onUnmounted(() => {
-  lottieInstances.forEach(anim => {
-    if (anim) {
-      try {
-        anim.destroy();
-      } catch (error) {
-        console.error('Failed to destroy animation:', error);
-      }
-    }
+    lottieInstances[index] = anim;
   });
 });
 
 function playAnimation(index) {
   const anim = lottieInstances[index];
   if (anim) {
-    try {
-      anim.setDirection(1);
-      anim.play();
-    } catch (error) {
-      console.error('Failed to play animation:', error);
-    }
+    anim.setDirection(1);
+    anim.play();
   }
 }
 
 function reverseAnimation(index) {
   const anim = lottieInstances[index];
   if (anim) {
-    try {
-      anim.setDirection(-1);
-      anim.play();
-    } catch (error) {
-      console.error('Failed to reverse animation:', error);
-    }
+    anim.setDirection(-1);
+    anim.play();
   }
 }
 </script>
@@ -167,7 +128,7 @@ function reverseAnimation(index) {
         >
           <div
             :ref="el => (animationRefs[index].value = el)"
-            class="animation-container w-full h-full max-md:h-[200px] max-sm:h-[130px]"
+            class="w-full h-full max-md:h-[200px] max-sm:h-[130px]"
           />
           <div class="flex flex-col gap-3 items-start w-full">
             <div
