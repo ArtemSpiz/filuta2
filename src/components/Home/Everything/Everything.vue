@@ -66,7 +66,7 @@ onMounted(() => {
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      path: card.animation, // Замість animationData
+      path: card.animation,
     });
 
     lottieInstances[index] = anim;

@@ -46,12 +46,11 @@ const HelpCards = [
 const shrinkScale = [0.94, 0.96, 0.98, 1];
 
 let helpTrigger = null;
+
 const isMobile = ref(false);
 
 onMounted(() => {
-  if (process.client) {
-    isMobile.value = window.innerWidth <= 768;
-  }
+  isMobile.value = window.innerWidth <= 769;
 });
 
 function updateContainerHeight() {
@@ -65,23 +64,17 @@ function updateContainerHeight() {
 }
 
 function getOffsetY() {
-  if (process.client) {
-    if (window.innerWidth < 768) return 0;
-    if (window.innerWidth < 1040) return 200;
-    if (window.innerWidth < 1285) return 300;
-    if (window.innerWidth < 1400) return 400;
-    return 430;
-  }
-  return 0;
+  if (window.innerWidth < 769) return 0;
+  if (window.innerWidth < 1040) return 200;
+  if (window.innerWidth < 1285) return 300;
+  if (window.innerWidth < 1400) return 400;
+  return 430;
 }
 
 function getTargetHeight() {
-  if (process.client) {
-    if (window.innerWidth < 640) return 300;
-    if (window.innerWidth < 1024) return 400;
-    return 470;
-  }
-  return 0;
+  if (window.innerWidth < 640) return 300;
+  if (window.innerWidth < 1024) return 400;
+  return 470;
 }
 
 onMounted(async () => {
@@ -91,7 +84,7 @@ onMounted(async () => {
   await nextTick();
   updateContainerHeight();
 
-  const offsetY = getOffsetY();
+  let offsetY = getOffsetY();
   const totalCards = cards.value.length;
 
   cards.value.forEach(card => {
@@ -155,19 +148,21 @@ onMounted(async () => {
 
   helpTrigger = tl.scrollTrigger;
 
-  if (process.client) {
-    window.addEventListener('resize', handleResize);
-  }
+  window.addEventListener('resize', handleResize);
 });
 
 function handleResize() {
-  ScrollTrigger.getById('helpScrollAnim')?.kill();
-  onMountedFns();
+  helpTrigger?.kill(true);
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  nextTick(() => {
+    onMountedFns();
+    ScrollTrigger.refresh();
+  });
 }
 
 function onMountedFns() {
   updateContainerHeight();
-  const offsetY = getOffsetY();
+  let offsetY = getOffsetY();
   const totalCards = cards.value.length;
   cards.value.forEach(card => {
     card.style.width = '100%';
@@ -225,6 +220,7 @@ function onMountedFns() {
     }
   }
   helpTrigger = tl.scrollTrigger;
+  ScrollTrigger.refresh();
 }
 
 onUnmounted(() => {
@@ -236,7 +232,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="container relative gap-[56px] flex items-center flex-col help max-lg:!pb-0 max-md:gap-[32px] py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-sm:pb-0"
+    class="container flex gap-14 relative items-center flex-col help py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-md:gap-8"
   >
     <div
       class="absolute top-[-200px] left-0 pointer-events-none z-0 max-md:top-[-90px] max-md:max-w-[305px] max-md:w-full"
@@ -258,8 +254,8 @@ onUnmounted(() => {
     </div>
     <div class="flex flex-col gap-[18px] self-stretch z-10 relative">
       <div
-        ref="helpCardsWrapper"
         class="flex flex-col items-center gap-4 w-full relative helpCards"
+        ref="helpCardsWrapper"
       >
         <div
           v-for="(card, index) in HelpCards"
