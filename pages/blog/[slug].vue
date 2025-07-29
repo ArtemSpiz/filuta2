@@ -8,16 +8,16 @@
     <!-- Article Content -->
     <article v-else-if="post" class="min-h-screen">
       <!-- Hero Section -->
-      <Section padding="xl">
+      <Section padding="xl" text-wrap-class="" text-subtitle="">
         <BlogArticleHero :post="post" />
       </Section>
 
       <!-- Article Body Section -->
-      <Section padding="lg">
+      <Section padding="lg" text-wrap-class="" text-subtitle="">
         <BlogArticleBody :post="post" :related-posts="relatedPosts" />
       </Section>
 
-      <Section>
+      <Section text-wrap-class="" text-subtitle="">
         <Related />
       </Section>
     </article>
@@ -31,7 +31,7 @@
 import Related from '@/components/Article/Related.vue';
 
 const route = useRoute();
-const slug = route.params.slug;
+const slug = route.params.slug as string;
 
 // SEO
 definePageMeta({
@@ -47,7 +47,7 @@ watch(
   post,
   async newPost => {
     if (newPost) {
-      const { setupPageSEO } = await import('~/composables/usePageSEO');
+      const { setupPageSEO } = await import('../../composables/usePageSEO');
 
       setupPageSEO({
         title: newPost.meta_title || newPost.title,

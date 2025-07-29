@@ -2,9 +2,9 @@
   <div>
     <Hero />
     <Problems />
-    <!-- <Transform /> -->
+    <Transform />
     <Everything />
-    <!-- <Powered /> -->
+    <Powered />
     <Intelligent />
     <Trusted />
     <Security />

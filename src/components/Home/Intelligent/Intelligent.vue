@@ -79,6 +79,7 @@ onUnmounted(() => {
         ensures accuracy and reliability."
       text-subtitle="!max-w-full "
       align="left"
+      text-wrap-class=""
     >
       <div
         class="flex justify-between items-center w-full relative gap-[24px] max-lg:flex-col max-lg:justify-center max-lg:items-center"

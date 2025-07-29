@@ -16,7 +16,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
       <img :src="herolightBlue" alt="heroLight" />
     </div>
     <div
-      class="heroContainer flex flex-col !items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:!items-center"
+      class="heroContainer container flex flex-col !items-start justify-center gap-16 max-lg:gap-8 max-lg:w-full max-lg:justify-center max-lg:h-full max-lg:!items-center"
     >
       <div class="flex flex-col items-start gap-8 w-full max-lg:justify-center max-lg:items-center">
         <div class="heroUnderTitle max-sm:text-[14px]">Leading AI Tools to Grow Your Business</div>
@@ -35,7 +35,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
       </div>
 
       <div
-        class="w-full z-0 absolute right-0 top-[50%] translate-y-[-50%] max-w-[800px] max-xl:max-w-[600px] max-lg:hidden"
+        class="w-full z-0 absolute right-0 top-[50%] -translate-x-1/2 translate-y-[-50%] max-w-[800px] max-xl:max-w-[600px] max-lg:hidden"
       >
         <img :src="bgHero" alt="robot" class="animate-float" />
       </div>

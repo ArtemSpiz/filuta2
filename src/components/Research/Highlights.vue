@@ -35,6 +35,7 @@ const firstCardSubtitle = [
       text-wrap-class="max-md:mb-12"
       title="Highlights & Achievements"
       subtitle="What We've Built, Proven, and Published"
+      text-subtitle=""
     >
       <div
         class="grid grid-cols-3 grid-rows-2 gap-6 max-xl:grid-cols-4 max-lg:grid-rows-3 max-md:grid-cols-1 max-md:grid-rows-4auto"

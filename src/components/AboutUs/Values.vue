@@ -53,6 +53,8 @@ const ValuesCards = [
       title="Our Team Values"
       subtitle="Guiding Principles Behind Every Partnership"
       align="left"
+      text-wrap-class=""
+      text-subtitle=""
       ><div class="grid grid-cols-6 grid-rows-2 gap-[16px] max-lg:flex max-lg:flex-col">
         <div
           v-for="(card, index) in ValuesCards"

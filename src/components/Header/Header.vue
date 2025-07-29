@@ -6,16 +6,16 @@ import HeaderMobile from './HeaderMobile.vue';
 </script>
 
 <template>
-  <div
-    class="m-auto flex items-center justify-between w-full box-border container absolute top-6 bg-transparent z-10"
-  >
-    <div class="flex items-center justify-between w-full">
-      <HeaderLogo />
-      <div class="flex items-center gap-[81px] max-lg:gap-[24px] max-md:hidden">
-        <HeaderNavigation />
-        <HeaderCTA />
+  <div class="container absolute left-1/2 -translate-x-1/2 top-6">
+    <div class="flex items-center justify-between w-full box-border bg-transparent z-10">
+      <div class="flex items-center justify-between w-full">
+        <HeaderLogo />
+        <div class="flex items-center gap-[81px] max-lg:gap-[24px] max-md:hidden">
+          <HeaderNavigation />
+          <HeaderCTA />
+        </div>
+        <HeaderMobile class="hidden max-md:flex" />
       </div>
-      <HeaderMobile class="hidden max-md:flex" />
     </div>
   </div>
 </template>

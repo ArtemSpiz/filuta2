@@ -74,6 +74,7 @@ onUnmounted(() => {
       title="Featured Articles"
       subtitle="Insights on modern compliance, automation, and operational excellence in school districts."
       align="left"
+      text-subtitle=""
       ><div
         class="flex self-stretch gap-[24px] z-10 max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:items-center max-md:justify-center"
       >

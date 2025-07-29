@@ -83,8 +83,6 @@ onMounted(async () => {
       return;
     }
 
-    console.log(`Initializing Transform animations with ${totalCards} cards`);
-
     cards.forEach((card, i) => {
       gsap.set(card, { width: i === 0 ? 808 : 80 });
       cardWidths.value[i] = i === 0 ? 808 : 80;
@@ -158,7 +156,6 @@ onMounted(async () => {
     }
 
     ScrollTrigger.refresh();
-    console.log('Transform animations initialized successfully');
   } catch (error) {
     console.error('Failed to initialize Transform animations:', error);
   }

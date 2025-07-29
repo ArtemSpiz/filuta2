@@ -60,6 +60,7 @@ const SecurityCards = [
     title="Security You Can Trust"
     align="center"
     subtitle="Your data stays safe, private, and fully under your control."
+    text-subtitle=""
     ><div class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1 w-full">
       <div
         v-for="(card, index) in SecurityCards"

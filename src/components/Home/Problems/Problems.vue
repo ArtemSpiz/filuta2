@@ -53,7 +53,7 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <Section title="The Problems Slowing You Down">
+  <Section title="The Problems Slowing You Down" text-wrap-class="" text-subtitle="">
     <div
       class="flex justify-center items-start gap-6 w-full flex-wrap max-xl:grid max-xl:grid-cols-ddd max-md:flex max-md:flex-col max-md:justify-center max-md:items-center"
     >

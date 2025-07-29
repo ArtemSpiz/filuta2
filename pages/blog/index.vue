@@ -5,12 +5,14 @@
       title="Blog"
       subtitle="Discover the latest trends in AI-powered compliance solutions, government regulations, and educational technology from our expert team."
       padding="lg"
+      text-wrap-class=""
+      text-subtitle=""
     >
       <BlogHero />
     </Section>
 
     <!-- Blog Content Section -->
-    <Section padding="lg">
+    <Section padding="lg" text-wrap-class="" text-subtitle="">
       <div
         class="max-w-7xl mx-auto flex flex-col gap-14 py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12 max-md:gap-8"
       >

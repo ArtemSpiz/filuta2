@@ -47,7 +47,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Section align="left"
+  <Section align="left" text-wrap-class="" text-subtitle=""
     ><div
       class="flex flex-col items-start gap-[56px] px-[60px] py-[64px] w-full rounded-[24px] bg-no-repeat bg-cover max-lg:p-[45px] max-md:p-[30px] max-sm:p-[24px] max-md:gap-[32px] max-sm:h-[396px]"
       :style="{
