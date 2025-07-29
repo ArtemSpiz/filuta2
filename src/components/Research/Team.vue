@@ -1,7 +1,7 @@
 <script setup>
-import ArrowCaseIcon from "@/assets/svg/ArrowCaseIcon.vue";
-import { ref, onMounted, onUnmounted, nextTick } from "vue";
-import LinkedInIcon from "@/assets/svg/linkedInIcon.vue";
+import ArrowCaseIcon from '@/assets/svg/ArrowCaseIcon.vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import LinkedInIcon from '@/assets/svg/linkedInIcon.vue';
 
 const props = defineProps({
   teamCards: {
@@ -11,10 +11,12 @@ const props = defineProps({
   },
 });
 
-const isMobile = ref(window.innerWidth < 768);
+const isMobile = ref(false);
 
 function updateIsMobile() {
-  isMobile.value = window.innerWidth < 768;
+  if (process.client) {
+    isMobile.value = window.innerWidth < 768;
+  }
 }
 
 const scrollContainer = ref(null);
@@ -25,12 +27,14 @@ const peekWidth = 40;
 const currentIndex = ref(0);
 
 function updateRightPadding() {
-  const w = window.innerWidth;
-  if (w < 640) rightPadding.value = 24;
-  else if (w < 768) rightPadding.value = 40;
-  else if (w < 1040) rightPadding.value = 60;
-  else if (w < 1285) rightPadding.value = 80;
-  else rightPadding.value = 108;
+  if (process.client) {
+    const w = window.innerWidth;
+    if (w < 640) rightPadding.value = 24;
+    else if (w < 768) rightPadding.value = 40;
+    else if (w < 1040) rightPadding.value = 60;
+    else if (w < 1285) rightPadding.value = 80;
+    else rightPadding.value = 108;
+  }
 }
 
 function getMaxScrollLeft() {
@@ -60,11 +64,8 @@ function getMaxIndex() {
   if (!el) return 0;
   const visibleWidth = el.clientWidth;
   const totalCards = getCardsCount();
-  const totalWidth =
-    totalCards * cardWidth + (totalCards - 1) * cardGap + rightPadding.value;
-  const stops = Math.ceil(
-    (totalWidth - visibleWidth + peekWidth) / (cardWidth + cardGap)
-  );
+  const totalWidth = totalCards * cardWidth + (totalCards - 1) * cardGap + rightPadding.value;
+  const stops = Math.ceil((totalWidth - visibleWidth + peekWidth) / (cardWidth + cardGap));
   return Math.max(0, stops);
 }
 
@@ -76,7 +77,7 @@ function scrollToIndex(idx) {
 
   isProgrammaticScroll.value = true;
   if (isMobile.value) {
-    const cards = el.querySelectorAll(".team-card");
+    const cards = el.querySelectorAll('.team-card');
     if (!cards.length) return;
 
     if (idx === totalCards - 1) {
@@ -92,11 +93,10 @@ function scrollToIndex(idx) {
     } else {
       targetScroll = idx * step;
     }
-    if (targetScroll > getMaxScrollLeft() - 1)
-      targetScroll = getMaxScrollLeft();
+    if (targetScroll > getMaxScrollLeft() - 1) targetScroll = getMaxScrollLeft();
     if (targetScroll < 0) targetScroll = 0;
   }
-  el.scrollTo({ left: targetScroll, behavior: "smooth" });
+  el.scrollTo({ left: targetScroll, behavior: 'smooth' });
   setTimeout(() => {
     updateScrollButtons();
     isProgrammaticScroll.value = false;
@@ -128,7 +128,7 @@ function onScroll() {
     if (isMobile.value) {
       currentIndex.value = getNearestCardIndexMobile();
     } else {
-      let idx = Math.round(el.scrollLeft / (cardWidth + cardGap));
+      const idx = Math.round(el.scrollLeft / (cardWidth + cardGap));
       currentIndex.value = idx;
       snapToNearestCard();
     }
@@ -138,7 +138,7 @@ function onScroll() {
 function getNearestCardIndexMobile() {
   const el = scrollContainer.value;
   if (!el) return 0;
-  const cards = el.querySelectorAll(".team-card");
+  const cards = el.querySelectorAll('.team-card');
   if (!cards.length) return 0;
   const containerCenter = el.scrollLeft + el.clientWidth / 2;
   let minDist = Infinity;
@@ -180,22 +180,26 @@ function snapToNearestCard() {
 }
 
 onMounted(() => {
-  updateRightPadding();
-  updateIsMobile();
-  window.addEventListener("resize", updateRightPadding);
-  window.addEventListener("resize", updateIsMobile);
-  nextTick(() => {
-    updateScrollButtons();
-    if (scrollContainer.value) {
-      scrollContainer.value.addEventListener("scroll", onScroll);
-    }
-  });
+  if (process.client) {
+    updateRightPadding();
+    updateIsMobile();
+    window.addEventListener('resize', updateRightPadding);
+    window.addEventListener('resize', updateIsMobile);
+    nextTick(() => {
+      updateScrollButtons();
+      if (scrollContainer.value) {
+        scrollContainer.value.addEventListener('scroll', onScroll);
+      }
+    });
+  }
 });
 onUnmounted(() => {
-  window.removeEventListener("resize", updateRightPadding);
-  window.removeEventListener("resize", updateIsMobile);
-  if (scrollContainer.value) {
-    scrollContainer.value.removeEventListener("scroll", onScroll);
+  if (process.client) {
+    window.removeEventListener('resize', updateRightPadding);
+    window.removeEventListener('resize', updateIsMobile);
+    if (scrollContainer.value) {
+      scrollContainer.value.removeEventListener('scroll', onScroll);
+    }
   }
 });
 
@@ -214,36 +218,30 @@ function handleActiveCard(index) {
 </script>
 
 <template>
-  <div class="gap-[48px] flex-col flex containerBottom">
+  <div class="flex flex-col gap-12">
     <div
-      class="w-full justify-between flex container pbNone max-md:flex-col max-md:gap-[48px]"
+      class="w-full container !pb-0 flex justify-between max-md:flex-col max-md:gap-12 pt-[100px] max-xl:pt-20 max-lg:pt-16 max-md:pt-12"
     >
-      <div class="flex flex-col gap-[16px] w-full max-w-[600px]">
+      <div class="flex flex-col gap-4 w-full max-w-2xl">
         <div class="Title">Research team</div>
         <div class="Subtitle">
-          Our research is led by a world-class team of AI scientists, engineers,
-          and academic collaborators. We combine deep theoretical expertise with
-          a product-first mindset.
+          Our research is led by a world-class team of AI scientists, engineers, and academic
+          collaborators. We combine deep theoretical expertise with a product-first mindset.
         </div>
       </div>
 
-      <div
-        class="flex items-center gap-[16px] max-md:items-end max-md:justify-end"
-      >
+      <div class="flex items-center gap-4 max-md:items-end max-md:justify-end">
         <div
-          class="cursor-pointer transition-all duration-300 h-[48px] px-[12px] flex justify-center items-center rounded-full border bg-[rgba(255,255,255,0.02)]"
+          class="cursor-pointer transition-all duration-300 h-12 px-3 flex justify-center items-center rounded-full border bg-white/5"
+          :class="canScrollLeft ? 'border-white' : 'border-gray-500'"
           @click="scrollPrev"
-          :class="canScrollLeft ? 'border-white' : 'border-[#626262]'"
         >
-          <ArrowCaseIcon
-            class="rotate-180"
-            :fill="canScrollLeft ? '#FFF' : '#626262'"
-          />
+          <ArrowCaseIcon class="rotate-180" :fill="canScrollLeft ? '#FFF' : '#626262'" />
         </div>
         <div
-          class="cursor-pointer transition-all duration-300 h-[48px] px-[12px] flex justify-center items-center rounded-full border bg-[rgba(255,255,255,0.02)]"
+          class="cursor-pointer transition-all duration-300 h-12 px-3 flex justify-center items-center rounded-full border bg-white/5"
+          :class="canScrollRight ? 'border-white' : 'border-gray-500'"
           @click="scrollNext"
-          :class="canScrollRight ? 'border-white' : 'border-[#626262]'"
         >
           <ArrowCaseIcon :fill="canScrollRight ? '#FFF' : '#626262'" />
         </div>
@@ -251,26 +249,26 @@ function handleActiveCard(index) {
     </div>
 
     <div
-      class="flex items-center self-stretch gap-[24px] px-[108px] w-full overflow-y-hidden overflow-x-scroll no-scrollbar snap-x scroll-smooth max-xl:px-[80px] max-lg:px-[60px] max-md:px-[40px] max-sm:px-[24px] max-md:snap-center"
       ref="scrollContainer"
+      class="flex container items-center self-stretch gap-6 px-27 w-full overflow-y-hidden overflow-x-scroll no-scrollbar snap-x scroll-smooth max-xl:px-20 max-lg:px-15 max-md:px-10 max-sm:px-6 pb-[100px] max-xl:pb-20 max-lg:pb-16 max-md:pb-12"
     >
       <div
-        class="team-card p-[24px] flex relative flex-col gap-[24px] self-stretch rounded-[20px] border border-[#2B2A30] shadow-[0px_-17px_44px_0px_rgba(0,0,0,0.45)] transition-[background] duration-500 max-md:p-[12px] max-md:shrink-0"
         v-for="(card, index) in props.teamCards"
         :key="index"
-        @click="handleActiveCard(index)"
+        class="team-card p-6 flex relative flex-col gap-6 self-stretch rounded-5xl border border-dark-700 shadow-glow transition-all duration-500 max-md:p-3 max-md:shrink-0"
         :style="{
           background: activeCardIndexes.includes(index)
             ? 'radial-gradient(67.2% 132.88% at 100% 100%, #57C1CA 0%, #2B6064 100%)'
             : '#141219',
         }"
-        :class="{ ' hidden': index == 10 }"
+        :class="{ hidden: index == 10 }"
+        @click="handleActiveCard(index)"
       >
         <div
-          class="w-[240px] h-auto transition-all duration-500 max-md:w-[270px] max-md:h-[321px] rounded-[8px] overflow-hidden"
+          class="w-60 h-auto transition-all duration-500 max-md:w-[270px] max-md:h-[321px] rounded-lg overflow-hidden"
           :class="{
-            'opacity-1 translate-y-0': !activeCardIndexes.includes(index),
-            'opacity-0 translate-y-[-30px]': activeCardIndexes.includes(index),
+            'opacity-100 translate-y-0': !activeCardIndexes.includes(index),
+            'opacity-0 -translate-y-8': activeCardIndexes.includes(index),
           }"
         >
           <img
@@ -280,37 +278,35 @@ function handleActiveCard(index) {
           />
         </div>
         <div
-          class="flex flex-col gap-[8px] transition-all duration-500"
+          class="flex flex-col gap-2 transition-all duration-500"
           :class="{
-            'opacity-1 translate-y-0': !activeCardIndexes.includes(index),
-            'opacity-0 translate-y-[-30px]': activeCardIndexes.includes(index),
+            'opacity-100 translate-y-0': !activeCardIndexes.includes(index),
+            'opacity-0 -translate-y-8': activeCardIndexes.includes(index),
           }"
         >
-          <div class="text-white text-[24px] leading-[130%] font-ibm">
+          <div class="text-white text-2xl leading-[130%] font-ibm">
             {{ card.name }}
           </div>
-          <div
-            class="text-[rgba(255,255,255,0.60)] text-[16px] font-ibm leading-[150%]"
-          >
+          <div class="text-white/60 text-base font-ibm leading-[150%]">
             {{ card.post }}
           </div>
         </div>
 
         <div
-          class="text-white top-[24px] pr-[24px] absolute font-ibm text-[16px] leading-[150%] transition-all duration-[450]"
+          class="text-white top-6 pr-6 absolute font-ibm text-base leading-[150%] transition-all duration-[450ms]"
           :class="{
-            'opacity-1 translate-y-0': activeCardIndexes.includes(index),
-            'opacity-0 translate-y-[30px]': !activeCardIndexes.includes(index),
+            'opacity-100 translate-y-0': activeCardIndexes.includes(index),
+            'opacity-0 translate-y-8': !activeCardIndexes.includes(index),
           }"
         >
           {{ card.text }}
         </div>
 
         <div
-          class="min-w-[24px] bottom-[24px] absolute transition-all duration-500"
+          class="min-w-6 bottom-6 absolute transition-all duration-500"
           :class="{
-            'opacity-1 translate-y-0': activeCardIndexes.includes(index),
-            'opacity-0 translate-y-[30px]': !activeCardIndexes.includes(index),
+            'opacity-100 translate-y-0': activeCardIndexes.includes(index),
+            'opacity-0 translate-y-8': !activeCardIndexes.includes(index),
           }"
         >
           <LinkedInIcon />

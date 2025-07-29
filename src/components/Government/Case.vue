@@ -1,30 +1,37 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import ArrowCaseIcon from "@/assets/svg/ArrowCaseIcon.vue";
-import bgImgCard1 from "@/assets/img/caseBg1.png";
-import bgImgCardMob1 from "@/assets/img/caseBgMob1.png";
-import TransparentBtn from "@/ui/TransparentBtn/TransparentBtn.vue";
+import { onMounted, onUnmounted, ref } from 'vue';
+import ArrowCaseIcon from '@/assets/svg/ArrowCaseIcon.vue';
+import bgImgCard1 from '@/assets/img/caseBg1.png';
+import bgImgCardMob1 from '@/assets/img/caseBgMob1.png';
+import TransparentBtn from '@/components/ui/TransparentBtn/TransparentBtn.vue';
+import Section from '../ui/Section/Section.vue';
 
-const isMobile = window.innerWidth < 786;
+const isMobile = ref(false);
+
+onMounted(() => {
+  if (process.client) {
+    isMobile.value = window.innerWidth < 786;
+  }
+});
 
 const CaseCards = [
   {
-    bgImage: isMobile ? bgImgCardMob1 : bgImgCard1,
-    title: "HISD: Scaling Compliance for One of the Largest Districts in Texas",
+    bgImage: isMobile.value ? bgImgCardMob1 : bgImgCard1,
+    title: 'HISD: Scaling Compliance for One of the Largest Districts in Texas',
     subtitle:
-      "Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.",
+      'Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.',
   },
   {
     bgImage: bgImgCard1,
-    title: "HISD: Scaling Compliance for One of the Largest Districts in Texas",
+    title: 'HISD: Scaling Compliance for One of the Largest Districts in Texas',
     subtitle:
-      "Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.",
+      'Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.',
   },
   {
     bgImage: bgImgCard1,
-    title: "HISD: Scaling Compliance for One of the Largest Districts in Texas",
+    title: 'HISD: Scaling Compliance for One of the Largest Districts in Texas',
     subtitle:
-      "Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.",
+      'Filuta AI enabled daily vendor checks and full automation across hundreds of campuses, significantly reducing manual effort and error risk.',
   },
 ];
 const cardRefs = ref([]);
@@ -41,7 +48,7 @@ function updateScrollLimits() {
   canScrollLeft.value = el.scrollLeft > 0;
   canScrollRight.value = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
 
-  let scrollCenter = el.scrollLeft + containerWidth / 2;
+  const scrollCenter = el.scrollLeft + containerWidth / 2;
   let closestIdx = 0;
   let minDist = Infinity;
   let accOffset = 0;
@@ -61,13 +68,13 @@ function updateScrollLimits() {
 
 onMounted(() => {
   updateScrollLimits();
-  carousel.value?.addEventListener("scroll", updateScrollLimits);
-  window.addEventListener("resize", updateScrollLimits);
+  carousel.value?.addEventListener('scroll', updateScrollLimits);
+  window.addEventListener('resize', updateScrollLimits);
 });
 
 onUnmounted(() => {
-  carousel.value?.removeEventListener("scroll", updateScrollLimits);
-  window.removeEventListener("resize", updateScrollLimits);
+  carousel.value?.removeEventListener('scroll', updateScrollLimits);
+  window.removeEventListener('resize', updateScrollLimits);
 });
 
 const currentIndex = ref(0);
@@ -78,10 +85,9 @@ function scrollToIndex(index) {
 
   const card = cardRefs.value[index];
 
-  const scrollOffset =
-    card.offsetLeft - (carousel.value.offsetWidth / 2 - card.offsetWidth / 2);
+  const scrollOffset = card.offsetLeft - (carousel.value.offsetWidth / 2 - card.offsetWidth / 2);
 
-  carousel.value.scrollTo({ left: scrollOffset, behavior: "smooth" });
+  carousel.value.scrollTo({ left: scrollOffset, behavior: 'smooth' });
   currentIndex.value = index;
 }
 
@@ -99,33 +105,32 @@ function scrollPrev() {
 </script>
 
 <template>
-  <div class="flex-col gap-[48px] flex containerBottom ">
+  <div
+    class="flex-col gap-[48px] flex containerBottom py-[100px] max-xl:py-20 max-lg:py-16 max-md:py-12"
+  >
     <div
       class="flex justify-between items-start container pbNone max-sm:flex-col max-sm:gap-[32px] max-sm:items-end"
     >
       <div class="flex flex-col gap-[16px]">
         <div class="Title">Case Studies</div>
         <div class="Subtitle max-w-[600px]">
-          Discover how Filuta AI helps districts automate compliance, reduce
-          risk, and refocus teams on what matters most.
+          Discover how Filuta AI helps districts automate compliance, reduce risk, and refocus teams
+          on what matters most.
         </div>
       </div>
 
       <div class="flex items-center gap-[16px]">
         <div
           class="cursor-pointer transition-all duration-300 h-[48px] px-[12px] flex justify-center items-center rounded-full border bg-[rgba(255,255,255,0.02)]"
-          @click="scrollPrev"
           :class="canScrollLeft ? 'border-white' : 'border-[#626262]'"
+          @click="scrollPrev"
         >
-          <ArrowCaseIcon
-            :fill="canScrollLeft ? '#FFF' : '#626262'"
-            class="rotate-180"
-          />
+          <ArrowCaseIcon :fill="canScrollLeft ? '#FFF' : '#626262'" class="rotate-180" />
         </div>
         <div
           class="cursor-pointer transition-all duration-300 h-[48px] px-[12px] flex justify-center items-center rounded-full border bg-[rgba(255,255,255,0.02)]"
-          @click="scrollNext"
           :class="canScrollRight ? 'border-white' : 'border-[#626262]'"
+          @click="scrollNext"
         >
           <ArrowCaseIcon :fill="canScrollRight ? '#FFF' : '#626262'" />
         </div>
@@ -150,15 +155,11 @@ function scrollPrev() {
         <div
           class="p-[40px] flex items-end gap-[72px] justify-between z-10 max-lg:w-full max-lg:p-[24px] max-lg:gap-[24px] max-md:items-start max-md:flex-col"
         >
-          <div
-            class="flex flex-col gap-[8px] w-[600px] flex-1 max-md:w-full max-md:max-w-[600px]"
-          >
+          <div class="flex flex-col gap-[8px] w-[600px] flex-1 max-md:w-full max-md:max-w-[600px]">
             <div class="text-[24px] text-white font-ibm leading-[130%]">
               {{ card.title }}
             </div>
-            <div
-              class="text-[16px] text-[rgba(255,255,255,0.60)] font-ibm leading-[150%]"
-            >
+            <div class="text-[16px] text-[rgba(255,255,255,0.60)] font-ibm leading-[150%]">
               {{ card.subtitle }}
             </div>
           </div>

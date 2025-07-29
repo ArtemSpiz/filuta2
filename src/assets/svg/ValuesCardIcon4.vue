@@ -1,11 +1,5 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
-    fill="none"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
     <g clip-path="url(#clip0_44_89127)">
       <g filter="url(#filter0_d_44_89127)">
         <path
@@ -38,11 +32,7 @@
           type="matrix"
           values="0 0 0 0 0.341176 0 0 0 0 0.756863 0 0 0 0 0.792157 0 0 0 0.7 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_44_89127"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_44_89127" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
