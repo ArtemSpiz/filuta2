@@ -48,6 +48,9 @@ export function useBlog() {
   const currentPage = ref(parseInt(route.query.page as string) || 1);
   const postsPerPage = 12;
 
+  // Keep previous data to prevent white screen flash
+  const previousData = ref<any>(null);
+
   // Fetch data from API
   const {
     data: blogData,
@@ -74,16 +77,38 @@ export function useBlog() {
     }),
   });
 
-  const displayPosts = computed(() => {
-    if (!blogData.value?.posts) return [];
+  // Store previous data when new data arrives
+  watch(blogData, newData => {
+    if (newData && 'posts' in newData && newData.posts && newData.posts.length > 0) {
+      previousData.value = newData;
+    }
+  });
 
-    return blogData.value.posts;
+  // Use previous data while loading to prevent white screen
+  const displayData = computed(() => {
+    if (pending.value && previousData.value) {
+      return previousData.value;
+    }
+    return blogData.value;
+  });
+
+  const displayPosts = computed(() => {
+    if (!displayData.value || !('posts' in displayData.value) || !displayData.value.posts) {
+      return [];
+    }
+    return displayData.value.posts;
   });
 
   const visiblePages = computed(() => {
-    if (!blogData.value?.pagination) return [];
+    if (
+      !displayData.value ||
+      !('pagination' in displayData.value) ||
+      !displayData.value.pagination
+    ) {
+      return [];
+    }
 
-    const { current, total } = blogData.value.pagination;
+    const { current, total } = displayData.value.pagination;
     const pages = [];
     const maxVisible = 5;
 
@@ -145,10 +170,10 @@ export function useBlog() {
 
   return {
     // Data
-    categories: computed(() => blogData.value?.categories || []),
+    categories: computed(() => displayData.value?.categories || []),
     selectedCategory,
     currentPage,
-    blogData,
+    blogData: displayData,
     pending,
     error,
 

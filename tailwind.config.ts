@@ -35,6 +35,23 @@ export default {
         'dark-800': '#1A1A1A',
         'dark-700': '#2B2A30',
         'dark-950': '#0A0A0A',
+        // Additional colors found in components
+        'text-gray': '#7C7C7C',
+        'text-light-gray': '#8A8A8A',
+        'text-white': '#E0E0E0',
+        'text-black': '#000000',
+        'text-purple': '#A394F7',
+        'border-dark': '#2B2A30',
+        'border-purple': '#484873',
+        'bg-dark': '#141219',
+        'bg-purple': '#262034',
+        'bg-gradient-purple': '#302F45',
+        'bg-gradient-purple-light': '#424069',
+        'bg-gradient-teal': '#2B6064',
+        // Additional background colors
+        'bg-card-green': '#121819',
+        'bg-card-green-dark': '#121619',
+        'bg-purple-button': '#6D68FF',
       },
       animation: {
         float: 'float 6s ease-in-out infinite',

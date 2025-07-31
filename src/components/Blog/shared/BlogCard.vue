@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/blog/${post.slug}`">
+  <NuxtLink :to="getPostUrl(post, type)">
     <article
       :class="[
         'h-full bg-dark-800 rounded-xl overflow-hidden border border-dark-700 hover:border-brand-primary/50 transition-all duration-300 hover:shadow-glow',
@@ -27,7 +27,7 @@
         <!-- Category and Date -->
         <div class="flex items-center justify-between mb-4">
           <span class="text-brand-primary text-xs rounded-full">
-            {{ post.category }}
+            {{ getCategory(post, type) }}
           </span>
           <span class="text-gray-400 text-xs text-nowrap opacity-80">
             {{ formatDate(post.published_at) }}
@@ -67,11 +67,29 @@ import TransparentBtn from '@/components/ui/TransparentBtn/TransparentBtn.vue';
 interface Props {
   post: BlogPost;
   variant?: 'default' | 'featured';
+  type?: 'blog' | 'case-study';
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
+  type: 'blog',
 });
+
+// Helper function to get the correct URL
+const getPostUrl = (post: any, type: string) => {
+  if (type === 'case-study') {
+    return `/case-studies/${post.slug}`;
+  }
+  return `/blog/${post.slug}`;
+};
+
+// Helper function to get the correct category
+const getCategory = (post: any, type: string) => {
+  if (type === 'case-study') {
+    return 'Case Study';
+  }
+  return post.category.title || post.category;
+};
 </script>
 
 <style scoped>

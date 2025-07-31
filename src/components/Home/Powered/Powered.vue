@@ -52,7 +52,7 @@ onMounted(async () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.poweredText',
-        start: 'top top',
+        start: '30% 30%',
         end: `+=${totalCards * 600 * 2}`,
         pin: '.powered',
         snap: 1 / (totalCards - 1),
@@ -101,7 +101,7 @@ onMounted(async () => {
 
     poweredTrigger = tl.scrollTrigger;
   } catch (error) {
-    console.error('Error in powered component:', error);
+    // Handle powered component errors
   }
 });
 
@@ -131,17 +131,17 @@ onUnmounted(() => {
         v-for="(card, index) in PoweredCards"
         :key="index"
         ref="cards"
-        class="w-full flex flex-col items-start justify-start gap-3 p-12 rounded-[20px] border border-[#2b2a30] bg-[#141219] shadow-[0px_-17px_44px_0px_rgba(0,0,0,0.45)] transition-all duration-500 max-sm:p-[32px]"
+        class="w-full flex flex-col items-start justify-start gap-3 p-12 rounded-[20px] border border-border-dark bg-bg-dark shadow-[0px_-17px_44px_0px_rgba(0,0,0,0.45)] transition-all duration-500 max-sm:p-[32px]"
       >
         <div
           :class="[
             'text-[64px] leading-[130%] font-ibm font-normal max-lg:text-[55px] max-md:text-[45px] max-sm:text-[40px]',
-            index === 2 ? 'text-[#a394f7]' : 'text-[#57c1ca]',
+            index === 2 ? 'text-text-purple' : 'text-brand-primary',
           ]"
         >
           {{ card.title }}
         </div>
-        <div class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm w-[220px]">
+        <div class="text-subtitle-color text-[16px] leading-[150%] font-ibm w-[220px]">
           {{ card.subtitle }}
         </div>
       </div>

@@ -79,7 +79,6 @@ onMounted(async () => {
     const totalCards = cards.length;
 
     if (totalCards === 0) {
-      console.warn('No transform cards found');
       return;
     }
 
@@ -157,7 +156,7 @@ onMounted(async () => {
 
     ScrollTrigger.refresh();
   } catch (error) {
-    console.error('Failed to initialize Transform animations:', error);
+    // Handle animation initialization errors
   }
 });
 

@@ -1,4 +1,4 @@
-import { getTeamMembers } from '~/server/utils/directus';
+import { getTeamMembers } from '../../utils/directus';
 
 export default defineEventHandler(async () => {
   try {
@@ -6,7 +6,6 @@ export default defineEventHandler(async () => {
     return teamMembers;
   } catch (error) {
     console.error('Error fetching research team members:', error);
-    // Return mock data as fallback
     return [];
   }
 });

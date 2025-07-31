@@ -2,7 +2,7 @@
   <div class="mb-8">
     <div class="flex items-center gap-4 mb-6">
       <span class="px-4 py-2 bg-brand-primary/20 text-brand-primary text-sm rounded-full">
-        {{ post.category }}
+        {{ post.category?.title }}
       </span>
       <span class="text-gray-400 text-sm">
         {{ formatDate(post.published_at) }}

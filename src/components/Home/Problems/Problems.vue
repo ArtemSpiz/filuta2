@@ -87,7 +87,7 @@ onUnmounted(() => {
         </div>
 
         <div
-          class="text-[#9d9d9d] text-center font-ibm text-[16px] font-normal leading-[150%] max-md:w-[310px]"
+          class="text-subtitle-color text-center font-ibm text-[16px] font-normal leading-[150%] max-md:w-[310px]"
         >
           {{ card.text }}
         </div>

@@ -1,4 +1,4 @@
-import { getBlogPost } from '../../utils/directus';
+import { getCaseStudy } from '../../utils/directus';
 
 export default defineEventHandler(async event => {
   try {
@@ -11,21 +11,21 @@ export default defineEventHandler(async event => {
     }
 
     const decodedSlug = decodeURIComponent(slug);
-    const post = await getBlogPost(decodedSlug);
+    const caseStudy = await getCaseStudy(decodedSlug);
 
-    if (!post) {
+    if (!caseStudy) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'Blog post not found',
+        statusMessage: 'Case study not found',
       });
     }
 
-    return post;
+    return caseStudy;
   } catch (error) {
-    console.error('Error fetching blog post:', error);
+    console.error('Error fetching case study:', error);
     throw createError({
       statusCode: 500,
-      statusMessage: 'Failed to fetch blog post',
+      statusMessage: 'Failed to fetch case study',
     });
   }
 });

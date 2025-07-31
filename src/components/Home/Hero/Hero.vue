@@ -30,7 +30,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
         </div>
       </div>
       <div class="flex items-start gap-6 max-md:flex-col">
-        <ColorButton class="bg-[#6d68ff]" />
+        <ColorButton class="bg-bg-purple-button" />
         <TransparentBtn class="max-md:w-full" />
       </div>
 

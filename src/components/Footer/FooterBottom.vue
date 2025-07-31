@@ -5,7 +5,7 @@
     <div
       v-for="(part, index) in parts"
       :key="index"
-      class="text-gray-500 font-['IBM Plex Sans'] text-[14px] leading-[130%]"
+      class="text-gray-500 font-ibm text-[14px] leading-[130%]"
     >
       {{ part.trim() }}
     </div>

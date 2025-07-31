@@ -215,7 +215,7 @@ CMD ["npm", "start"]
 
 2. **Create Collections**:
    - `blog_posts`: title, slug, content, category, featured_image, published_at
-   - `team_members`: name, position, bio, image, linkedin_url, order
+   - `team_members`: name, position, bio, image, linkedIn, order
    - `pages`: title, slug, content, meta_title, meta_description
    - `hero_sections`: title, subtitle, background_image, page
    - `feature_cards`: title, description, icon, image, section, order

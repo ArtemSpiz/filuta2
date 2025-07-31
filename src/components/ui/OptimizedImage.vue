@@ -21,46 +21,33 @@ const props = withDefaults(defineProps<Props>(), {
   loading: 'lazy',
 });
 
-const config = useRuntimeConfig();
-const directusToken = String(config.public.directusToken);
-const directusUrl = String(config.public.directusUrl);
+const getDirectusConfig = () => {
+  const config = useRuntimeConfig();
+  return {
+    directusUrl: config.directusUrl || 'https://filuta-ai-website.directus.app',
+    directusToken: config.directusToken || '',
+  };
+};
 
 const imageUrl = computed(() => {
-  if (!props.imageId) return undefined;
-
-  // Check if it's a Directus image ID (UUID format)
-  const isDirectusId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-    props.imageId
-  );
-
-  if (isDirectusId) {
-    // Generate Directus optimized URL with authentication
-    const params = new URLSearchParams();
-    if (props.width) params.append('width', props.width.toString());
-    if (props.height) params.append('height', props.height.toString());
-    if (props.quality) params.append('quality', props.quality.toString());
-    if (props.format) params.append('format', props.format);
-    if (props.fit) params.append('fit', props.fit);
-
-    // Add access token for authentication
-    params.append('access_token', directusToken);
-
-    const url = `${directusUrl}/assets/${props.imageId}?${params.toString()}`;
-    console.log('Directus OptimizedImage URL:', url);
-    return url;
-  } else {
-    // Return local image path as-is
-    console.log('Local image path:', props.imageId);
+  if (props.imageId && props.imageId.startsWith('http')) {
     return props.imageId;
   }
+
+  if (props.imageId && !props.imageId.startsWith('http')) {
+    const { directusUrl, directusToken } = getDirectusConfig();
+    const url = `${directusUrl}/assets/${props.imageId}?width=${props.width}&height=${props.height}&quality=85&format=webp&fit=cover&access_token=${directusToken}`;
+    return url;
+  }
+
+  return props.imageId || '/img/blogImage1.png';
 });
 
 const hasImage = computed(() => !!props.imageId);
 const imageError = ref(false);
 
 const handleImageError = () => {
-  console.log('Image failed to load:', imageUrl.value);
-  imageError.value = true;
+  // Fallback to default image on error
 };
 </script>
 

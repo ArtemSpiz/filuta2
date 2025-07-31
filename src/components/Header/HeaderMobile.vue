@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import headerIcon1 from '@/assets/img/headerIcon1.png';
 import headerIcon2 from '@/assets/img/headerIcon2.png';
 import headerIcon3 from '@/assets/img/headerIcon3.png';
@@ -22,11 +23,17 @@ const iconMap = {
   headerIcon8,
 };
 
+const route = useRoute();
 const burgerOpen = ref(false);
 const openIndex = ref<number | null>(null);
 
 const handlerBurgerOpen = () => {
   burgerOpen.value = !burgerOpen.value;
+};
+
+const closeMenu = () => {
+  burgerOpen.value = false;
+  openIndex.value = null;
 };
 
 const toggleDropdown = (index: number) => {
@@ -35,6 +42,14 @@ const toggleDropdown = (index: number) => {
 };
 
 const isOpen = (index: number) => openIndex.value === index;
+
+// Watch for route changes and close menu
+watch(
+  () => route.path,
+  () => {
+    closeMenu();
+  }
+);
 </script>
 
 <template>

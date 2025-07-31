@@ -1,10 +1,8 @@
 import { getCategories } from '../../utils/directus';
 
-export default defineEventHandler(async event => {
+export default defineEventHandler(async () => {
   try {
-    console.log('Fetching categories from Directus...');
     const categoriesResponse = await getCategories();
-    console.log('Categories response:', categoriesResponse);
 
     return {
       categories: categoriesResponse.data || [],

@@ -14,32 +14,56 @@
           @category-change="handleCategoryChange"
         />
 
-        <LoadingState v-if="pending" />
+        <!-- Content with smooth transitions -->
+        <Transition name="fade" mode="out-in">
+          <div
+            v-if="pending && !(blogData && 'posts' in blogData && blogData.posts?.length)"
+            key="loading"
+            class="space-y-12"
+          >
+            <LoadingState />
+          </div>
 
-        <div v-else-if="blogData?.posts?.length" class="space-y-12">
-          <!-- Featured Post -->
-          <BlogCard v-if="blogData.posts[0]" :post="blogData.posts[0]" variant="featured" />
+          <div
+            v-else-if="blogData && 'posts' in blogData && blogData.posts?.length"
+            key="content"
+            class="space-y-12"
+          >
+            <!-- Featured Post -->
+            <Transition name="slide-fade" mode="out-in">
+              <BlogCard v-if="blogData.posts[0]" :post="blogData.posts[0]" variant="featured" />
+            </Transition>
 
-          <!-- Regular Posts Grid -->
-          <BlogGrid>
-            <BlogCard v-for="post in displayPosts" :key="post.id" :post="post" variant="default" />
-          </BlogGrid>
+            <!-- Regular Posts Grid -->
+            <Transition name="slide-fade" mode="out-in">
+              <BlogGrid key="grid">
+                <BlogCard
+                  v-for="post in displayPosts.slice(1)"
+                  :key="post.id"
+                  :post="post"
+                  variant="default"
+                />
+              </BlogGrid>
+            </Transition>
 
-          <!-- Load More Button -->
-          <LoadMoreButton :has-more="blogData?.pagination?.hasNext" @load-more="loadMore" />
+            <!-- Load More Button -->
+            <LoadMoreButton :has-more="blogData?.pagination?.hasNext" @load-more="loadMore" />
 
-          <!-- Pagination -->
-          <Pagination
-            v-if="blogData?.pagination?.total > 1"
-            :pagination="blogData.pagination"
-            :current-page="currentPage"
-            :visible-pages="visiblePages"
-            @change="changePage"
-          />
-        </div>
+            <!-- Pagination -->
+            <Pagination
+              v-if="blogData?.pagination?.total > 1"
+              :pagination="blogData.pagination"
+              :current-page="currentPage"
+              :visible-pages="visiblePages"
+              @change="changePage"
+            />
+          </div>
 
-        <!-- Empty State -->
-        <EmptyState v-else />
+          <!-- Empty State -->
+          <div v-else key="empty">
+            <EmptyState />
+          </div>
+        </Transition>
       </div>
     </Section>
   </div>
@@ -84,12 +108,38 @@ watch(
 );
 
 const handleCategoryChange = (category: string) => {
-  console.log('Category changed to:', category);
   selectCategory(category);
 };
 
 const loadMore = () => {
   // Implement load more functionality
-  console.log('Load more clicked');
 };
 </script>
+
+<style scoped>
+/* Smooth transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+</style>

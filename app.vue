@@ -6,8 +6,8 @@
   </div>
 </template>
 
-<script setup>
-// Global SEO and meta tags - single useHead call
+<script setup lang="ts">
+// Global SEO and meta tags
 useHead({
   title: 'Filuta - AI-Powered Compliance Solutions',
   meta: [
@@ -45,48 +45,29 @@ useHead({
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'canonical', href: 'https://filuta.com' },
   ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Filuta',
-        url: 'https://filuta.com',
-        logo: 'https://filuta.com/logo.png',
-        description: 'AI-Powered Compliance Solutions',
-        sameAs: ['https://linkedin.com/company/filuta', 'https://twitter.com/filuta'],
-      }),
-    },
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'Filuta',
-        url: 'https://filuta.com',
-      }),
-    },
-  ],
 });
-
-// Global error handling - temporarily disabled
-// onErrorCaptured((error, instance, info) => {
-//   console.error('Global error:', error, info);
-//   return false;
-// });
 </script>
 
 <style>
-/* Global styles */
-html {
-  scroll-behavior: smooth;
+/* Global page transition styles */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease;
 }
 
-body {
-  font-family: 'IBM Plex Sans', sans-serif;
-  color: #ffffff;
-  line-height: 1.6;
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Custom scrollbar */
@@ -95,47 +76,15 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #2b2a30;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #424069;
+  background: #2b2a30;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #57c1ca;
-}
-
-/* Utility classes */
-.container {
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-/* Animation classes */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: all 0.3s ease;
-}
-
-.slide-up-enter-from {
-  transform: translateY(20px);
-  opacity: 0;
-}
-
-.slide-up-leave-to {
-  transform: translateY(-20px);
-  opacity: 0;
 }
 </style>

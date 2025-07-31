@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import headerIcon1 from '@/assets/img/headerIcon1.png';
 import headerIcon2 from '@/assets/img/headerIcon2.png';
 import headerIcon3 from '@/assets/img/headerIcon3.png';
@@ -19,7 +20,12 @@ const iconMap = {
   headerIcon8,
 };
 
+const route = useRoute();
 const openIndex = ref<number | null>(null);
+
+const closeDropdown = () => {
+  openIndex.value = null;
+};
 
 const toggleDropdown = (index: number) => {
   if (!headerNavs[index]?.arrow) return;
@@ -27,10 +33,18 @@ const toggleDropdown = (index: number) => {
 };
 
 const isOpen = (index: number) => openIndex.value === index;
+
+// Watch for route changes and close dropdown
+watch(
+  () => route.path,
+  () => {
+    closeDropdown();
+  }
+);
 </script>
 
 <template>
-  <div class="flex items-center gap-8 relative max-lg:gap-[24px]">
+  <nav class="flex items-center gap-8 relative max-lg:gap-[24px]">
     <div v-for="(navItem, index) in headerNavs" :key="index" class="flex items-center relative">
       <NuxtLink
         :class="[
@@ -52,11 +66,14 @@ const isOpen = (index: number) => openIndex.value === index;
           ]"
         />
       </NuxtLink>
+
+      <!-- Dropdown Menu -->
       <div
+        v-if="navItem.links"
         :class="[
-          'absolute top-[calc(100%+22px)] pointer-events-none right-0 w-max flex flex-col items-start gap-2 p-3 rounded-[10px] border border-white/20 bg-[#0F202115] backdrop-blur-[10px] opacity-0  transition-all duration-300',
+          'absolute top-[calc(100%+22px)] pointer-events-none right-0 w-max flex flex-col items-start gap-2 p-3 rounded-[10px] border border-white/20 bg-[#0F202115] backdrop-blur-[10px] opacity-0 transition-all duration-300',
           {
-            'opacity-100 visible z-30 pointer-events-auto ': isOpen(index),
+            'opacity-100 visible z-30 pointer-events-auto': isOpen(index),
           },
         ]"
       >
@@ -64,13 +81,14 @@ const isOpen = (index: number) => openIndex.value === index;
           v-for="(linkItem, linkIndex) in navItem.links"
           :key="linkIndex"
           :to="linkItem.href"
-          class="link-hover-bg relative flex items-center gap-[12px] w-full px-3.5 py-[14px] rounded-[8px] bg-gradient-to-l from-dark-800/40 to-dark-800/50 transition-[background] duration-500"
+          class="group relative flex items-center gap-[12px] w-full px-3.5 py-[14px] rounded-[8px] bg-gradient-to-l from-dark-800/40 to-dark-800/50 transition-all duration-500 overflow-hidden hover:bg-gradient-to-l hover:from-[rgba(16,31,31,0.2)] hover:to-[#4b52cf]"
+          @click="closeDropdown"
         >
           <div class="w-5 h-5 z-10">
             <img
               v-if="linkItem.icon && iconMap[linkItem.icon as keyof typeof iconMap]"
               :src="iconMap[linkItem.icon as keyof typeof iconMap]"
-              alt="icon"
+              :alt="`${linkItem.link} icon`"
             />
           </div>
           <div class="flex flex-col gap-[2px]">
@@ -87,27 +105,5 @@ const isOpen = (index: number) => openIndex.value === index;
         </NuxtLink>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
-
-<style scoped>
-.link-hover-bg {
-  position: relative;
-  overflow: hidden;
-}
-
-.link-hover-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(270deg, rgba(16, 31, 31, 0.2) 0%, #4b52cf 100%);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 0;
-  border-radius: 8px;
-}
-
-.link-hover-bg:hover::before {
-  opacity: 1;
-}
-</style>

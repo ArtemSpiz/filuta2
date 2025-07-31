@@ -18,12 +18,14 @@
       </Section>
 
       <Section text-wrap-class="" text-subtitle="">
-        <Related />
+        <Related :related-posts="relatedPosts" />
       </Section>
     </article>
 
     <!-- Error State -->
-    <BlogErrorState v-else />
+    <div v-else class="min-h-screen flex items-center justify-center">
+      <BlogErrorState />
+    </div>
   </div>
 </template>
 
@@ -72,13 +74,15 @@ watch(
   { immediate: true }
 );
 
-// Handle 404
-if (error.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Article not found',
-  });
-}
+// Handle 404 - only throw if we're not in loading state and there's an error
+watch([pending, error], ([isPending, hasError]) => {
+  if (!isPending && hasError) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Article not found',
+    });
+  }
+});
 </script>
 
 <style scoped>

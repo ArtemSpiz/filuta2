@@ -113,7 +113,7 @@ onUnmounted(() => {
             </div>
 
             <div
-              class="text-[#9d9d9d] text-center text-[16px] leading-[150%] font-ibm font-normal w-full max-w-[525px]"
+              class="text-subtitle-color text-center text-[16px] leading-[150%] font-ibm font-normal w-full max-w-[525px]"
             >
               {{ card.subtitle }}
             </div>
@@ -123,7 +123,7 @@ onUnmounted(() => {
                 'text-center border-b text-[16px] leading-[150%] font-ibm font-normal transition-all duration-500',
                 activeIndex === index
                   ? 'text-white border-white'
-                  : 'text-[#9D9D9D] border-[#9D9D9D]',
+                  : 'text-subtitle-color border-subtitle-color',
               ]"
             >
               Read more

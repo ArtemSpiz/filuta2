@@ -12,7 +12,7 @@ export interface BlogPost {
         width: number;
         height: number;
       };
-  category: string;
+  category: string | { id: string; title: string };
   published_at: string;
   meta_title?: string;
   meta_description?: string;

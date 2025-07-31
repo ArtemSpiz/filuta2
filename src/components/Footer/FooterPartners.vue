@@ -20,10 +20,10 @@
           />
         </div>
         <div class="flex flex-col items-start gap-2 flex-1">
-          <div class="text-gray-900 font-['IBM Plex Sans'] text-[16px] leading-[130%]">
+          <div class="text-gray-900 font-ibm text-[16px] leading-[130%]">
             {{ card.title }}
           </div>
-          <div class="text-[14px] text-gray-700 font-['IBM Plex Sans'] leading-[130%]">
+          <div class="text-[14px] text-gray-700 font-ibm leading-[130%]">
             {{ card.subtitle }}
           </div>
         </div>

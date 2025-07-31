@@ -116,7 +116,7 @@ function reverseAnimation(index) {
         <div
           v-for="(card, index) in EverythingCards"
           :key="index"
-          class="flex flex-col justify-end items-start gap-4 p-12 rounded-[20px] border border-[#2b2a30] bg-[#141219] relative overflow-hidden transition-all duration-500 hover:border-[#a394f7] hover:bg-[#262034] max-lg:p-[30px] max-md:p-[25px] max-md:gap-[10px] max-sm:p-[16px]"
+          class="flex flex-col justify-end items-start gap-4 p-12 rounded-[20px] border border-border-dark bg-bg-dark relative overflow-hidden transition-all duration-500 hover:border-text-purple hover:bg-bg-purple max-lg:p-[30px] max-md:p-[25px] max-md:gap-[10px] max-sm:p-[16px]"
           :class="[
             index === 0 && 'col-start-1 row-start-1',
             index === 1 && 'col-start-2 row-start-1',
@@ -138,7 +138,7 @@ function reverseAnimation(index) {
               {{ card.title }}
             </div>
             <div
-              class="text-[#9d9d9d] text-[16px] leading-[150%] font-ibm font-normal max-md:text-[10px]"
+              class="text-subtitle-color text-[16px] leading-[150%] font-ibm font-normal max-md:text-[10px]"
             >
               {{ card.subtitle }}
             </div>
