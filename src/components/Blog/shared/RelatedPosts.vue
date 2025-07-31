@@ -22,13 +22,14 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  posts: {
-    type: Array,
-    required: true,
-  },
-});
+<script setup lang="ts">
+import type { BlogPost } from '@/types/blog';
+
+interface Props {
+  posts: BlogPost[];
+}
+
+defineProps<Props>();
 </script>
 
 <style scoped>

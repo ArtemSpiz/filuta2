@@ -6,7 +6,7 @@ import HeaderMobile from './HeaderMobile.vue';
 </script>
 
 <template>
-  <div class="container absolute left-1/2 -translate-x-1/2 top-6">
+  <div class="container absolute left-1/2 -translate-x-1/2 top-6 z-50">
     <div class="flex items-center justify-between w-full box-border bg-transparent z-10">
       <div class="flex items-center justify-between w-full">
         <HeaderLogo />

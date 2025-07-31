@@ -7,11 +7,12 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  message: {
-    type: String,
-    default: 'Loading posts...',
-  },
+<script setup lang="ts">
+interface Props {
+  message?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  message: 'Loading posts...',
 });
 </script>

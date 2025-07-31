@@ -23,19 +23,16 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  title: {
-    type: String,
-    default: 'Article not found',
-  },
-  message: {
-    type: String,
-    default: "The article you're looking for doesn't exist or has been removed.",
-  },
-  ctaText: {
-    type: String,
-    default: 'Back to Blog',
-  },
+<script setup lang="ts">
+interface Props {
+  title?: string;
+  message?: string;
+  ctaText?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  title: 'Article not found',
+  message: "The article you're looking for doesn't exist or has been removed.",
+  ctaText: 'Back to Blog',
 });
 </script>

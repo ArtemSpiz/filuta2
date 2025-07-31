@@ -17,19 +17,13 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  post: {
-    type: Object,
-    required: true,
-  },
-});
+<script setup lang="ts">
+import type { BlogPost } from '@/types/blog';
+import { formatDate } from '@/utils/blog';
 
-const formatDate = dateString => {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-};
+interface Props {
+  post: BlogPost;
+}
+
+defineProps<Props>();
 </script>

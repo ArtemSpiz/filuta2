@@ -14,7 +14,7 @@
 
       <!-- Article Body Section -->
       <Section padding="lg" text-wrap-class="" text-subtitle="">
-        <BlogArticleBody :post="post" :related-posts="relatedPosts" />
+        <BlogArticleContent :post="post" :related-posts="relatedPosts" />
       </Section>
 
       <Section text-wrap-class="" text-subtitle="">
@@ -29,6 +29,11 @@
 
 <script setup lang="ts">
 import Related from '@/components/Article/Related.vue';
+import Section from '@/components/ui/Section/Section.vue';
+import LoadingState from '@/components/Blog/shared/LoadingState.vue';
+import BlogArticleHero from '@/components/Blog/article/BlogArticleHero.vue';
+import BlogArticleContent from '@/components/Blog/article/BlogArticleContent.vue';
+import BlogErrorState from '@/components/Blog/shared/BlogErrorState.vue';
 
 const route = useRoute();
 const slug = route.params.slug as string;

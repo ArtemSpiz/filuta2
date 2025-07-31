@@ -20,11 +20,10 @@
   </nav>
 </template>
 
-<script setup>
-const props = defineProps({
-  currentPage: {
-    type: String,
-    required: true,
-  },
-});
+<script setup lang="ts">
+interface Props {
+  currentPage: string;
+}
+
+defineProps<Props>();
 </script>

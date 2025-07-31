@@ -31,6 +31,10 @@ const props = withDefaults(
     align?: 'left' | 'center' | 'right';
   }>(),
   {
+    textWrapClass: '',
+    textSubtitle: '',
+    title: '',
+    subtitle: '',
     variant: 'default',
     padding: 'lg',
     align: 'center',

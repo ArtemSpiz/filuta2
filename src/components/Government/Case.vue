@@ -4,7 +4,6 @@ import ArrowCaseIcon from '@/assets/svg/ArrowCaseIcon.vue';
 import bgImgCard1 from '@/assets/img/caseBg1.png';
 import bgImgCardMob1 from '@/assets/img/caseBgMob1.png';
 import TransparentBtn from '@/components/ui/TransparentBtn/TransparentBtn.vue';
-import Section from '../ui/Section/Section.vue';
 
 const isMobile = ref(false);
 

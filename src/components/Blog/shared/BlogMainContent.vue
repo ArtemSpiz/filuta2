@@ -12,14 +12,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  featuredImage: {
-    type: String,
-    default: '',
-  },
-});
+import ArticleContent from '@/components/Blog/shared/ArticleContent.vue';
+
+interface Props {
+  title?: string;
+}
+
+defineProps<Props>();
 </script>

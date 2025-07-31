@@ -35,7 +35,7 @@ import herolightBlue from '@/assets/img/heroLightBlue.png';
       </div>
 
       <div
-        class="w-full z-0 absolute right-0 top-[50%] -translate-x-1/2 translate-y-[-50%] max-w-[800px] max-xl:max-w-[600px] max-lg:hidden"
+        class="w-full z-0 absolute right-0 top-[50%] translate-y-[-50%] max-w-[800px] max-xl:max-w-[600px] max-lg:hidden"
       >
         <img :src="bgHero" alt="robot" class="animate-float" />
       </div>

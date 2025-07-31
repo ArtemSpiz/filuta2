@@ -4,12 +4,20 @@ export interface BlogPost {
   subtitle: string;
   slug: string;
   content: string;
-  featured_image: string;
+  featured_image:
+    | string
+    | {
+        id: string;
+        filename_download: string;
+        width: number;
+        height: number;
+      };
   category: string;
   published_at: string;
   meta_title?: string;
   meta_description?: string;
   seo_keywords?: string[];
+  related?: BlogPost[];
 }
 
 export interface BlogPagination {
@@ -66,14 +74,8 @@ export function useBlog() {
     }),
   });
 
-  // Computed properties
   const displayPosts = computed(() => {
     if (!blogData.value?.posts) return [];
-
-    // If it's the news category, skip the first post as it's featured
-    if (selectedCategory.value === 'news' && blogData.value.posts.length > 0) {
-      return blogData.value.posts.slice(1);
-    }
 
     return blogData.value.posts;
   });
@@ -103,6 +105,7 @@ export function useBlog() {
   const selectCategory = (category: string) => {
     selectedCategory.value = category;
     currentPage.value = 1;
+    // No navigation - just update the filter
   };
 
   const changePage = (page: number) => {
@@ -170,19 +173,10 @@ export function useBlogPost(slug: string) {
     default: () => null,
   });
 
-  // Get related posts from API
-  const { data: relatedPosts } = useFetch('/api/blog', {
-    query: computed(() => ({
-      category: post.value?.category || '',
-      limit: 3,
-    })),
-    default: () => ({ posts: [] }),
-  });
-
   return {
     post: computed(() => post.value),
     pending,
     error,
-    relatedPosts: computed(() => relatedPosts.value?.posts || []),
+    relatedPosts: computed(() => post.value?.related || []),
   };
 }

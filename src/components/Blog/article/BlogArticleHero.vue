@@ -14,21 +14,13 @@
 </template>
 
 <script setup lang="ts">
-interface BlogPost {
-  id: string;
-  title: string;
-  subtitle: string;
-  slug: string;
-  content: string;
-  featured_image: string;
-  category: string;
-  published_at: string;
-  meta_title?: string;
-  meta_description?: string;
-  seo_keywords?: string[];
+import type { BlogPost } from '@/types/blog';
+import Breadcrumb from '@/components/Blog/shared/Breadcrumb.vue';
+import ArticleHeader from '@/components/Blog/shared/ArticleHeader.vue';
+
+interface Props {
+  post: BlogPost;
 }
 
-defineProps<{
-  post: BlogPost;
-}>();
+defineProps<Props>();
 </script>

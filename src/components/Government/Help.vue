@@ -84,7 +84,7 @@ onMounted(async () => {
   await nextTick();
   updateContainerHeight();
 
-  let offsetY = getOffsetY();
+  const offsetY = getOffsetY();
   const totalCards = cards.value.length;
 
   cards.value.forEach(card => {
@@ -162,7 +162,7 @@ function handleResize() {
 
 function onMountedFns() {
   updateContainerHeight();
-  let offsetY = getOffsetY();
+  const offsetY = getOffsetY();
   const totalCards = cards.value.length;
   cards.value.forEach(card => {
     card.style.width = '100%';
@@ -254,8 +254,8 @@ onUnmounted(() => {
     </div>
     <div class="flex flex-col gap-[18px] self-stretch z-10 relative">
       <div
-        class="flex flex-col items-center gap-4 w-full relative helpCards"
         ref="helpCardsWrapper"
+        class="flex flex-col items-center gap-4 w-full relative helpCards"
       >
         <div
           v-for="(card, index) in HelpCards"

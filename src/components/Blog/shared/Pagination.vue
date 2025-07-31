@@ -3,8 +3,8 @@
     <nav class="flex items-center space-x-2">
       <button
         v-if="pagination.hasPrev"
-        @click="$emit('change', currentPage - 1)"
         class="px-4 py-2 text-gray-400 hover:text-white transition-colors duration-200"
+        @click="$emit('change', currentPage - 1)"
       >
         Previous
       </button>
@@ -13,13 +13,13 @@
         <button
           v-for="page in visiblePages"
           :key="page"
-          @click="$emit('change', page)"
           :class="[
             'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
             page === currentPage
               ? 'bg-brand-primary text-white'
               : 'bg-dark-800 text-gray-300 hover:bg-dark-700 hover:text-white',
           ]"
+          @click="$emit('change', page)"
         >
           {{ page }}
         </button>
@@ -27,8 +27,8 @@
 
       <button
         v-if="pagination.hasNext"
-        @click="$emit('change', currentPage + 1)"
         class="px-4 py-2 text-gray-400 hover:text-white transition-colors duration-200"
+        @click="$emit('change', currentPage + 1)"
       >
         Next
       </button>
@@ -36,21 +36,26 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  pagination: {
-    type: Object,
-    required: true,
-  },
-  currentPage: {
-    type: Number,
-    required: true,
-  },
-  visiblePages: {
-    type: Array,
-    required: true,
-  },
-});
+<script setup lang="ts">
+interface BlogPagination {
+  current: number;
+  total: number;
+  limit: number;
+  totalPosts: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
 
-const emit = defineEmits(['change']);
+interface Props {
+  pagination: BlogPagination;
+  currentPage: number;
+  visiblePages: number[];
+}
+
+interface Emits {
+  (e: 'change', page: number): void;
+}
+
+defineProps<Props>();
+defineEmits<Emits>();
 </script>

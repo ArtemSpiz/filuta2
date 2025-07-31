@@ -3,7 +3,7 @@
     <!-- Page Sections -->
     <AboutHero />
     <Composite />
-    <Team :team-cards="AboutTeamData" />
+    <Team :team-cards="aboutTeamData || []" />
     <Values />
     <Build
       title="Build Better Games, With Less QA Stress"
@@ -18,7 +18,6 @@ import Composite from '@/components/AboutUs/Composite.vue';
 import Team from '@/components/Research/Team.vue';
 import Values from '@/components/AboutUs/Values.vue';
 import Build from '@/components/Home/Build/Build.vue';
-import AboutTeamData from '@/content/AboutTeamData';
 
 // SEO
 definePageMeta({
@@ -31,6 +30,6 @@ definePageMeta({
 import { setupPageSEO, pageSEOConfigs } from '~/composables/usePageSEO';
 setupPageSEO(pageSEOConfigs.about);
 
-// Fetch team data from CMS or use static data
+// Fetch team data from Directus
 const { data: aboutTeamData } = useFetch('/api/team/about');
 </script>

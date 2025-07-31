@@ -2,6 +2,7 @@
 import ArrowCaseIcon from '@/assets/svg/ArrowCaseIcon.vue';
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import LinkedInIcon from '@/assets/svg/linkedInIcon.vue';
+import OptimizedImage from '@/components/ui/OptimizedImage.vue';
 
 const props = defineProps({
   teamCards: {
@@ -215,6 +216,10 @@ function handleActiveCard(index) {
     arr.splice(i, 1);
   }
 }
+
+function isDirectusAsset(image) {
+  return image && typeof image === 'object' && 'id' in image;
+}
 </script>
 
 <template>
@@ -271,9 +276,11 @@ function handleActiveCard(index) {
             'opacity-0 -translate-y-8': activeCardIndexes.includes(index),
           }"
         >
-          <img
-            :src="card.image"
+          <OptimizedImage
+            :image-id="card.image && isDirectusAsset(card.image) ? card.image.id : undefined"
             alt="photo"
+            :width="240"
+            :height="320"
             class="max-md:object-cover max-md:object-[top_-20px_right_0px]"
           />
         </div>
@@ -288,7 +295,7 @@ function handleActiveCard(index) {
             {{ card.name }}
           </div>
           <div class="text-white/60 text-base font-ibm leading-[150%]">
-            {{ card.post }}
+            {{ card.position }}
           </div>
         </div>
 
@@ -299,7 +306,7 @@ function handleActiveCard(index) {
             'opacity-0 translate-y-8': !activeCardIndexes.includes(index),
           }"
         >
-          {{ card.text }}
+          {{ card.bio }}
         </div>
 
         <div

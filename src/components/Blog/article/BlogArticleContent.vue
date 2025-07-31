@@ -2,10 +2,11 @@
   <div class="max-w-full mx-auto">
     <div class="flex gap-12">
       <!-- Main Content -->
-      <BlogMainContent :title="post.title" :featured-image="post.featured_image">
-        <div v-html="post.content"></div>
+      <BlogMainContent :title="post.title">
+        <div v-html="post.content" />
 
-        <!-- <template #footer>
+        <!-- Article Footer -->
+        <template #footer>
           <div class="flex items-center justify-center pb-5">
             <SocialSharing :post="post" />
             <NuxtLink
@@ -23,31 +24,27 @@
               Back to Blog
             </NuxtLink>
           </div>
-        </template> -->
+        </template>
       </BlogMainContent>
 
       <!-- Sidebar -->
+      <div class="hidden lg:block lg:col-span-1">
+        <RelatedPosts :posts="relatedPosts" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-interface BlogPost {
-  id: string;
-  title: string;
-  subtitle: string;
-  slug: string;
-  content: string;
-  featured_image: string;
-  category: string;
-  published_at: string;
-  meta_title?: string;
-  meta_description?: string;
-  seo_keywords?: string[];
-}
+import type { BlogPost } from '@/types/blog';
+import BlogMainContent from '@/components/Blog/shared/BlogMainContent.vue';
+import SocialSharing from '@/components/Blog/shared/SocialSharing.vue';
+import RelatedPosts from '@/components/Blog/shared/RelatedPosts.vue';
 
-defineProps<{
+interface Props {
   post: BlogPost;
   relatedPosts: BlogPost[];
-}>();
+}
+
+defineProps<Props>();
 </script>

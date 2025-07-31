@@ -17,15 +17,14 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  title: {
-    type: String,
-    default: 'No posts found',
-  },
-  message: {
-    type: String,
-    default: 'Try selecting a different category or check back later.',
-  },
+<script setup lang="ts">
+interface Props {
+  title?: string;
+  message?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  title: 'No posts found',
+  message: 'Try selecting a different category or check back later.',
 });
 </script>

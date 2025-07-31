@@ -3,7 +3,7 @@
     <span class="text-gray-400">Share:</span>
     <div class="flex space-x-3">
       <a
-        :href="`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://filuta.com/blog/${post.slug}`)}`"
+        :href="getSocialSharingUrl(post, 'twitter')"
         target="_blank"
         rel="noopener noreferrer"
         class="text-gray-400 hover:text-brand-primary transition-colors duration-200"
@@ -15,7 +15,7 @@
         </svg>
       </a>
       <a
-        :href="`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://filuta.com/blog/${post.slug}`)}`"
+        :href="getSocialSharingUrl(post, 'linkedin')"
         target="_blank"
         rel="noopener noreferrer"
         class="text-gray-400 hover:text-brand-primary transition-colors duration-200"
@@ -30,11 +30,13 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  post: {
-    type: Object,
-    required: true,
-  },
-});
+<script setup lang="ts">
+import type { BlogPost } from '@/types/blog';
+import { getSocialSharingUrl } from '@/utils/blog';
+
+interface Props {
+  post: BlogPost;
+}
+
+defineProps<Props>();
 </script>
