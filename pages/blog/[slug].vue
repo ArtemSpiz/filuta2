@@ -55,16 +55,25 @@ watch(
   async newPost => {
     if (newPost) {
       const { setupPageSEO } = await import('../../composables/usePageSEO');
+      const runtimeConfig = useRuntimeConfig();
+      const baseUrl = runtimeConfig.public.siteUrl || 'http://localhost:3000';
+
+      // Build image URL if featured_image exists
+      let imageUrl: string | undefined = undefined;
+      if (newPost.featured_image?.id) {
+        const directusUrl = runtimeConfig.public.directusUrl;
+        imageUrl = `${directusUrl}/assets/${newPost.featured_image.id}`;
+      }
 
       setupPageSEO({
         title: newPost.meta_title || newPost.title,
         description: newPost.meta_description || newPost.subtitle,
         url: `/blog/${newPost.slug}`,
         type: 'article',
-        image: newPost.featured_image,
+        image: imageUrl,
         publishedAt: newPost.published_at,
         author: 'Filuta',
-        section: newPost.category,
+        section: newPost.category?.title || newPost.category,
         keywords: newPost.seo_keywords,
         schemaType: 'BlogPosting',
         schemaName: newPost.title,

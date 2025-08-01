@@ -19,7 +19,8 @@ export interface PageSEOConfig {
 }
 
 export function setupPageSEO(config: PageSEOConfig) {
-  const baseUrl = 'https://filuta.com';
+  const runtimeConfig = useRuntimeConfig();
+  const baseUrl = runtimeConfig.public.siteUrl || 'http://localhost:3000';
 
   // Set up Schema.org structured data
   const schemaData = {
@@ -37,7 +38,7 @@ export function setupPageSEO(config: PageSEOConfig) {
         name: 'Filuta',
         logo: {
           '@type': 'ImageObject',
-          url: `${baseUrl}/logo.png`,
+          url: `${baseUrl}/img/logo.png`,
         },
       },
     }),
@@ -116,5 +117,14 @@ export const pageSEOConfigs = {
     type: 'website' as const,
     schemaType: 'Blog' as const,
     schemaName: 'Filuta Blog',
+  },
+  caseStudies: {
+    title: 'Case Studies - Filuta',
+    description:
+      'Explore real-world case studies showcasing how Filuta AI transforms compliance processes in government and education sectors.',
+    url: '/case-studies',
+    type: 'website' as const,
+    schemaType: 'Blog' as const,
+    schemaName: 'Filuta Case Studies',
   },
 };

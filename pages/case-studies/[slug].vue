@@ -59,13 +59,22 @@ watch(
   async newCaseStudy => {
     if (newCaseStudy) {
       const { setupPageSEO } = await import('../../composables/usePageSEO');
+      const runtimeConfig = useRuntimeConfig();
+      const baseUrl = runtimeConfig.public.siteUrl || 'http://localhost:3000';
+
+      // Build image URL if featured_image exists
+      let imageUrl: string | undefined = undefined;
+      if (newCaseStudy.featured_image?.id) {
+        const directusUrl = runtimeConfig.public.directusUrl;
+        imageUrl = `${directusUrl}/assets/${newCaseStudy.featured_image.id}`;
+      }
 
       setupPageSEO({
         title: newCaseStudy.meta_title || newCaseStudy.title,
         description: newCaseStudy.meta_description || newCaseStudy.subtitle,
         url: `/case-studies/${newCaseStudy.slug}`,
         type: 'article',
-        image: newCaseStudy.featured_image,
+        image: imageUrl,
         publishedAt: newCaseStudy.published_at,
         author: 'Filuta',
         section: 'Case Studies',
